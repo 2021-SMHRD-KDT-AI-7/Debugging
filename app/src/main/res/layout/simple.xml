@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fontFamily="@font/scdream4"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:text="안녕하세요. 테스트 페이지로 만들었습니다. Hello world!"
+    android:textSize="20sp">
+
+</TextView>
