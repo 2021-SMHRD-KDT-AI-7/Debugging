@@ -4,12 +4,16 @@
     <!--  Context.getCacheDir() 내부저장소   -->
     <cache-path
         name="cache"
-        path="."/>
+        path="." />
 
     <!--  Context.getFilesDir() 내부저장소  -->
-    <files-path name="files" path="."/>
+    <files-path
+        name="files"
+        path="." />
 
-    <root-path name="root" path="."/>
+    <root-path
+        name="root"
+        path="." />
 
     <!--  Environment.getExternalStorageDirectory() 외부저장소  -->
     <external-path
@@ -24,5 +28,5 @@
     <!--  Environment.getExternalFilesDir() 외부저장소  -->
     <external-files-path
         name="external_files"
-        path="."/>
+        path="." />
 </paths>

@@ -106,25 +106,18 @@ public class CameraActivity extends AppCompatActivity {
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
         String flask_url = "http://211.227.224.206:5000/sendFrame";
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progress.dismiss();
-                        if(response.equals("true")){
-                            Toast.makeText(CameraActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            Toast.makeText(CameraActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
-                        }
+                response -> {
+                    progress.dismiss();
+                    if (response.equals("true")) {
+                        Toast.makeText(CameraActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(CameraActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progress.dismiss();
-                        Toast.makeText(CameraActivity.this, "Some error occurred -> "+error, Toast.LENGTH_LONG).show();
-                    }
-                }){
+                error -> {
+                    progress.dismiss();
+                    Toast.makeText(CameraActivity.this, "Some error occurred -> " + error, Toast.LENGTH_LONG).show();
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -201,19 +194,19 @@ public class CameraActivity extends AppCompatActivity {
     //갤러리 사진 저장 기능
     private void saveFile(String currentPhotoPath) {
 
-        Bitmap bitmap = BitmapFactory.decodeFile( currentPhotoPath );
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
 
-        ContentValues values = new ContentValues( );
+        ContentValues values = new ContentValues();
 
         //실제 앨범에 저장될 이미지이름
-        values.put( MediaStore.Images.Media.DISPLAY_NAME, new SimpleDateFormat( "yyyyMMdd_HHmmss", Locale.US ).format( new Date( ) ) + ".jpg" );
-        values.put( MediaStore.Images.Media.MIME_TYPE, "image/*" );
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".jpg");
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
 
         //저장될 경로 -> /내장 메모리/DCIM/ 에 'AndroidQ' 폴더로 지정
-        values.put( MediaStore.Images.Media.RELATIVE_PATH, "DCIM/AndroidQ" );
+        values.put(MediaStore.Images.Media.RELATIVE_PATH, "DCIM/AndroidQ");
 
-        Uri u = MediaStore.Images.Media.getContentUri( MediaStore.VOLUME_EXTERNAL );
-        Uri uri = getContentResolver( ).insert( u, values ); //이미지 Uri를 MediaStore.Images에 저장
+        Uri u = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL);
+        Uri uri = getContentResolver().insert(u, values); //이미지 Uri를 MediaStore.Images에 저장
 
         try {
             /*
@@ -226,43 +219,43 @@ public class CameraActivity extends AppCompatActivity {
 
             ParcelFileDescriptor parcelFileDescriptor = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                parcelFileDescriptor = getContentResolver( ).openFileDescriptor( uri, "w", null ); //미디어 파일 열기
+                parcelFileDescriptor = getContentResolver().openFileDescriptor(uri, "w", null); //미디어 파일 열기
             }
-            if ( parcelFileDescriptor == null ) return;
+            if (parcelFileDescriptor == null) return;
 
             //바이트기반스트림을 이용하여 JPEG파일을 바이트단위로 쪼갠 후 저장
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream( );
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
             //비트맵 형태 이미지 크기 압축
-            bitmap.compress( Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream );
-            byte[] b = byteArrayOutputStream.toByteArray( );
-            InputStream inputStream = new ByteArrayInputStream( b );
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] b = byteArrayOutputStream.toByteArray();
+            InputStream inputStream = new ByteArrayInputStream(b);
 
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream( );
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             int bufferSize = 1024;
-            byte[] buffers = new byte[ bufferSize ];
+            byte[] buffers = new byte[bufferSize];
 
             int len = 0;
-            while ( ( len = inputStream.read( buffers ) ) != -1 ) {
-                buffer.write( buffers, 0, len );
+            while ((len = inputStream.read(buffers)) != -1) {
+                buffer.write(buffers, 0, len);
             }
 
-            byte[] bs = buffer.toByteArray( );
-            FileOutputStream fileOutputStream = new FileOutputStream( parcelFileDescriptor.getFileDescriptor( ) );
-            fileOutputStream.write( bs );
-            fileOutputStream.close( );
-            inputStream.close( );
-            parcelFileDescriptor.close( );
+            byte[] bs = buffer.toByteArray();
+            FileOutputStream fileOutputStream = new FileOutputStream(parcelFileDescriptor.getFileDescriptor());
+            fileOutputStream.write(bs);
+            fileOutputStream.close();
+            inputStream.close();
+            parcelFileDescriptor.close();
 
-            getContentResolver( ).update( uri, values, null, null ); //MediaStore.Images 테이블에 이미지 행 추가 후 업데이트
+            getContentResolver().update(uri, values, null, null); //MediaStore.Images 테이블에 이미지 행 추가 후 업데이트
 
-        } catch ( Exception e ) {
-            e.printStackTrace( );
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        values.clear( );
-        values.put( MediaStore.Images.Media.IS_PENDING, 0 ); //실행하는 기기에서 앱이 IS_PENDING 값을 1로 설정하면 독점 액세스 권한 획득
-        getContentResolver( ).update( uri, values, null, null );
+        values.clear();
+        values.put(MediaStore.Images.Media.IS_PENDING, 0); //실행하는 기기에서 앱이 IS_PENDING 값을 1로 설정하면 독점 액세스 권한 획득
+        getContentResolver().update(uri, values, null, null);
 
     }
 
@@ -298,7 +291,7 @@ public class CameraActivity extends AppCompatActivity {
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
-        Log.d(TAG, "사진저장>> "+storageDir.toString());
+        Log.d(TAG, "사진저장>> " + storageDir.toString());
 
         currentPhotoPath = image.getAbsolutePath();
 
