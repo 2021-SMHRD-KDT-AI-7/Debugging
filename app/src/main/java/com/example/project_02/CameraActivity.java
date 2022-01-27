@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class camera_server extends AppCompatActivity {
+public class CameraActivity extends AppCompatActivity {
 
     private ImageView img;
     private Button btn_capture, btn_gallery, btn_send;
@@ -63,7 +63,7 @@ public class camera_server extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.server_camera);
+        setContentView(R.layout.activity_camera);
 
         init();
 
@@ -84,7 +84,7 @@ public class camera_server extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progress = new ProgressDialog(camera_server.this);
+                progress = new ProgressDialog(CameraActivity.this);
                 progress.setMessage("Uploading...");
                 progress.show();
 
@@ -111,10 +111,10 @@ public class camera_server extends AppCompatActivity {
                     public void onResponse(String response) {
                         progress.dismiss();
                         if(response.equals("true")){
-                            Toast.makeText(camera_server.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(CameraActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
                         }
                         else{
-                            Toast.makeText(camera_server.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(CameraActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -122,7 +122,7 @@ public class camera_server extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progress.dismiss();
-                        Toast.makeText(camera_server.this, "Some error occurred -> "+error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(CameraActivity.this, "Some error occurred -> "+error, Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
@@ -177,7 +177,7 @@ public class camera_server extends AppCompatActivity {
         btn_gallery = findViewById(R.id.btn_gallery);
         btn_send = findViewById(R.id.btn_send);
 
-        queue = Volley.newRequestQueue(camera_server.this);
+        queue = Volley.newRequestQueue(CameraActivity.this);
 
         requestPermission();
     }
@@ -187,7 +187,7 @@ public class camera_server extends AppCompatActivity {
         //민감한 권한 사용자에게 허용요청
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) { // 저장소에 데이터를 쓰는 권한을 부여받지 않았다면~
 
-            ActivityCompat.requestPermissions(camera_server.this, new String[]{Manifest.permission.CAMERA,
+            ActivityCompat.requestPermissions(CameraActivity.this, new String[]{Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
     }
