@@ -4,7 +4,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
+        maven { url 'https://jitpack.io' }
     }
+
 }
-rootProject.name = "2차_프로젝트_디버깅"
+rootProject.name = "Project_02"
 include ':app'
