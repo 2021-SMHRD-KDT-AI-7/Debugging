@@ -4,14 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginActivity">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+    tools:context=".joinActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
@@ -25,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.30" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
@@ -38,7 +31,6 @@
         android:id="@+id/et_id"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="4dp"
         android:ems="10"
         android:fontFamily="@font/scdream7"
         android:hint="ID를 입력해주세요"
@@ -61,37 +53,61 @@
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/et_id" />
 
+    <EditText
+        android:id="@+id/et_pw2"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:fontFamily="@font/scdream7"
+        android:hint="PW를 한번 더 입력해주세요"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/et_pw" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:fontFamily="@font/scdream7"
+        android:hint="이름을 입력해주세요"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/et_pw2" />
+
+    <EditText
+        android:id="@+id/et_birthday"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:fontFamily="@font/scdream7"
+        android:hint="생년월일"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
     <Button
         android:id="@+id/btn_join_"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#CE82FD"
         android:fontFamily="@font/scdream7"
         android:insetTop="3dp"
         android:insetBottom="3dp"
-        android:text="로그인"
+        android:text="회원가입"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/cb_" />
-
-    <Button
-        android:id="@+id/btn_join2"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#E4E4E4"
-        android:fontFamily="@font/scdream7"
-        android:insetTop="3dp"
-        android:insetBottom="3dp"
-        android:text="아직 계정이 없나요?"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/btn_join_" />
+        app:layout_constraintTop_toBottomOf="@+id/et_birthday" />
 
     <TextView
         android:id="@+id/tv_login"
@@ -99,20 +115,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:fontFamily="@font/scdream7"
-        android:text="로그인"
+        android:text="회원가입"
         android:textColor="@color/black"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9" />
-
-    <CheckBox
-        android:id="@+id/cb_"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="자동 로그인"
-        app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/et_pw" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
