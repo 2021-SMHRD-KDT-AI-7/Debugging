@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Project_02"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".joinActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity
