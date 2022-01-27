@@ -15,7 +15,7 @@ import com.android.volley.toolbox.StringRequest;
 public class loginActivity extends AppCompatActivity {
 
     private EditText et_id, et_pw;
-    private Button btn_login;
+    private Button btn_login, btn_join;
     CheckBox cb_;
     StringRequest sr;
     RequestQueue rq;
@@ -26,8 +26,9 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         et_id = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
-        btn_login = findViewById(R.id.btn_kakao_login);
         cb_ = findViewById(R.id.cb_);
+        btn_login = findViewById(R.id.btn_join_);
+        btn_join = findViewById(R.id.btn_join2);
 
         btn_login.setOnClickListener(view -> {
             Intent intent = new Intent(
@@ -54,6 +55,11 @@ public class loginActivity extends AppCompatActivity {
                 }
             };
             rq.add(sr);*/
+        });
+        btn_join.setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    loginActivity.this, joinActivity.class);
+            startActivity(intent);
         });
     }
 }

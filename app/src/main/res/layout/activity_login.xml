@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_id" />
 
     <Button
-        android:id="@+id/btn_kakao_login"
+        android:id="@+id/btn_join_"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#CE82FD"
@@ -91,7 +91,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/btn_kakao_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_join_" />
 
     <TextView
         android:id="@+id/tv_login"

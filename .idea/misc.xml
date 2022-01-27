@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/activity_guide02.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/activity_history.xml" value="0.5" />
         <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/activity_join.xml" value="0.25" />
         <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/activity_my.xml" value="0.1953125" />
+        <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/fragment1.xml" value="0.24722222222222223" />
+        <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/fragment_2.xml" value="0.24722222222222223" />
+        <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/fragment_3.xml" value="0.24722222222222223" />
+        <entry key="..\:/Users/smhrd/ASProject/Project_mirror/app/src/main/res/layout/fragment_5.xml" value="0.35260416666666666" />
       </map>
     </option>
   </component>

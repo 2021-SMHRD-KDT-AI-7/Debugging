@@ -25,9 +25,9 @@ public class frontActivity extends AppCompatActivity {
         });
         // 회원가입 페이지 이동
         btn_join.setOnClickListener(view -> {
-            //Intent intent = new Intent(frontActivity.this,
-            // joinActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(frontActivity.this,
+                    joinActivity.class);
+            startActivity(intent);
         });
     }
 }
