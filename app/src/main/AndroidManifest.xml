@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +29,7 @@
             android:name=".historyActivity"
             android:exported="false" />
         <activity
-            android:name=".camera_server"
+            android:name=".CameraActivity"
             android:exported="true" />
         <activity
             android:name=".guideActivity05"
@@ -49,7 +53,7 @@
             android:name=".loginActivity"
             android:exported="false" />
         <activity
-            android:name=".frontActivity"
+            android:name=".RegisterviewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,6 +61,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--        <activity-->
+        <!--            android:name=".frontActivity"-->
+        <!--            android:exported="true">-->
+        <!--            일단 지금 테스트하려고 위에 회원가입 페이지 먼저 띄우기 위해 메인 페이지 주석처리함-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
 
         <provider
             android:name="androidx.core.content.FileProvider"

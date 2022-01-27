@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class camera_server extends AppCompatActivity {
+public class CameraActivity extends AppCompatActivity {
 
     private ImageView img;
     private Button btn_capture, btn_gallery, btn_send;
@@ -63,24 +63,37 @@ public class camera_server extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.server_camera);
+        setContentView(R.layout.activity_camera);
 
         init();
 
-        btn_capture.setOnClickListener(v -> camera_open_intent());
+        btn_capture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                camera_open_intent();
+            }
+        });
 
-        btn_gallery.setOnClickListener(v -> gallery_open_intent());
+        btn_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gallery_open_intent();
+            }
+        });
 
-        btn_send.setOnClickListener(v -> {
-            progress = new ProgressDialog(camera_server.this);
-            progress.setMessage("Uploading...");
-            progress.show();
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progress = new ProgressDialog(CameraActivity.this);
+                progress.setMessage("Uploading...");
+                progress.show();
 
-            sendImage();
+                sendImage();
+            }
         });
     }
 
-    //이미지 플라시크로 전송
+    //이미지 플라스크로 전송
     private void sendImage() {
 
         //비트맵 이미지를 byte로 변환 -> base64형태로 변환
@@ -93,20 +106,27 @@ public class camera_server extends AppCompatActivity {
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
         String flask_url = "http://211.227.224.206:5000/sendFrame";
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
-                response -> {
-                    progress.dismiss();
-                    if (response.equals("true")) {
-                        Toast.makeText(camera_server.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(camera_server.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progress.dismiss();
+                        if(response.equals("true")){
+                            Toast.makeText(CameraActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(CameraActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+                        }
                     }
                 },
-                error -> {
-                    progress.dismiss();
-                    Toast.makeText(camera_server.this, "Some error occurred -> " + error, Toast.LENGTH_LONG).show();
-                }) {
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progress.dismiss();
+                        Toast.makeText(CameraActivity.this, "Some error occurred -> "+error, Toast.LENGTH_LONG).show();
+                    }
+                }){
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("image", imageString);
 
@@ -157,7 +177,7 @@ public class camera_server extends AppCompatActivity {
         btn_gallery = findViewById(R.id.btn_gallery);
         btn_send = findViewById(R.id.btn_send);
 
-        queue = Volley.newRequestQueue(camera_server.this);
+        queue = Volley.newRequestQueue(CameraActivity.this);
 
         requestPermission();
     }
@@ -165,9 +185,9 @@ public class camera_server extends AppCompatActivity {
     //카메라, 쓰기, 읽기 권한 체크/요청
     private void requestPermission() {
         //민감한 권한 사용자에게 허용요청
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(),
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) { // 저장소에 데이터를 쓰는 권한을 부여받지 않았다면~
-            ActivityCompat.requestPermissions(camera_server.this, new String[]{Manifest.permission.CAMERA,
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) { // 저장소에 데이터를 쓰는 권한을 부여받지 않았다면~
+
+            ActivityCompat.requestPermissions(CameraActivity.this, new String[]{Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
     }
@@ -180,18 +200,20 @@ public class camera_server extends AppCompatActivity {
 
     //갤러리 사진 저장 기능
     private void saveFile(String currentPhotoPath) {
-        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
-        ContentValues values = new ContentValues();
+
+        Bitmap bitmap = BitmapFactory.decodeFile( currentPhotoPath );
+
+        ContentValues values = new ContentValues( );
 
         //실제 앨범에 저장될 이미지이름
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".jpg");
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+        values.put( MediaStore.Images.Media.DISPLAY_NAME, new SimpleDateFormat( "yyyyMMdd_HHmmss", Locale.US ).format( new Date( ) ) + ".jpg" );
+        values.put( MediaStore.Images.Media.MIME_TYPE, "image/*" );
 
         //저장될 경로 -> /내장 메모리/DCIM/ 에 'AndroidQ' 폴더로 지정
-        values.put(MediaStore.Images.Media.RELATIVE_PATH, "DCIM/AndroidQ");
+        values.put( MediaStore.Images.Media.RELATIVE_PATH, "DCIM/AndroidQ" );
 
-        Uri u = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL);
-        Uri uri = getContentResolver().insert(u, values); //이미지 Uri를 MediaStore.Images에 저장
+        Uri u = MediaStore.Images.Media.getContentUri( MediaStore.VOLUME_EXTERNAL );
+        Uri uri = getContentResolver( ).insert( u, values ); //이미지 Uri를 MediaStore.Images에 저장
 
         try {
             /*
@@ -204,42 +226,43 @@ public class camera_server extends AppCompatActivity {
 
             ParcelFileDescriptor parcelFileDescriptor = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                parcelFileDescriptor = getContentResolver().openFileDescriptor(uri, "w", null); //미디어 파일 열기
+                parcelFileDescriptor = getContentResolver( ).openFileDescriptor( uri, "w", null ); //미디어 파일 열기
             }
-            if (parcelFileDescriptor == null) return;
+            if ( parcelFileDescriptor == null ) return;
 
             //바이트기반스트림을 이용하여 JPEG파일을 바이트단위로 쪼갠 후 저장
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream( );
 
             //비트맵 형태 이미지 크기 압축
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-            byte[] b = byteArrayOutputStream.toByteArray();
-            InputStream inputStream = new ByteArrayInputStream(b);
+            bitmap.compress( Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream );
+            byte[] b = byteArrayOutputStream.toByteArray( );
+            InputStream inputStream = new ByteArrayInputStream( b );
 
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream( );
             int bufferSize = 1024;
-            byte[] buffers = new byte[bufferSize];
+            byte[] buffers = new byte[ bufferSize ];
 
             int len = 0;
-            while ((len = inputStream.read(buffers)) != -1) {
-                buffer.write(buffers, 0, len);
+            while ( ( len = inputStream.read( buffers ) ) != -1 ) {
+                buffer.write( buffers, 0, len );
             }
 
-            byte[] bs = buffer.toByteArray();
-            FileOutputStream fileOutputStream = new FileOutputStream(parcelFileDescriptor.getFileDescriptor());
-            fileOutputStream.write(bs);
-            fileOutputStream.close();
-            inputStream.close();
-            parcelFileDescriptor.close();
-            getContentResolver().update(uri, values, null, null); //MediaStore.Images 테이블에 이미지 행 추가 후 업데이트
+            byte[] bs = buffer.toByteArray( );
+            FileOutputStream fileOutputStream = new FileOutputStream( parcelFileDescriptor.getFileDescriptor( ) );
+            fileOutputStream.write( bs );
+            fileOutputStream.close( );
+            inputStream.close( );
+            parcelFileDescriptor.close( );
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            getContentResolver( ).update( uri, values, null, null ); //MediaStore.Images 테이블에 이미지 행 추가 후 업데이트
+
+        } catch ( Exception e ) {
+            e.printStackTrace( );
         }
 
-        values.clear();
-        values.put(MediaStore.Images.Media.IS_PENDING, 0); //실행하는 기기에서 앱이 IS_PENDING 값을 1로 설정하면 독점 액세스 권한 획득
-        getContentResolver().update(uri, values, null, null);
+        values.clear( );
+        values.put( MediaStore.Images.Media.IS_PENDING, 0 ); //실행하는 기기에서 앱이 IS_PENDING 값을 1로 설정하면 독점 액세스 권한 획득
+        getContentResolver( ).update( uri, values, null, null );
 
     }
 
@@ -275,7 +298,7 @@ public class camera_server extends AppCompatActivity {
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
-        Log.d(TAG, "사진저장>> " + storageDir.toString());
+        Log.d(TAG, "사진저장>> "+storageDir.toString());
 
         currentPhotoPath = image.getAbsolutePath();
 
