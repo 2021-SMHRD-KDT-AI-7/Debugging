@@ -34,7 +34,7 @@ public class loginActivity extends AppCompatActivity {
         cb_ = findViewById(R.id.cb_);
 
         btn_login.setOnClickListener(view -> {
-            sr = new StringRequest(Request.Method.POST,
+            /*sr = new StringRequest(Request.Method.POST,
                     "링크 입력 요망",
                     response -> {
                         if (response.equals("true")) {
@@ -57,7 +57,7 @@ public class loginActivity extends AppCompatActivity {
                     return data;
                 }
             };
-            rq.add(sr);
+            rq.add(sr);*/
             finish();
         });
     }
