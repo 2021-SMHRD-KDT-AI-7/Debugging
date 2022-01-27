@@ -74,9 +74,6 @@ public class historyActivity extends AppCompatActivity {
         entries.add(new Entry(data.get(8).getdate(), data.get(8).getRes()));
         entries.add(new Entry(data.get(9).getdate(), data.get(9).getRes()));
 
-
-//  values.add(new Entry(dateTime, weight));
-
         LineDataSet lineDataSet = new LineDataSet(entries, null); // 차트 데이터 디자인
         lineDataSet.setLineWidth(2); // 선 굵기
         lineDataSet.setCircleRadius(2); // 원 크기
