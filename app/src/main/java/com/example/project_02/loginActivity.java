@@ -30,7 +30,7 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         et_id = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
-        btn_login = findViewById(R.id.btn_kakao_login);
+        btn_login = findViewById(R.id.btn_login_);
         cb_ = findViewById(R.id.cb_);
 
         btn_login.setOnClickListener(view -> {

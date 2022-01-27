@@ -39,7 +39,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Fragment2 extends Fragment {
 
-    Button  btnOK, btnClose;
+    Button btnOK, btnClose;
     ImageView imgPlant;
 
     TextureView cameraPreView;
@@ -61,7 +61,7 @@ public class Fragment2 extends Fragment {
 
         //bottomsheetDialog 객체 생성
         LayoutInflater inflater1 = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater1.inflate(R.layout.capture,null,false);
+        View view = inflater1.inflate(R.layout.capture, null, false);
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
         bottomSheetDialog.setContentView(view);
 
@@ -78,11 +78,7 @@ public class Fragment2 extends Fragment {
 
         try {
             processCameraProvider = ProcessCameraProvider.getInstance(getActivity()).get();
-        }
-        catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -103,7 +99,7 @@ public class Fragment2 extends Fragment {
                             @Override
                             public void onCaptureSuccess(@NonNull ImageProxy image) {
 
-                                try{
+                                try {
                                     @SuppressLint({"UnsafeExperimentalUsageError", "UnsafeOptInUsageError"})
                                     Image mediaImage = image.getImage();
                                     Bitmap bitmap = ImageUtil.mediaImageToBitmap(mediaImage);
@@ -117,10 +113,9 @@ public class Fragment2 extends Fragment {
                                     //이미지 데이터가 계속 쌓이게 되면서 사진이 찍히지 않음
                                     image.close();
                                     mediaImage.close();
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-
 //                                super.onCaptureSuccess(image);
                             }
                         }
