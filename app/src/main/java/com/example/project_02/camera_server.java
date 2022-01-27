@@ -93,7 +93,7 @@ public class camera_server extends AppCompatActivity {
         });
     }
 
-    //이미지 플라시크로 전송
+    //이미지 플라스크로 전송
     private void sendImage() {
 
         //비트맵 이미지를 byte로 변환 -> base64형태로 변환
