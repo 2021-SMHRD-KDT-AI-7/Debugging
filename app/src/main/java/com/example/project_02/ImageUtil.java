@@ -249,7 +249,6 @@ byte[] byteArray = byteBuffer.array();
                     rotationDegrees = 270;
                     break;
             }
-
             return (float)rotationDegrees;
         }
         catch (Exception e) {

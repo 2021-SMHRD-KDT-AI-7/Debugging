@@ -4,22 +4,22 @@
 
     <item
         android:id="@+id/tab1"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/ic_twotone_home_24"
         android:title="fragment1" />
     <item
         android:id="@+id/tab2"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/ic_baseline_camera_24"
         android:title="fragment2" />
     <item
         android:id="@+id/tab3"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/ic_baseline_analytics_24"
         android:title="fragment3" />
     <item
         android:id="@+id/tab4"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/ic_baseline_auto_fix_high_24"
         android:title="fragment4" />
     <item
         android:id="@+id/tab5"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/ic_baseline_history_edu_24"
         android:title="fragment5" />
 </menu>
