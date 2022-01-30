@@ -30,20 +30,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.project_02.ImageUtil;
-import com.example.project_02.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.util.concurrent.ExecutionException;
 
-
-public class Fragment2 extends Fragment {
+public class cameraFragment extends Fragment {
 
     Button btnOK, btnClose;
     ImageView imgPlant;
-
-    TextureView cameraPreView;
     ImageView btnCapture;
+    //TextureView cameraPreView;
 
     private int REQUEST_CODE_PERMISSIONS = 1001;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
@@ -66,9 +61,9 @@ public class Fragment2 extends Fragment {
         bottomSheetDialog.setContentView(view);
 
         //fragment3.xml
-        View v = inflater.inflate(R.layout.fragment_2, container, false);
+        View v = inflater.inflate(R.layout.fragment_camera, container, false);
 
-//        cameraPreView = v.findViewById(R.id.cameraPreView);
+        //cameraPreView = v.findViewById(R.id.cameraPreView);
         previewView = v.findViewById(R.id.previewView);
         btnCapture = v.findViewById(R.id.btnCapture);
 
@@ -90,64 +85,46 @@ public class Fragment2 extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
-        btnCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnCapture.setOnClickListener(view13 -> {
+            imageCapture.takePicture(ContextCompat.getMainExecutor(getActivity()),
+                    new ImageCapture.OnImageCapturedCallback() {
+                        @Override
+                        public void onCaptureSuccess(@NonNull ImageProxy image) {
+                            try {
+                                @SuppressLint({"UnsafeExperimentalUsageError", "UnsafeOptInUsageError"})
+                                Image mediaImage = image.getImage();
+                                Bitmap bitmap = ImageUtil.mediaImageToBitmap(mediaImage);
 
-                imageCapture.takePicture(ContextCompat.getMainExecutor(getActivity()),
-                        new ImageCapture.OnImageCapturedCallback() {
-                            @Override
-                            public void onCaptureSuccess(@NonNull ImageProxy image) {
+                                Log.d("MainActivity", Integer.toString(bitmap.getWidth())); //4128
+                                Log.d("MainActivity", Integer.toString(bitmap.getHeight())); //3096
 
-                                try {
-                                    @SuppressLint({"UnsafeExperimentalUsageError", "UnsafeOptInUsageError"})
-                                    Image mediaImage = image.getImage();
-                                    Bitmap bitmap = ImageUtil.mediaImageToBitmap(mediaImage);
+                                imgPlant.setImageBitmap(bitmap);
 
-                                    Log.d("MainActivity", Integer.toString(bitmap.getWidth())); //4128
-                                    Log.d("MainActivity", Integer.toString(bitmap.getHeight())); //3096
-
-                                    imgPlant.setImageBitmap(bitmap);
-
-                                    //close() 안해주면 Too many acquire images. Close image to be able to process next 오류발생
-                                    //이미지 데이터가 계속 쌓이게 되면서 사진이 찍히지 않음
-                                    image.close();
-                                    mediaImage.close();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-//                                super.onCaptureSuccess(image);
+                                //close() 안해주면 Too many acquire images. Close image to be able to process next 오류발생
+                                //이미지 데이터가 계속 쌓이게 되면서 사진이 찍히지 않음
+                                image.close();
+                                mediaImage.close();
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
+//                                super.onCaptureSuccess(image);
                         }
-                );
-
-                bottomSheetDialog.show();
-
-            }
+                    }
+            );
+            bottomSheetDialog.show();
         });
 
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "확인", Toast.LENGTH_SHORT).show();
-                bottomSheetDialog.dismiss();
-                processCameraProvider.unbindAll(); //프리뷰 카메라 종료
-
-                //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
-
-
-            }
+        btnOK.setOnClickListener(view1 -> {
+            Toast.makeText(getActivity().getApplicationContext(), "확인", Toast.LENGTH_SHORT).show();
+            bottomSheetDialog.dismiss();
+            processCameraProvider.unbindAll(); //프리뷰 카메라 종료
+            //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
         });
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "닫기", Toast.LENGTH_SHORT).show();
-                bottomSheetDialog.dismiss();
-
-            }
+        btnClose.setOnClickListener(view12 -> {
+            Toast.makeText(getActivity().getApplicationContext(), "닫기", Toast.LENGTH_SHORT).show();
+            bottomSheetDialog.dismiss();
         });
-
         return v;
     }
 
