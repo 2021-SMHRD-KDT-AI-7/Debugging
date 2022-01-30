@@ -7,15 +7,19 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class loginActivity extends AppCompatActivity {
 
     private EditText et_id, et_pw;
-    private Button btn_login, btn_join;
+    private Button btn_login;
     CheckBox cb_;
     StringRequest sr;
     RequestQueue rq;
@@ -26,20 +30,19 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         et_id = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
+        btn_login = findViewById(R.id.btn_login_);
         cb_ = findViewById(R.id.cb_);
-        btn_login = findViewById(R.id.btn_join_);
-        btn_join = findViewById(R.id.btn_join2);
 
         btn_login.setOnClickListener(view -> {
-            Intent intent = new Intent(
-                    loginActivity.this, MainActivity.class);
-            startActivity(intent);
             /*sr = new StringRequest(Request.Method.POST,
                     "링크 입력 요망",
                     response -> {
                         if (response.equals("true")) {
                             Toast.makeText(getApplicationContext(),
                                     "로그인되었습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(
+                                    loginActivity.this, myActivity.class);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(),
                                     "아이디 혹은 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
@@ -55,11 +58,7 @@ public class loginActivity extends AppCompatActivity {
                 }
             };
             rq.add(sr);*/
-        });
-        btn_join.setOnClickListener(view -> {
-            Intent intent = new Intent(
-                    loginActivity.this, joinActivity.class);
-            startActivity(intent);
+            finish();
         });
     }
 }
