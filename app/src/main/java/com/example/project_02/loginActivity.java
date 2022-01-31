@@ -34,6 +34,9 @@ public class loginActivity extends AppCompatActivity {
         cb_ = findViewById(R.id.cb_);
 
         btn_login.setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    loginActivity.this, MainActivity.class);
+            startActivity(intent);
             /*sr = new StringRequest(Request.Method.POST,
                     "링크 입력 요망",
                     response -> {
