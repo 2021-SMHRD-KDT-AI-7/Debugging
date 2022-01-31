@@ -1,8 +1,10 @@
 package com.example.project_02;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -39,4 +41,5 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
+
 }
