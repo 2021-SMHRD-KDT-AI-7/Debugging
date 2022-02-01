@@ -19,6 +19,7 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,6 +50,7 @@ public class cameraFragment extends Fragment {
     ProcessCameraProvider processCameraProvider;
     int lensFacing = CameraSelector.LENS_FACING_BACK;
     ImageCapture imageCapture;
+    Fragment BaumannFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,6 +121,9 @@ public class cameraFragment extends Fragment {
             bottomSheetDialog.dismiss();
             processCameraProvider.unbindAll(); //프리뷰 카메라 종료
             //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
+
+            //parentFragmentManager.beginTransaction().replace(R.id.container,BaumannFragment).commit();
+
         });
 
         btnClose.setOnClickListener(view12 -> {
