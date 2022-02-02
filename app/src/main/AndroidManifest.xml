@@ -39,10 +39,6 @@
             android:exported="false" />
 
         <activity
-            android:name=".myActivity"
-            android:exported="true" />
-
-        <activity
             android:name=".loginActivity"
             android:exported="false" />
 
