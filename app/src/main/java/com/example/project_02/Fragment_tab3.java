@@ -7,12 +7,72 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Fragment_tab3 extends Fragment {
+    ArrayList<Integer> baumanScore = new ArrayList<>();
+    ArrayList<String> skintype = new ArrayList<>();
+    HorizontalBarChart barChart;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
+
+        String[] skin = {"T", "", "P", "", "S", "", "O"};
+
+        barChart = v.findViewById(R.id.barchart);
+
+        baumanScore.add(83);
+        baumanScore.add(92);
+        baumanScore.add(57);
+        baumanScore.add(48);
+
+        List<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0, baumanScore.get(3)));
+        entries.add(new BarEntry(2, baumanScore.get(2)));
+        entries.add(new BarEntry(4, baumanScore.get(1)));
+        entries.add(new BarEntry(6, baumanScore.get(0)));
+
+        BarDataSet barDataSet = new BarDataSet(entries, null);
+        barDataSet.setDrawValues(true);
+        barDataSet.setValueTextSize(10);
+
+        BarData barData = new BarData(barDataSet);
+
+        XAxis xAxis = barChart.getXAxis(); // X축
+        xAxis.setTextSize(18); // 텍스트 크기
+        xAxis.setDrawGridLines(false); // 격자 삭제
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(skin)); // X축을 피부타입으로 변경
+
+        YAxis yLAxis = barChart.getAxisLeft(); // y축 왼쪽
+        yLAxis.setDrawGridLines(false); // 격자 삭제
+        yLAxis.setAxisMinimum(0); // y축 최소값
+        yLAxis.setAxisMaximum(105); // y축 최대값
+        barChart.getAxisRight().setDrawLabels(false); //
+
+        Description description = new Description(); // 차트 주석 생성
+        description.setText(""); // 주석 미기입
+
+        barChart.setData(barData); // 차트 생성
+        barChart.setDoubleTapToZoomEnabled(false); // 더블터치하면 확대하기
+        barChart.setTouchEnabled(false); // 터치 가능
+        barChart.setDescription(description); // 주석
+        barChart.invalidate();
+        barChart.animateXY(1000, 2000,
+                Easing.EaseInOutCubic, Easing.EaseInOutCubic);
         return v;
     }
 }

@@ -87,7 +87,6 @@ public class historyActivity extends AppCompatActivity {
         lineDataSet.setValueTextSize(10);
 
         LineData lineData = new LineData(lineDataSet); // 차트 그리기
-        lineChart.setData(lineData); // 차트에 데이터 디자인 값 추가
         XAxis xAxis = lineChart.getXAxis(); // X축 생성
         xAxis.setSpaceMax(0.5f); // X축 여백
         xAxis.setSpaceMin(0.5f); // X축 여백
@@ -109,6 +108,7 @@ public class historyActivity extends AppCompatActivity {
         Description description = new Description(); // 차트 주석 생성
         description.setText(""); // 주석 미기입
 
+        lineChart.setData(lineData); // 차트 생성
         lineChart.setDoubleTapToZoomEnabled(true); // 더블터치하면 확대하기
         lineChart.setDrawGridBackground(true); // 배경에 점선 표시?
         lineChart.setDescription(description); // 주석 그리기
