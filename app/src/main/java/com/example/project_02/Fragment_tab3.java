@@ -31,7 +31,7 @@ public class Fragment_tab3 extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
 
-        String[] skin = {"T", "", "P", "", "S", "", "O"};
+        String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
 
