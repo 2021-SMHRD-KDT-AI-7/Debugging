@@ -20,7 +20,7 @@ public class myActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.activity_tab5_my);
 
         name = findViewById(R.id.tv_name);
         gender = findViewById(R.id.tv_gender);
