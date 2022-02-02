@@ -11,6 +11,6 @@ public class GuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guide);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new GuideFragment_1()).commit();
+                .replace(R.id.container,new GuideFragment_1()).commit();
     }
 }
