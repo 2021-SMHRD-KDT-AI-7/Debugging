@@ -48,9 +48,8 @@ public class cameraFragment extends Fragment {
     //카메라 프리뷰에 필요한 변수
     PreviewView previewView;
     ProcessCameraProvider processCameraProvider;
-    int lensFacing = CameraSelector.LENS_FACING_BACK;
+    int lensFacing = CameraSelector.LENS_FACING_FRONT;
     ImageCapture imageCapture;
-    Fragment BaumannFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,7 +114,6 @@ public class cameraFragment extends Fragment {
             );
             bottomSheetDialog.show();
         });
-
         btnOK.setOnClickListener(view1 -> {
             Toast.makeText(getActivity().getApplicationContext(), "확인", Toast.LENGTH_SHORT).show();
             bottomSheetDialog.dismiss();
@@ -123,9 +121,7 @@ public class cameraFragment extends Fragment {
             //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
 
             //parentFragmentManager.beginTransaction().replace(R.id.container,BaumannFragment).commit();
-
         });
-
         btnClose.setOnClickListener(view12 -> {
             Toast.makeText(getActivity().getApplicationContext(), "닫기", Toast.LENGTH_SHORT).show();
             bottomSheetDialog.dismiss();

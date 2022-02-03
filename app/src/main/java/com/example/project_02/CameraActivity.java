@@ -67,29 +67,16 @@ public class CameraActivity extends AppCompatActivity {
 
         init();
 
-        btn_capture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                camera_open_intent();
-            }
-        });
+        btn_capture.setOnClickListener(v -> camera_open_intent());
 
-        btn_gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gallery_open_intent();
-            }
-        });
+        btn_gallery.setOnClickListener(v -> gallery_open_intent());
 
-        btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progress = new ProgressDialog(CameraActivity.this);
-                progress.setMessage("Uploading...");
-                progress.show();
+        btn_send.setOnClickListener(v -> {
+            progress = new ProgressDialog(CameraActivity.this);
+            progress.setMessage("Uploading...");
+            progress.show();
 
-                sendImage();
-            }
+            sendImage();
         });
     }
 
@@ -101,7 +88,6 @@ public class CameraActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
 
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
         String flask_url = "http://211.227.224.206:5000/sendFrame";
@@ -126,7 +112,6 @@ public class CameraActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         queue.add(request);
     }
 
@@ -139,7 +124,6 @@ public class CameraActivity extends AppCompatActivity {
 
             getBitmap(picturePhotoURI);
             img.setImageBitmap(bitmap);
-
             //갤러리에 사진 저장
             saveFile(currentPhotoPath);
 
@@ -150,7 +134,6 @@ public class CameraActivity extends AppCompatActivity {
             getBitmap(galleryURI);
             img.setImageBitmap(bitmap);
         }
-
     }
 
     //Uri에서 bisap
@@ -169,7 +152,6 @@ public class CameraActivity extends AppCompatActivity {
         btn_capture = findViewById(R.id.btn_capture);
         btn_gallery = findViewById(R.id.btn_gallery);
         btn_send = findViewById(R.id.btn_send);
-
         queue = Volley.newRequestQueue(CameraActivity.this);
 
         requestPermission();
@@ -193,9 +175,7 @@ public class CameraActivity extends AppCompatActivity {
 
     //갤러리 사진 저장 기능
     private void saveFile(String currentPhotoPath) {
-
         Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
-
         ContentValues values = new ContentValues();
 
         //실제 앨범에 저장될 이미지이름
@@ -213,10 +193,8 @@ public class CameraActivity extends AppCompatActivity {
              ParcelFileDescriptor: 공유 파일 요청 객체
              ContentResolver: 어플리케이션끼리 특정한 데이터를 주고 받을 수 있게 해주는 기술(공용 데이터베이스)
                             ex) 주소록이나 음악 앨범이나 플레이리스트 같은 것에도 접근하는 것이 가능
-
             getContentResolver(): ContentResolver객체 반환
             */
-
             ParcelFileDescriptor parcelFileDescriptor = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                 parcelFileDescriptor = getContentResolver().openFileDescriptor(uri, "w", null); //미디어 파일 열기

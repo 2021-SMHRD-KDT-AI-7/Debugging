@@ -94,12 +94,14 @@ public class historyActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // X축 위치
         xAxis.setTextColor(Color.parseColor("#242424")); // 텍스트 색상
         xAxis.setLabelCount(2, /*force: */true); // X축을 count개로 분할
-        xAxis.enableGridDashedLine(10, 10, 10); // 그리드라인
+        xAxis.setDrawGridLines(false);
 
         YAxis yLAxis = lineChart.getAxisLeft(); // 왼쪽 y축 생성
         YAxis yRAxis = lineChart.getAxisRight(); // 오른쪽 y축 생성
         yLAxis.setTextColor(Color.parseColor("#242424")); // y축 텍스트 색상
         yRAxis.setTextColor(Color.parseColor("#242424"));
+        yLAxis.setDrawGridLines(false);
+        yRAxis.setDrawGridLines(false);
         yLAxis.setAxisMinimum(0); // y축 최소값
         yRAxis.setAxisMinimum(0);
         yLAxis.setAxisMaximum(115); // y축 최대값
