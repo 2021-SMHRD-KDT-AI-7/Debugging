@@ -13,22 +13,18 @@ import android.widget.Button;
 public class GuideFragment_6 extends Fragment {
     Button btn_start;
 
-        @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-            ViewGroup rootView = (ViewGroup) inflater.inflate(
-                    R.layout.fragment_guide_6, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(
+                R.layout.fragment_guide_6, container, false);
 
-                btn_start = rootView.findViewById(R.id.btn_start);
-
-                btn_start.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(),frontActivity.class);
-                        startActivity(intent);
-                    }
-                });
-            return rootView;
+        btn_start = rootView.findViewById(R.id.btn_start);
+        btn_start.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), frontActivity.class);
+            startActivity(intent);
+        });
+        return rootView;
     }
 }
