@@ -22,12 +22,14 @@ public class frontActivity extends AppCompatActivity {
             Intent intent = new Intent(frontActivity.this,
                     loginActivity.class);
             startActivity(intent);
+            finish();
         });
         // 회원가입 페이지 이동
         btn_join.setOnClickListener(view -> {
             Intent intent = new Intent(frontActivity.this,
                     joinActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 }
