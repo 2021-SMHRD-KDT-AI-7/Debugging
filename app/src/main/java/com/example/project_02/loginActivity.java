@@ -21,7 +21,7 @@ import java.util.Map;
 public class loginActivity extends AppCompatActivity {
 
     private EditText et_id, et_pw;
-    private Button btn_login;
+    private Button btn_login, btn_join;
     ImageView back;
     CheckBox cb_;
     StringRequest sr;
@@ -35,6 +35,7 @@ public class loginActivity extends AppCompatActivity {
         et_id = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
         btn_login = findViewById(R.id.btn_login_);
+        btn_join = findViewById(R.id.btn_join2);
         cb_ = findViewById(R.id.cb_);
 
         btn_login.setOnClickListener(view -> {
@@ -65,6 +66,12 @@ public class loginActivity extends AppCompatActivity {
                 }
             };
             rq.add(sr);*/
+            finish();
+        });
+        btn_join.setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    loginActivity.this, joinActivity.class);
+            startActivity(intent);
             finish();
         });
         back.setOnClickListener(view -> finish());
