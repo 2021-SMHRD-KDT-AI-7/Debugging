@@ -53,7 +53,7 @@ public class BaumannFragment extends Fragment {
         init();
 
         Button button = (Button)rootView.findViewById(R.id.next);
-        button.setOnClickListener(this::baumann);
+        button.setOnClickListener(this::onClick);
 
         // option1 체크박스가 눌렸을 때
         rootView.findViewById(R.id.checkBox).setOnClickListener(new Button.OnClickListener() {

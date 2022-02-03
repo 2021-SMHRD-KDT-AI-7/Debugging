@@ -17,6 +17,7 @@ public class GuideActivity extends AppCompatActivity {
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 6;
     private CircleIndicator3 mIndicator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
