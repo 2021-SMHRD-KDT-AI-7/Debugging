@@ -101,7 +101,7 @@
             android:id="@+id/btn_login"
             android:layout_width="0dp"
             android:layout_height="55dp"
-            android:backgroundTint="#CE82FD"
+            android:backgroundTint="#BBE6EC"
             android:drawableLeft="@drawable/ic_baseline_email_24"
             android:fontFamily="@font/scdream5"
             android:insetTop="3dp"

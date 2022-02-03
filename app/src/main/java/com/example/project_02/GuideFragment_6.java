@@ -17,8 +17,6 @@ public class GuideFragment_6 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
             ViewGroup rootView = (ViewGroup) inflater.inflate(
                     R.layout.fragment_guide_6, container, false);
 
