@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="mirror"
+            android:text="Mirror"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30sp" />
