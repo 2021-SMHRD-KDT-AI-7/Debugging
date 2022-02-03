@@ -26,7 +26,7 @@ public class CosAdapter extends BaseAdapter {
     private Context context;  // Activity 에서 보내준 화면정보!  // 화면을 구성하는 정보를 담고있는 객체( Activity 핵심)  MainActivity 일듯??
     private LayoutInflater inflater; // 추출한 inflater를 저장할 공간~
     private Fragment_tab4 activity;
-    // int[] cos_sample_list = { R.drawable.cos_sample,R.drawable.cos_sample2,R.drawable.cos_sample3,R.drawable.cos_sample4,R.drawable.cos_sample5};
+    int[] cos_sample_list = {R.drawable.cos_sample, R.drawable.cos_sample2, R.drawable.cos_sample3, R.drawable.cos_sample4, R.drawable.cos_sample5};
 
     public CosAdapter(int template, ArrayList<CosVO> data, Context context, Fragment_tab4 activity) {
         this.template = template;
@@ -64,9 +64,9 @@ public class CosAdapter extends BaseAdapter {
         TextView price = view.findViewById(R.id.tv_cos_price);
         TextView cos_count = view.findViewById(R.id.cos_count);
 
-        // img.setImageResource(cos_sample_list[i]);
+        img.setImageResource(cos_sample_list[i]);
 
-        cos_count.setText(i+1+"");
+        cos_count.setText(i + 1 + "");
 
         name.setText(data.get(i).getCos_name());
         brand.setText(data.get(i).getCos_brand());

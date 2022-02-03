@@ -25,9 +25,9 @@
         android:id="@+id/cos_img"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/count_edge"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cos_count"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -63,16 +63,7 @@
         android:text="화장품가격"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cos_img"
-        app:layout_constraintStart_toStartOf="@+id/tv_cos_name" />
+        app:layout_constraintStart_toStartOf="@+id/tv_cos_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cos_name" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cos_img" />
 </androidx.constraintlayout.widget.ConstraintLayout>
