@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.container, new Fragment_tab1()).commit();
             } else if (item.getItemId() == R.id.tab2) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new Fragment_tab2()).commit();
+                        .replace(R.id.container, new cameraFragment()).commit();
             } else if (item.getItemId() == R.id.tab3) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, new Fragment_tab3()).commit();
