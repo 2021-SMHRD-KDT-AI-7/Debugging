@@ -7,21 +7,6 @@ public class CosVO {
     private String cos_brand;
     private String cos_img;
     private String cos_bauman;
-    // 화장품 테이블
-    // 964개
-    // 1~964번
-    // 1번
-    // 2번
-    // ORNT >> { 1, 3, 5}
-    // ORPT >> { 1, 4, 6}
-    // 1.  16가지 결과에 대한 화장품 5종류 선정 ( 중복가능)
-    // 2. 그 결과를 listview 보여줄 수 있도록 쿼리문 작성
-    // sql >> select * from 화장품 테이블 seq >> ORNT의 배열 의 숫자들과 일치하는 애를 가져와라
-    // 3. 태욱 안드-DB 연동
-    // 4. 출력 인데 프론트가 필요해
-    // index   , i+=1 settext
-
-    // 5. DB img_view >> url
 
     public CosVO(int cos_seq, String cos_name, String cos_price, String cos_brand, String cos_img, String cos_bauman) {
         this.cos_seq = cos_seq;
