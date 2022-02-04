@@ -17,21 +17,18 @@
         android:theme="@style/Theme.Project_02">
         <activity
             android:name=".GuideActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".splashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".historyActivity"
             android:exported="false" />
@@ -39,9 +36,14 @@
         <activity
             android:name=".loginActivity"
             android:exported="false" />
+
         <activity
             android:name=".frontActivity"
-            android:exported="true" />
+            android:exported="false" />
+
+        <activity
+            android:name=".joinActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

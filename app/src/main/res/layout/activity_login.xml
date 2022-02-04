@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back2"
     tools:context=".loginActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -25,7 +26,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.30" />
+        app:layout_constraintGuide_percent="0.47" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.29" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
@@ -38,15 +46,17 @@
         android:id="@+id/et_id"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="4dp"
         android:ems="10"
-        android:fontFamily="@font/scdream7"
+        android:fontFamily="@font/scdream5"
         android:hint="ID를 입력해주세요"
         android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+        app:layout_constraintTop_toTopOf="@+id/guideline7"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/et_pw"
@@ -54,9 +64,10 @@
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:fontFamily="@font/scdream7"
+        android:fontFamily="@font/scdream5"
         android:hint="PW를 입력해주세요"
         android:inputType="textPassword"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/et_id" />
@@ -64,14 +75,15 @@
     <Button
         android:id="@+id/btn_login_"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#BBE6EC"
-        android:fontFamily="@font/scdream7"
+        android:fontFamily="@font/scdream5"
         android:insetTop="3dp"
         android:insetBottom="3dp"
         android:text="로그인"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/cb_" />
@@ -82,12 +94,12 @@
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#E4E4E4"
-        android:fontFamily="@font/scdream7"
+        android:fontFamily="@font/scdream5"
         android:insetTop="3dp"
         android:insetBottom="3dp"
         android:text="아직 계정이 없나요?"
         android:textColor="#000000"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
@@ -114,5 +126,16 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/et_pw" />
+
+    <ImageView
+        android:id="@+id/login_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test"
+        app:tint="#000000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

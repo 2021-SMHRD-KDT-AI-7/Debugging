@@ -43,15 +43,27 @@ public class cameraFragment extends Fragment {
 
     private int REQUEST_CODE_PERMISSIONS = 1001;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
+    MainActivity mainactivity;
+
 
 
     //카메라 프리뷰에 필요한 변수
     PreviewView previewView;
     ProcessCameraProvider processCameraProvider;
-    int lensFacing = CameraSelector.LENS_FACING_BACK;
+    int lensFacing = CameraSelector.LENS_FACING_FRONT;
     ImageCapture imageCapture;
     Fragment BaumannFragment;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mainactivity=(MainActivity)getActivity();
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mainactivity=null;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -122,7 +134,7 @@ public class cameraFragment extends Fragment {
             processCameraProvider.unbindAll(); //프리뷰 카메라 종료
             //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
 
-            //parentFragmentManager.beginTransaction().replace(R.id.container,BaumannFragment).commit();
+            mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,new BaumannFragment()).commit();
 
         });
 

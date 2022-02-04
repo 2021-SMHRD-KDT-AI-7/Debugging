@@ -37,23 +37,23 @@
             <Button
                 android:id="@+id/btnOK"
                 android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:layout_height="48dp"
+                android:fontFamily="@font/scdream4"
                 android:text="확인"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp"
-                android:textStyle="italic|bold" />
+                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/btnClose"
                 android:layout_width="160dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginLeft="8dp"
-                android:background="#FFFFFF"
+                android:fontFamily="@font/scdream4"
                 android:text="닫기"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp"
-                android:textStyle="italic|bold" />
+                android:textStyle="italic" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,9 +36,9 @@ public class Fragment_tab3 extends Fragment {
         barChart = v.findViewById(R.id.barchart);
 
         baumanScore.add(83);
-        baumanScore.add(92);
-        baumanScore.add(57);
-        baumanScore.add(48);
+        baumanScore.add(50);
+        baumanScore.add(75);
+        baumanScore.add(70);
 
         List<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, baumanScore.get(3)));

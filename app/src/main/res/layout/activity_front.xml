@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.90" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -84,9 +84,9 @@
         <Button
             android:id="@+id/btn_join"
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="56dp"
             android:backgroundTint="#E4E4E4"
-            android:fontFamily="@font/scdream7"
+            android:fontFamily="@font/scdream5"
             android:insetTop="3dp"
             android:insetBottom="3dp"
             android:text="새로 회원가입하기"
@@ -100,13 +100,15 @@
         <Button
             android:id="@+id/btn_login"
             android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:backgroundTint="#BBE6EC"
+            android:layout_height="56dp"
+            android:backgroundTint="#AFE1E8"
             android:drawableLeft="@drawable/ic_baseline_email_24"
-            android:fontFamily="@font/scdream7"
+            android:fontFamily="@font/scdream5"
             android:insetTop="3dp"
             android:insetBottom="3dp"
             android:text="기존 이메일로 로그인하기"
+            android:textColor="@color/white"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

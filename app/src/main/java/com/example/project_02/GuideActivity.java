@@ -1,9 +1,7 @@
 package com.example.project_02;
 
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -17,6 +15,7 @@ public class GuideActivity extends AppCompatActivity {
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 6;
     private CircleIndicator3 mIndicator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +31,7 @@ public class GuideActivity extends AppCompatActivity {
         //Indicator
         mIndicator = findViewById(R.id.indicator);
         mIndicator.setViewPager(mPager);
-        mIndicator.createIndicators(num_page,0);
+        mIndicator.createIndicators(num_page, 0);
 
         //ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
@@ -44,8 +43,9 @@ public class GuideActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {//이 메서드는 새 페이지가 선택되면 호출
                 super.onPageSelected(position);
-                mIndicator.animatePageSelected(position%num_page);
+                mIndicator.animatePageSelected(position % num_page);
             }
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {//스크롤 상태가 변경될 때 호출
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
@@ -57,24 +57,20 @@ public class GuideActivity extends AppCompatActivity {
             }
         });
 
-        final float pageMargin= getResources().getDimensionPixelOffset(R.dimen.pageMargin);
+        final float pageMargin = getResources().getDimensionPixelOffset(R.dimen.pageMargin);
         final float pageOffset = getResources().getDimensionPixelOffset(R.dimen.offset);
 
-        mPager.setPageTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float myOffset = position * -(2 * pageOffset + pageMargin);
-                if (mPager.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
-                    if (ViewCompat.getLayoutDirection(mPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                        page.setTranslationX(-myOffset);
-                    } else {
-                        page.setTranslationX(myOffset);
-                    }
+        mPager.setPageTransformer((page, position) -> {
+            float myOffset = position * -(2 * pageOffset + pageMargin);
+            if (mPager.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
+                if (ViewCompat.getLayoutDirection(mPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                    page.setTranslationX(-myOffset);
                 } else {
-                    page.setTranslationY(myOffset);
+                    page.setTranslationX(myOffset);
                 }
+            } else {
+                page.setTranslationY(myOffset);
             }
         });
-
     }
 }

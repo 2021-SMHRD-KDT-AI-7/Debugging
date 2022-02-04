@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class joinActivity extends AppCompatActivity {
 
-    EditText id, pw, pw2, name, bd;
+    private EditText id, pw, pw2, name, bd;
+    ImageView back;
     Button btn_join;
 
     @Override
@@ -19,6 +21,7 @@ public class joinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
+        back = findViewById(R.id.join_back);
         id = findViewById(R.id.et_id);
         pw = findViewById(R.id.et_pw);
         pw2 = findViewById(R.id.et_pw2);
@@ -50,5 +53,6 @@ public class joinActivity extends AppCompatActivity {
                 finish();
             }
         });
+        back.setOnClickListener(view -> finish());
     }
 }

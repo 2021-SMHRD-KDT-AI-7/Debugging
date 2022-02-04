@@ -1,5 +1,6 @@
 package com.example.project_02;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -17,11 +18,11 @@ class LineChartXAxisValueFormatter extends IndexAxisValueFormatter {
     public String getFormattedValue(float value) {
         LocalDate now = LocalDate.now();
         int year = now.getYear();
+        long MilliTime = TimeUnit.DAYS.toMillis((long) value);
+        Date Milliseconds = new Date(MilliTime);
 
-        long emissionsMilliSince1970Time = TimeUnit.DAYS.toMillis((long) value);
-        Date timeMilliseconds = new Date(emissionsMilliSince1970Time);
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("MM-dd");
-
-        return year + "-" + dateTimeFormat.format(timeMilliseconds);
+        return year + dateTimeFormat.format(Milliseconds);
     }
 }

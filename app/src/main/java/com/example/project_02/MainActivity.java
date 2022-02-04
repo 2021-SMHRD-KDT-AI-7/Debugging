@@ -1,15 +1,16 @@
 package com.example.project_02;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bn;
+    private long lastTimeBackPressed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,4 +43,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() { // 뒤로가기 버튼 막기
+        //두 번 클릭시 어플 종료
+        if (System.currentTimeMillis() - lastTimeBackPressed < 1500) {
+            finish();
+            return;
+        }
+        lastTimeBackPressed = System.currentTimeMillis();
+        Toast.makeText(this,
+                "'뒤로' 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+    }
 }
