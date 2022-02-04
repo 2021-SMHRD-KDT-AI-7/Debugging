@@ -18,12 +18,11 @@ public class CosAdapter extends BaseAdapter {
     // 하지만.. inflate는 Activity 클래스에서 밖에 못함
 
     // 그래서  Activity한테 추출해내야돼! Inflator 를.
-
     // 1) Adapter에서 사용할 데이터들 변수(저장할 공간)로 만들어놓기~
 
-    private int template;  // ListView 한 칸에  들어갈 디자인~
+    private int template;  // ListView 한 칸에 들어갈 디자인~
     private ArrayList<CosVO> data;
-    private Context context;  // Activity 에서 보내준 화면정보!  // 화면을 구성하는 정보를 담고있는 객체( Activity 핵심)  MainActivity 일듯??
+    private Context context;  // Activity 에서 보내준 화면정보! / 화면을 구성하는 정보를 담고있는 객체( Activity 핵심)  MainActivity 일듯??
     private LayoutInflater inflater; // 추출한 inflater를 저장할 공간~
     private Fragment_tab4 activity;
     int[] cos_sample_list = {R.drawable.cos_sample, R.drawable.cos_sample2, R.drawable.cos_sample3, R.drawable.cos_sample4, R.drawable.cos_sample5};
@@ -35,6 +34,17 @@ public class CosAdapter extends BaseAdapter {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.activity = activity;
     }
+    // 화장품 테이블
+    // 964개
+    // ORNT >> { 1, 3, 5}
+    // ORPT >> { 1, 4, 6}
+    // 1.  16가지 결과에 대한 화장품 5종류 선정 ( 중복가능)
+
+    // 2. 그 결과를 listview 보여줄 수 있도록 쿼리문 작성
+    // sql >> select * from 화장품 테이블 seq >> ORNT의 배열 의 숫자들과 일치하는 애를 가져와라
+    // 3. 태욱 안드-DB 연동
+
+    // 5. DB img_view >> url
 
     @Override
     public int getCount() {  // 출력할 view의 개수    = VO의 개수
