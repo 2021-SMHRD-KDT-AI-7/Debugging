@@ -19,20 +19,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Cos_home_Adapter extends BaseAdapter {
-    // xml 에다가 Data로 꾸며줘야함
-    // xml 을 Java로 컨트롤 할 수 있도록 객체로 만들어줌 >> inflate
-    // 하지만.. inflate는 Activity 클래스에서 밖에 못함
 
-    // 그래서  Activity한테 추출해내야돼! Inflator 를
-    // 1) Adapter에서 사용할 데이터들 변수(저장할 공간)로 만들어놓기
-
-    private int template;  // ListView 한 칸에 들어갈 디자인
+    private int template;
     private ArrayList<CosVO> data;
-    private Context context;  // Activity 에서 보내준 화면정보 / 화면을 구성하는 정보를 담고있는 객체(Activity 핵심) MainActivity 일듯??
-    private LayoutInflater inflater; // 추출한 inflater를 저장할 공간
+    private Context context;
+    private LayoutInflater inflater;
     private Fragment_tab1 activity;
     Bitmap bitmap;
-    // int[] cos_sample_list = {R.drawable.cos_sample, R.drawable.cos_sample2, R.drawable.cos_sample3, R.drawable.cos_sample4, R.drawable.cos_sample5};
 
     public Cos_home_Adapter(int template, ArrayList<CosVO> data, Context context, Fragment_tab1 activity) {
         this.template = template;
@@ -41,18 +34,6 @@ public class Cos_home_Adapter extends BaseAdapter {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.activity = activity;
     }
-    // 화장품 테이블
-    // 964개
-    // ORNT >> { 1, 3, 5}
-    // ORPT >> { 1, 4, 6}
-    // 1.  16가지 결과에 대한 화장품 5종류 선정 (중복가능)
-    // D \ O,  S \ R,  P \ N,  W \ T
-
-    // 2. 그 결과를 listview 보여줄 수 있도록 쿼리문 작성
-    // sql >> select * from 화장품 테이블 seq >> ORNT의 배열 의 숫자들과 일치하는 애를 가져와라
-    // 3. 태욱 안드-DB 연동
-
-    // 5. DB img_view >> url
 
     @Override
     public int getCount() {  // 출력할 view의 개수 = VO의 개수
@@ -68,7 +49,6 @@ public class Cos_home_Adapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
-
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
@@ -97,8 +77,6 @@ public class Cos_home_Adapter extends BaseAdapter {
         ImageView cos_img = view.findViewById(R.id.cos_img_home);
 
         // img.setImageResource(cos_sample_list[i]);
-
-
         name.setText(data.get(i).getCos_name());
 
 

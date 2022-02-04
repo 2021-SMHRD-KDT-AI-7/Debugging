@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -16,16 +17,12 @@ public class Fragment_tab1 extends Fragment {
     ArrayList<CosVO> cos_list = new ArrayList<>();
     ListView lv;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab1, container, false);
 
-
         lv = v.findViewById(R.id.cos_listview_home);
-
 
         // cos_list
         // 바우만 테스트 결과 = cos DB에 바우만 컬럼의 값이 일치하는 화장품 가져와서 add
@@ -42,7 +39,6 @@ public class Fragment_tab1 extends Fragment {
 
         // template  >> R.layout.custom  우리가 디자인한 템플릿
         // data >> 데이터를 저장한 어레이 리스트
-
 
         return v;
     }
