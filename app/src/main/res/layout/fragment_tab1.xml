@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="디버깅님"
-        android:textColor="#0C0C0C"
+        android:textColor="#555A5C"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="오늘의 하루는 어떠셨나요?"
-        android:textColor="#0A0B0B"
+        android:textColor="#555A5C"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -77,5 +77,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.55" />
+
+    <ListView
+        android:id="@+id/cos_listview_home"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
