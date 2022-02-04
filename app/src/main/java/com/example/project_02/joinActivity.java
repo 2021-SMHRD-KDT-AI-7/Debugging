@@ -78,6 +78,11 @@ public class joinActivity extends AppCompatActivity {
                 finish();
             }
         });
-        back.setOnClickListener(view -> finish());
+        back.setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    joinActivity.this, frontActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }

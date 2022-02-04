@@ -74,6 +74,12 @@ public class loginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-        back.setOnClickListener(view -> finish());
+        back.setOnClickListener(view -> {
+                    Intent intent = new Intent(
+                            loginActivity.this, frontActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+        );
     }
 }
