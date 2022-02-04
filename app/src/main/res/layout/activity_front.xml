@@ -84,36 +84,20 @@
         <Button
             android:id="@+id/btn_join"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:backgroundTint="#E4E4E4"
             android:fontFamily="@font/scdream5"
-            android:insetTop="3dp"
+            android:insetTop="0dp"
             android:insetBottom="3dp"
             android:text="새로 회원가입하기"
             android:textColor="#000000"
             android:textSize="14sp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:backgroundTint="#AFE1E8"
-            android:drawableLeft="@drawable/ic_baseline_email_24"
-            android:fontFamily="@font/scdream5"
-            android:insetTop="3dp"
-            android:insetBottom="3dp"
-            android:text="기존 이메일로 로그인하기"
-            android:textColor="#555A5C"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_join" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -130,5 +114,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#AFE1E8"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:fontFamily="@font/scdream5"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="기존 이메일로 로그인하기"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
