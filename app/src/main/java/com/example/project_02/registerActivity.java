@@ -18,6 +18,7 @@ public class registerActivity extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try {
             String str;
+
             // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
             URL url = new URL("http://211.227.224.206:8081/DB_to_Android/and_DB.jsp");
 
@@ -27,7 +28,7 @@ public class registerActivity extends AsyncTask<String, Void, String> {
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
 
             // 전송할 데이터. GET 방식으로 작성
-            sendMsg = "id=" + strings[0] + "&pw=" + strings[1] + "&name=" + strings[2] + "&bd=" + strings[3] + "&ad=" + strings[4];
+            sendMsg = "user_id=" + strings[0] + "&user_pw=" + strings[1] + "&user_name=" + strings[2] + "&user_bd=" + strings[3];
 
             osw.write(sendMsg);
             osw.flush();
@@ -43,11 +44,15 @@ public class registerActivity extends AsyncTask<String, Void, String> {
                     buffer.append(str);
                 }
                 receiveMsg = buffer.toString();
+            } else {
+                // 통신 실패
             }
-            // 통신 실패
-        } catch (Exception e) {
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
         //jsp로부터 받은 리턴 값
         return receiveMsg;
     }
