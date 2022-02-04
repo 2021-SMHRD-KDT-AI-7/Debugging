@@ -42,7 +42,7 @@
                 android:fontFamily="@font/scdream5"
                 android:text="확인"
                 android:textColor="#FFFFFF"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="italic"
                 tools:ignore="TextContrastCheck" />
 
@@ -55,7 +55,7 @@
                 android:fontFamily="@font/scdream5"
                 android:text="닫기"
                 android:textColor="#FFFFFF"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="italic"
                 tools:ignore="TextContrastCheck" />
         </LinearLayout>
