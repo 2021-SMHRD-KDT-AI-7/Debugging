@@ -120,7 +120,7 @@
         android:insetTop="3dp"
         android:insetBottom="3dp"
         android:text="회원가입"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"

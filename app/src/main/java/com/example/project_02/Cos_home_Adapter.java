@@ -1,7 +1,5 @@
 package com.example.project_02;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CosAdapter extends BaseAdapter {
+public class Cos_home_Adapter extends BaseAdapter {
     // xml 에다가 Data로 꾸며줘야함
     // xml 을 Java로 컨트롤 할 수 있도록 객체로 만들어줌 >> inflate
     // 하지만.. inflate는 Activity 클래스에서 밖에 못함
@@ -32,11 +30,11 @@ public class CosAdapter extends BaseAdapter {
     private ArrayList<CosVO> data;
     private Context context;  // Activity 에서 보내준 화면정보 / 화면을 구성하는 정보를 담고있는 객체(Activity 핵심) MainActivity 일듯??
     private LayoutInflater inflater; // 추출한 inflater를 저장할 공간
-    private Fragment_tab4 activity;
+    private Fragment_tab1 activity;
     Bitmap bitmap;
     // int[] cos_sample_list = {R.drawable.cos_sample, R.drawable.cos_sample2, R.drawable.cos_sample3, R.drawable.cos_sample4, R.drawable.cos_sample5};
 
-    public CosAdapter(int template, ArrayList<CosVO> data, Context context, Fragment_tab4 activity) {
+    public Cos_home_Adapter(int template, ArrayList<CosVO> data, Context context, Fragment_tab1 activity) {
         this.template = template;
         this.data = data;
         this.context = context;
@@ -71,6 +69,7 @@ public class CosAdapter extends BaseAdapter {
         return i;
     }
 
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
@@ -94,18 +93,14 @@ public class CosAdapter extends BaseAdapter {
         if (view == null) {
             view = inflater.inflate(template, viewGroup, false);
         }
-        TextView name = view.findViewById(R.id.tv_cos_name);
-        TextView brand = view.findViewById(R.id.tv_cos_brand);
-        TextView price = view.findViewById(R.id.tv_cos_price);
-        TextView cos_count = view.findViewById(R.id.cos_count);
-        ImageView cos_img = view.findViewById(R.id.cos_img);
+        TextView name = view.findViewById(R.id.cos_name_home);
+        ImageView cos_img = view.findViewById(R.id.cos_img_home);
 
         // img.setImageResource(cos_sample_list[i]);
-        cos_count.setText(i + 1 + "");
+
 
         name.setText(data.get(i).getCos_name());
-        brand.setText(data.get(i).getCos_brand());
-        price.setText(data.get(i).getCos_price() + "원");
+
 
         // ---------------------------------------------------------- URL ImageView 출력 --------------------------------------
         // 안드로이드에서 네트워크와 관련된 작업을 할 때,

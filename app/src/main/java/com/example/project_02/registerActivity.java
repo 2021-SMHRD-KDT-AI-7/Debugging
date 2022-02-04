@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 
 public class registerActivity extends AsyncTask<String, Void, String> {
@@ -34,25 +35,20 @@ public class registerActivity extends AsyncTask<String, Void, String> {
             osw.flush();
 
             //jsp와 통신 성공 시 수행
-            if (conn.getResponseCode() == conn.HTTP_OK) {
-                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(tmp);
-                StringBuffer buffer = new StringBuffer();
+                StringBuilder buffer = new StringBuilder();
 
                 // jsp에서 보낸 값을 받는 부분
                 while ((str = reader.readLine()) != null) {
                     buffer.append(str);
                 }
                 receiveMsg = buffer.toString();
-            } else {
-                // 통신 실패
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            }  // 통신 실패
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         //jsp로부터 받은 리턴 값
         return receiveMsg;
     }
