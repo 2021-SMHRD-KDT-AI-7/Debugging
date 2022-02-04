@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,34 +40,23 @@ public class loginActivity extends AppCompatActivity {
         cb_ = findViewById(R.id.cb_);
 
         btn_login.setOnClickListener(view -> {
-            Intent intent = new Intent(
-                    loginActivity.this, MainActivity.class);
-            startActivity(intent);
-            /*sr = new StringRequest(Request.Method.POST,
-                    "링크 입력 요망",
-                    response -> {
-                        if (response.equals("true")) {
-                            Toast.makeText(getApplicationContext(),
-                                    "로그인되었습니다.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(
-                                    loginActivity.this, myActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(getApplicationContext(),
-                                    "아이디 혹은 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
-                        }
-                    },
-                    error -> {
-                    }) {
-                protected Map<String, String> getParams() {
-                    Map<String, String> data = new HashMap<>();
-                    data.put("user_id", et_id.getText().toString());
-                    data.put("user_pw", et_pw.getText().toString());
-                    return data;
-                }
-            };
-            rq.add(sr);*/
-            finish();
+            try {
+                String result;
+                String user_id = et_id.getText().toString();
+                String user_pw = et_pw.getText().toString();
+
+                signinActivity task = new signinActivity();
+                result = task.execute(user_id, user_pw).get();
+                Intent intent = new Intent(
+                        loginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                Log.i("DB_test", ".....ERROR.....!");
+                Toast.makeText(getApplicationContext(),
+                        "연결 실패.", Toast.LENGTH_SHORT).show();
+            }
+
         });
         btn_join.setOnClickListener(view -> {
             Intent intent = new Intent(
