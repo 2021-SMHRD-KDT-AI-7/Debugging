@@ -27,23 +27,23 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="6. 피부 히스토리로 \n매일 달라진 피부를 확인하세요"
-            android:textColor="@android:color/white"
+            android:text="6. 피부 히스토리로 \n매일 달라진 피부를 \n확인하세요"
+            android:textColor="#555A5C"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@+id/tvName1"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="96dp"
-            android:layout_marginEnd="120dp"
-            android:layout_marginBottom="128dp"
+            android:layout_marginStart="118dp"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="122dp"
+            android:layout_marginBottom="84dp"
             android:minHeight="70dp"
             android:text="start" />
 
