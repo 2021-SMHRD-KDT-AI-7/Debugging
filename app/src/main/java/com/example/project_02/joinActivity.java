@@ -32,42 +32,19 @@ public class joinActivity extends AppCompatActivity {
         bd = findViewById(R.id.et_birthday);
         btn_join = findViewById(R.id.btn_login_); // btn_join_ 아이디 중복 방지 언더바
 
-//        btn_join.setOnClickListener(v -> {
-//            if (!pw.getText().toString().equals(pw2.getText().toString())) {
-//                Toast.makeText(getApplicationContext(),
-//                        "비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
-//            } else {
-//                try {
-//                    String result;
-//                    String user_id = id.getText().toString();
-//                    String user_pw = pw.getText().toString();
-//                    String user_name = name.getText().toString();
-//                    String user_bd = bd.getText().toString();
-//                    String ad = "n";
-//
-//                    registerActivity task = new registerActivity();
-//                    result = task.execute(user_id, user_pw, user_name, user_bd, ad).get();
-//                } catch (Exception e) {
-//                    Log.i("DB_test", ".....ERROR.....!");
-//                }
-//                Toast.makeText(getApplicationContext(),
-//                        "회원가입되었습니다.", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(joinActivity.this, frontActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-        btn_join.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        btn_join.setOnClickListener(view -> {
+            if (!pw.getText().toString().equals(pw2.getText().toString())) {
+                Toast.makeText(getApplicationContext(),
+                        "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+            } else {
                 try {
-                    String result;
                     String user_id = id.getText().toString();
                     String user_pw = pw.getText().toString();
                     String user_name = name.getText().toString();
                     String user_bd = bd.getText().toString();
 
                     registerActivity task = new registerActivity();
-                    result = task.execute(user_id, user_pw, user_name, user_bd).get();
+                    task.execute(user_id, user_pw, user_name, user_bd).get();
                 } catch (Exception e) {
                     Log.i("DB_test", ".....ERROR.....!");
                 }
