@@ -31,7 +31,7 @@ public class Fragment_tab4 extends Fragment {
         //지금은 sample 데이터
         cos_list.add(new CosVO("닥터자르트 세라마이딘 크림 50ml", "38,000", "닥터자르트", "화장품주소"));
         cos_list.add(new CosVO("리얼베리어 익스트림 크림 50ml", "26,900", "리얼베리어", "화장품주소"));
-        cos_list.add(new CosVO("에스티 로더 갈색병 세럼 30ML", "89,040", "에스티로더", "화장품주소"));
+        cos_list.add(new CosVO("에스티 로더 갈색병 세럼 30ML", "89,400", "에스티로더", "화장품주소"));
         cos_list.add(new CosVO("가히 김고은 멀티밤", "29,400", "가히", "화장품주소"));
         cos_list.add(new CosVO("크리니크 모이스춰 써지 쏙보습크림 50ml", "41,000", "크리니크", "화장품주소"));
 
