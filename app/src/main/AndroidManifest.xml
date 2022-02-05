@@ -28,6 +28,7 @@
         <activity
             android:name=".splashActivity"
             android:exported="true"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
