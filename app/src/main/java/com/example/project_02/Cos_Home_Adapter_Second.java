@@ -3,6 +3,8 @@ package com.example.project_02;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,7 +92,8 @@ public class Cos_Home_Adapter_Second extends RecyclerView.Adapter<Cos_Home_Adapt
             // 작업 Thread에서 이미지를 불러오는 작업을 완료한 뒤
             // UI 작업을 할 수 있는 메인 Thread에서 ImageView에 이미지를 지정한다
             holder.cos_img_home.setImageBitmap(bitmap);
-
+            holder.cos_img_home.setBackground(new ShapeDrawable(new OvalShape()));
+            holder.cos_img_home.setClipToOutline(true);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -118,5 +121,5 @@ public class Cos_Home_Adapter_Second extends RecyclerView.Adapter<Cos_Home_Adapt
             cos_img_home = itemView.findViewById(R.id.cos_img_home);
             cos_name_home = itemView.findViewById(R.id.cos_name_home);
         }
-        }
+    }
 }

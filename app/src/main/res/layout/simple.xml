@@ -5,7 +5,7 @@
     android:fontFamily="@font/scdream4"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    android:text="안녕하세요. 테스트 페이지로 만들었습니다. Hello world!"
+    android:text="안녕하세요. 테스트 페이지로 만들었습니다. Hello world! 지우지마세요ㅠ"
     android:textSize="20sp">
 
 </TextView>
