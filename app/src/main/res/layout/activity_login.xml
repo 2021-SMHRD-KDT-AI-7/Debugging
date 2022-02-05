@@ -80,7 +80,7 @@
         android:insetTop="3dp"
         android:insetBottom="3dp"
         android:text="로그인"
-        android:textColor="#3949AB"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_login_" />
 
     <TextView
-        android:id="@+id/tv_login"
+        android:id="@+id/tv_join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"

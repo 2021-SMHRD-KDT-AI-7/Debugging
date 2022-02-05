@@ -5,7 +5,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 
@@ -31,7 +35,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class cameraFragment extends Fragment {
@@ -41,10 +56,15 @@ public class cameraFragment extends Fragment {
     ImageView btnCapture;
     //TextureView cameraPreView;
 
+    private RequestQueue queue;
+    private String currentPhotoPath;
+    private Bitmap bitmap;
+    private String imageString;
+
     private int REQUEST_CODE_PERMISSIONS = 1001;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
     MainActivity mainactivity;
-
+    BottomSheetDialog bottomSheetDialog;
 
 
     //카메라 프리뷰에 필요한 변수
@@ -53,25 +73,29 @@ public class cameraFragment extends Fragment {
     int lensFacing = CameraSelector.LENS_FACING_FRONT;
     ImageCapture imageCapture;
     Fragment BaumannFragment;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mainactivity=(MainActivity)getActivity();
+        mainactivity = (MainActivity) getActivity();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mainactivity=null;
+        mainactivity = null;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        queue = Volley.newRequestQueue(getActivity());
+
         //bottomsheetDialog 객체 생성
         LayoutInflater inflater1 = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.capture, null, false);
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+        bottomSheetDialog = new BottomSheetDialog(getActivity());
         bottomSheetDialog.setContentView(view);
 
         //fragment3.xml
@@ -90,7 +114,6 @@ public class cameraFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         //카메라 권한 요청
         if (allPermissionsGranted()) {
             bindPreview();
@@ -107,7 +130,7 @@ public class cameraFragment extends Fragment {
                             try {
                                 @SuppressLint({"UnsafeExperimentalUsageError", "UnsafeOptInUsageError"})
                                 Image mediaImage = image.getImage();
-                                Bitmap bitmap = ImageUtil.mediaImageToBitmap(mediaImage);
+                                bitmap = ImageUtil.mediaImageToBitmap(mediaImage);
 
                                 Log.d("MainActivity", Integer.toString(bitmap.getWidth())); //4128
                                 Log.d("MainActivity", Integer.toString(bitmap.getHeight())); //3096
@@ -133,9 +156,8 @@ public class cameraFragment extends Fragment {
             bottomSheetDialog.dismiss();
             processCameraProvider.unbindAll(); //프리뷰 카메라 종료
             //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
-
             mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,new BaumannFragment()).commit();
-
+            //sendImage();
         });
 
         btnClose.setOnClickListener(view12 -> {
@@ -143,6 +165,47 @@ public class cameraFragment extends Fragment {
             bottomSheetDialog.dismiss();
         });
         return v;
+    }
+
+    //이미지 플라스크로 전송
+    private void sendImage() {
+
+        //비트맵 이미지를 byte로 변환 -> base64형태로 변환
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+        //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
+        String flask_url = "http://211.227.224.206:5000/sendImage";
+        StringRequest request = new StringRequest(Request.Method.POST, flask_url,
+                response -> {
+                    Log.d("cameraFragment", response);
+
+                    byte[] decodedString = Base64.decode(response, Base64.DEFAULT);
+                    Bitmap b = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+                    imgPlant.setImageBitmap(b);
+                    bottomSheetDialog.show();
+
+//                 if (response.equals("true")) {
+//                        Log.d("cameraFragment", "Uploaded Successful");
+//                    } else {
+//                        Log.d("cameraFragment", "Some error occurred!");
+//                    }
+                },
+                error -> {
+                    Log.d("cameraFragment", "Some error occurred -> " + error);
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", imageString);
+
+                return params;
+            }
+        };
+        queue.add(request);
     }
 
     void bindPreview() {
@@ -154,7 +217,6 @@ public class cameraFragment extends Fragment {
                 .setTargetAspectRatio(AspectRatio.RATIO_4_3) //디폴트 표준 비율
                 .build();
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
-
         processCameraProvider.bindToLifecycle(this, cameraSelector, preview);
     }
 
@@ -164,7 +226,6 @@ public class cameraFragment extends Fragment {
                 .build();
         imageCapture = new ImageCapture.Builder()
                 .build();
-
         processCameraProvider.bindToLifecycle(this, cameraSelector, imageCapture);
     }
 

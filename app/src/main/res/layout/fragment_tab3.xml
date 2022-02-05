@@ -55,7 +55,7 @@
         app:layout_constraintGuide_percent="0.90" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tv_user2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
@@ -72,21 +72,21 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OSNT 타입입니다"
+        android:text="OSNT 타입 입니다"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user2"
         app:layout_constraintVertical_bias="0.292" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:text="경미한 지성, 심한 민감성, 비색소성, 탄력적인 \n피부 입니다"
         android:textColor="@color/black"
         android:textSize="18sp"

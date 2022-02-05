@@ -110,33 +110,31 @@
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
+    <TextView
+        android:id="@+id/tv_join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/scdream5"
+        android:text="회원가입"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        app:layout_constraintStart_toStartOf="@+id/guideline9" />
+
     <Button
-        android:id="@+id/btn_login_"
-        android:layout_width="0dp"
+        android:id="@+id/btn_join_"
+        android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="#BBE6EC"
-        android:fontFamily="@font/scdream5"
-        android:insetTop="3dp"
-        android:insetBottom="3dp"
+        android:fontFamily="@font/scdream4"
         android:text="회원가입"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
+        android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/et_birthday" />
 
-    <TextView
-        android:id="@+id/tv_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:fontFamily="@font/scdream5"
-        android:text="회원가입"
-        android:textColor="@color/black"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintStart_toStartOf="@+id/guideline9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
