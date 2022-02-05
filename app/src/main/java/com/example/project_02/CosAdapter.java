@@ -34,6 +34,7 @@ public class CosAdapter extends BaseAdapter {
     private LayoutInflater inflater; // 추출한 inflater를 저장할 공간
     private Fragment_tab4 activity;
     Bitmap bitmap;
+
     // int[] cos_sample_list = {R.drawable.cos_sample, R.drawable.cos_sample2, R.drawable.cos_sample3, R.drawable.cos_sample4, R.drawable.cos_sample5};
 
     public CosAdapter(int template, ArrayList<CosVO> data, Context context, Fragment_tab4 activity) {

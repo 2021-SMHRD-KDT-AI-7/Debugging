@@ -36,7 +36,6 @@ public class Fragment_tab4 extends Fragment {
 
         CosAdapter adapter = new CosAdapter(R.layout.cos_custom, cos_list, getContext().getApplicationContext(),Fragment_tab4.this);
         lv.setAdapter(adapter);
-
         // template  >> R.layout.custom  우리가 디자인한 템플릿
         // data >> 데이터를 저장한 어레이 리스트
 
