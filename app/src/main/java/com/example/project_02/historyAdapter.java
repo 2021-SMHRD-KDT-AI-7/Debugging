@@ -12,16 +12,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Adapter extends BaseAdapter {
+public class historyAdapter extends BaseAdapter {
 
     private int template;
-    private ArrayList<lvVO> data;
+    private ArrayList<historyListVO> data;
     private Context context;
     private LayoutInflater inflater;
     private Activity activity;
 
-    public Adapter(int template, ArrayList<lvVO> data,
-                   Context context, Activity activity) {
+
+    public historyAdapter(int template, ArrayList<historyListVO> data,
+                          Context context, Activity activity) {
         this.template = template;
         this.data = data;
         this.context = context;
@@ -61,6 +62,7 @@ public class Adapter extends BaseAdapter {
         time.setText(data.get(i).getTime());
         res.setText(Integer.toString(data.get(i).getRes()));
         notifyDataSetChanged();
+
         return view;
     }
 }

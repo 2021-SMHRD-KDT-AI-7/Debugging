@@ -1,12 +1,12 @@
 package com.example.project_02;
 
-public class lvVO {
+public class historyListVO {
     private int imgID;
     private int date;
     private String time;
     private int res;
 
-    public lvVO(int imgID, int date, String time, int res) {
+    public historyListVO(int imgID, int date, String time, int res) {
         this.imgID = imgID;
         this.date = date;
         this.time = time;
