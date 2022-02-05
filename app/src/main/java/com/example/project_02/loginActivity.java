@@ -1,21 +1,18 @@
 package com.example.project_02;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -76,7 +73,6 @@ public class loginActivity extends AppCompatActivity {
                 Map<String, String> data = new HashMap<>();
                 data.put("id", et_id.getText().toString());
                 data.put("pw", et_pw.getText().toString());
-
                 return data;
             }
         };
