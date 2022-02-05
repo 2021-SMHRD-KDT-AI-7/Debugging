@@ -1,5 +1,6 @@
 package com.example.project_02;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class Fragment_tab5 extends Fragment {
     ListView lv;
     TextView name, gender, birthdate, skintype;
     String userName;
+    Context mContext;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,8 +32,10 @@ public class Fragment_tab5 extends Fragment {
         skintype = v.findViewById(R.id.tv_skintype);
         lv = v.findViewById(R.id.lv_);
 
-        userName = "채정배";
-        name.setText(userName + " 님");
+        mContext = v.getContext();
+
+        userName = PreferenceManager.getString(mContext, "user_name" + " 님 환영합니다.");
+        name.setText(userName);
 
         List<String> list = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.simple, list);
@@ -54,7 +58,8 @@ public class Fragment_tab5 extends Fragment {
                 Intent intent = new Intent(getActivity(),
                         frontActivity.class);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),
+                        "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
         adapter.notifyDataSetChanged();
