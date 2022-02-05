@@ -20,10 +20,10 @@ public class BaumannFragment extends Fragment {
     ArrayList<checkVO> list = new ArrayList<>(); // 문제 항목 담아줄 ArrayList
 
     //피부 종목별 점수 담아줄 변수
-    int scoreoil;
-    int scoresen;
-    int scoremel;
-    int scoretin;
+    double scoreoil;
+    double scoresen;
+    double scoremel;
+    double scoretin;
     //피부 바우만테스트 알파벳 담아줄 변수
     String mbtiDO;
     String mbtiSR;
@@ -200,6 +200,7 @@ public class BaumannFragment extends Fragment {
             match(v);
             baumann(v);
 
+
             type.setText(vo.getType());
             Qs.setText(vo.getQs());
             checkBox.setText(vo.getCheckBox());
@@ -210,6 +211,7 @@ public class BaumannFragment extends Fragment {
 
             //scoreList.add(score);
         } else {
+            calculate(v);
             Toast.makeText(getActivity(), "문항이 없습니다.", Toast.LENGTH_LONG).show();
             Toast.makeText(getActivity(), "oil" + scoreoil + " sen" + scoresen + " mel" + scoremel + " tin" + scoretin, Toast.LENGTH_LONG).show();
             Toast.makeText(getActivity(), "result: " + mbtiDO + mbtiSR + mbtiPN + mbtiWT, Toast.LENGTH_LONG).show();
@@ -277,5 +279,12 @@ public class BaumannFragment extends Fragment {
             scoretin += score;
         }
     }
+    public void calculate(View v){
+        scoreoil=scoreoil/44*100;
+        scoresen=scoresen/36*100;
+        scoremel=scoremel/28*100;
+        scoretin=scoretin/44*100;
+    }
+
 
 }
