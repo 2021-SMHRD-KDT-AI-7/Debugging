@@ -22,7 +22,7 @@ public class historyActivity extends AppCompatActivity {
 
     private LineChart lineChart; // 차트
     ListView lv; // 리스트뷰
-    ArrayList<lvVO> data = new ArrayList<>();
+    ArrayList<historyListVO> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,35 +32,17 @@ public class historyActivity extends AppCompatActivity {
         lv = findViewById(R.id.lv_);
         lineChart = findViewById(R.id.chart);
 
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 10, "13 : 12", 89));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 20, "15 : 26", 57));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 30, "11 : 11", 66));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 40, "15 : 12", 98));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 50, "20 : 16", 96));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 60, "07 : 28", 86));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 70, "10 : 50", 78));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 80, "13 : 05", 93));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 90, "09 : 01", 82));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 100, "14 : 38", 76));
-        data.add(new lvVO(R.drawable.ic_baseline_camera_alt_24, 110, "19 : 40", 79));
-
-        // 차트 시작
-        /*ArrayList<Integer> X_date = new ArrayList<>();
-        ArrayList<Integer> y_score = new ArrayList<>();
-        X_date.add(10);
-        y_score.add(89);
-        X_date.add(20);
-        y_score.add(100);
-        X_date.add(30);
-        y_score.add(52);
-        X_date.add(40);
-        y_score.add(98);
-        X_date.add(50);
-        y_score.add(55);
-        X_date.add(60);
-        y_score.add(70);
-        X_date.add(70);
-        y_score.add(73);*/
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 10, "13 : 12", 89));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 20, "15 : 26", 57));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 30, "11 : 11", 66));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 40, "15 : 12", 98));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 50, "20 : 16", 96));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 60, "07 : 28", 86));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 70, "10 : 50", 78));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 80, "13 : 05", 93));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 90, "09 : 01", 82));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 100, "14 : 38", 76));
+        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 110, "19 : 40", 79));
 
         List<Entry> entries = new ArrayList<>(); // 차트 데이터값
         entries.add(new Entry(data.get(0).getdate(), data.get(0).getRes()));
@@ -118,7 +100,7 @@ public class historyActivity extends AppCompatActivity {
         lineChart.animateXY(1000, 2000,
                 Easing.EaseInOutCubic, Easing.EaseInOutCubic); // 차트 그리기 애니메이션
         // 차트 끝
-        Adapter adapter = new Adapter(R.layout.history_custom, data,
+        historyAdapter adapter = new historyAdapter(R.layout.history_custom, data,
                 getApplicationContext(), historyActivity.this);
         lv.setAdapter(adapter);
     }

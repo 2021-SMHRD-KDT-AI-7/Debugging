@@ -19,6 +19,7 @@ public class Fragment_tab5 extends Fragment {
 
     ListView lv;
     TextView name, gender, birthdate, skintype;
+    String userName;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,6 +29,9 @@ public class Fragment_tab5 extends Fragment {
         birthdate = v.findViewById(R.id.tv_birthdate);
         skintype = v.findViewById(R.id.tv_skintype);
         lv = v.findViewById(R.id.lv_);
+
+        userName = "채정배";
+        name.setText(userName + "님");
 
         List<String> list = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.simple, list);
