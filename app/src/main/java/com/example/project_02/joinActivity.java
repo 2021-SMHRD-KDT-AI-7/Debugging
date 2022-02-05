@@ -37,7 +37,7 @@ public class joinActivity extends AppCompatActivity {
         pw2 = findViewById(R.id.et_pw2);
         name = findViewById(R.id.et_name);
         bd = findViewById(R.id.et_birthday);
-        btn_join = findViewById(R.id.btn_login_); // btn_join_ 아이디 중복 방지 언더바
+        btn_join = findViewById(R.id.btn_join_); // btn_join_ 아이디 중복 방지 언더바
 
         rq = Volley.newRequestQueue(getApplicationContext());
         sr = new StringRequest(Request.Method.POST, "", response -> {
