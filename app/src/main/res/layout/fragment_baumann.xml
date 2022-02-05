@@ -6,19 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/type"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="지성vs건성" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="지성vs건성"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/Qs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
         android:layout_weight="1"
-        android:text="파우더를 사용하지 않고 기초 화장 (베이스,파운데이션)만 한 상태에서 2~3시간 후에 당신의 화장 상태는 어떻습니까?" />
+        android:text="파우더를 사용하지 않고 기초 화장 (베이스,파운데이션)만 한 상태에서 2~3시간 후에 당신의 화장 상태는 어떻습니까?"
+        android:textSize="20sp" />
 
 
     <RadioGroup
@@ -59,12 +77,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="나는 기초화장(파운데이션)을 하지 않는다" />
+
     </RadioGroup>
 
-    <Button
-        android:id="@+id/next"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="next" />
+        android:layout_height="15dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
