@@ -118,5 +118,5 @@ public class Cos_Home_Adapter_Second extends RecyclerView.Adapter<Cos_Home_Adapt
             cos_img_home = itemView.findViewById(R.id.cos_img_home);
             cos_name_home = itemView.findViewById(R.id.cos_name_home);
         }
-        }
+    }
 }
