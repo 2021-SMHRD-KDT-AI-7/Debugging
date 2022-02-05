@@ -53,7 +53,6 @@ public class loginActivity extends AppCompatActivity {
             if (response != null) {
                 try {
                     JSONObject member_json = new JSONObject(response);
-
                     PreferenceManager.setString(mContext, "user_id", member_json.getString("id"));
                     PreferenceManager.setString(mContext, "user_pw", member_json.getString("pw"));
                     PreferenceManager.setString(mContext, "user_name", member_json.getString("name"));

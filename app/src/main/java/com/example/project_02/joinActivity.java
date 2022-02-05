@@ -64,7 +64,6 @@ public class joinActivity extends AppCompatActivity {
                 data.put("pw", pw.getText().toString());
                 data.put("name", name.getText().toString());
                 data.put("bd", bd.getText().toString());
-
                 return data;
             }
         };
