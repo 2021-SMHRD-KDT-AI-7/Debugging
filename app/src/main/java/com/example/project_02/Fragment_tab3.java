@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -25,11 +26,17 @@ public class Fragment_tab3 extends Fragment {
     ArrayList<Integer> baumanScore = new ArrayList<>();
     ArrayList<String> skintype = new ArrayList<>();
     HorizontalBarChart barChart;
+    TextView user;
+    String userName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
+
+        user = v.findViewById(R.id.tv_user2);
+        userName = "채정배";
+        user.setText(userName + " 님은");
 
         String[] skin = {"T", "", "N", "", "S", "", "O"};
 
