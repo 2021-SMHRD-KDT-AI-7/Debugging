@@ -67,24 +67,25 @@ public class cameraFragment extends Fragment {
     BottomSheetDialog bottomSheetDialog;
 
 
-
     //카메라 프리뷰에 필요한 변수
     PreviewView previewView;
     ProcessCameraProvider processCameraProvider;
     int lensFacing = CameraSelector.LENS_FACING_FRONT;
     ImageCapture imageCapture;
     Fragment BaumannFragment;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mainactivity=(MainActivity)getActivity();
+        mainactivity = (MainActivity) getActivity();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mainactivity=null;
+        mainactivity = null;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -113,7 +114,6 @@ public class cameraFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         //카메라 권한 요청
         if (allPermissionsGranted()) {
             bindPreview();
@@ -182,14 +182,13 @@ public class cameraFragment extends Fragment {
         String flask_url = "http://211.227.224.206:5000/sendImage";
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
                 response -> {
+                    Log.d("cameraFragment", response);
 
-                Log.d("cameraFragment", response);
+                    byte[] decodedString = Base64.decode(response, Base64.DEFAULT);
+                    Bitmap b = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                byte[] decodedString = Base64.decode(response, Base64.DEFAULT);
-                Bitmap b = BitmapFactory.decodeByteArray( decodedString, 0, decodedString.length ) ;
-
-                imgPlant.setImageBitmap(b);
-                bottomSheetDialog.show();
+                    imgPlant.setImageBitmap(b);
+                    bottomSheetDialog.show();
 
 //                 if (response.equals("true")) {
 //                        Log.d("cameraFragment", "Uploaded Successful");
@@ -220,7 +219,6 @@ public class cameraFragment extends Fragment {
                 .setTargetAspectRatio(AspectRatio.RATIO_4_3) //디폴트 표준 비율
                 .build();
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
-
         processCameraProvider.bindToLifecycle(this, cameraSelector, preview);
     }
 
@@ -230,7 +228,6 @@ public class cameraFragment extends Fragment {
                 .build();
         imageCapture = new ImageCapture.Builder()
                 .build();
-
         processCameraProvider.bindToLifecycle(this, cameraSelector, imageCapture);
     }
 
