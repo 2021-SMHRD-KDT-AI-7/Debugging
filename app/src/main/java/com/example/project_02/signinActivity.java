@@ -10,7 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 public class signinActivity extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
 
@@ -52,7 +51,6 @@ public class signinActivity extends AsyncTask<String, Void, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         //jsp로부터 받은 리턴 값
         return receiveMsg;
     }
