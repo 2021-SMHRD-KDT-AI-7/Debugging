@@ -1,7 +1,5 @@
 package com.example.project_02;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,29 +11,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class joinActivity extends AppCompatActivity {
 
     EditText id, pw, pw2, name, bd;
     ImageView back;
     Button btn_join;
-    StringRequest sr;
-    RequestQueue rq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+        setTitle("ORACLE");
 
         back = findViewById(R.id.join_back);
         id = findViewById(R.id.et_id);
@@ -45,41 +32,59 @@ public class joinActivity extends AppCompatActivity {
         bd = findViewById(R.id.et_birthday);
         btn_join = findViewById(R.id.btn_login_); // btn_join_ 아이디 중복 방지 언더바
 
-        rq = Volley.newRequestQueue(getApplicationContext());
-        sr = new StringRequest(Request.Method.POST, "", response -> {
-            if (response != null) {
+//         신버전 DB저장용 명령어
+        btn_join.setOnClickListener(v -> {
+            if (!pw.getText().toString().equals(pw2.getText().toString())) {
+                Toast.makeText(getApplicationContext(),
+                        "비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+            } else {
+                try {
+                    String result;
+                    String user_id = id.getText().toString();
+                    String user_pw = pw.getText().toString();
+                    String user_name = name.getText().toString();
+                    String user_bd = bd.getText().toString();
+
+                    registerActivity task = new registerActivity();
+                    result = task.execute(user_id, user_pw, user_name, user_bd).get();
+                } catch (Exception e) {
+                    Log.i("DB_test", ".....ERROR.....!");
+                }
                 Toast.makeText(getApplicationContext(),
                         "회원가입되었습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(joinActivity.this, frontActivity.class);
                 startActivity(intent);
                 finish();
             }
-        }, error -> {
-        }) {
-            @NonNull
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> data = new HashMap<>();
-                data.put("id", id.getText().toString());
-                data.put("pw", pw.getText().toString());
-                data.put("name", name.getText().toString());
-                data.put("bd", bd.getText().toString());
-
-                return data;
-            }
-        };
-        btn_join.setOnClickListener(view -> {
-            if (pw.getText().equals(pw2.getText())) {
-                Toast.makeText(getApplicationContext(),
-                        "비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
-            } else {
-                rq.add(sr);
-            }
         });
+
+        // 구버전 DB저장용 명령어
+//        btn_join.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                try {
+//                    String result;
+//                    String user_id = id.getText().toString();
+//                    String user_pw = pw.getText().toString();
+//                    String user_name = name.getText().toString();
+//                    String user_bd = bd.getText().toString();
+//
+//                    registerActivity task = new registerActivity();
+//                    result = task.execute(user_id, user_pw, user_name, user_bd).get();
+//                } catch (Exception e) {
+//                    Log.i("DB_test", ".....ERROR.....!");
+//                }
+//                Toast.makeText(getApplicationContext(),
+//                        "회원가입되었습니다.", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(joinActivity.this, frontActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
         back.setOnClickListener(view -> {
             Intent intent = new Intent(
                     joinActivity.this, frontActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 }

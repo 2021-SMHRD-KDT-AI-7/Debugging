@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PreferenceManager {
-    public static final String PREFERENCES_NAME = "rebuild_preference";
 
+    public static final String PREFERENCES_NAME = "rebuild_preference";
 
     private static final String DEFAULT_VALUE_STRING = "";
 
@@ -21,13 +21,10 @@ public class PreferenceManager {
     private static SharedPreferences getPreferences(Context context) {
 
         return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-
     }
-
 
     /**
      * String 값 저장
-     *
      * @param context
      * @param key
      * @param value
@@ -42,7 +39,6 @@ public class PreferenceManager {
         editor.putString(key, value);
 
         editor.commit();
-
     }
 
 
@@ -63,7 +59,6 @@ public class PreferenceManager {
         editor.putBoolean(key, value);
 
         editor.commit();
-
     }
 
 
@@ -84,7 +79,6 @@ public class PreferenceManager {
         editor.putInt(key, value);
 
         editor.commit();
-
     }
 
 
@@ -105,7 +99,6 @@ public class PreferenceManager {
         editor.putLong(key, value);
 
         editor.commit();
-
     }
 
 
@@ -126,7 +119,6 @@ public class PreferenceManager {
         editor.putFloat(key, value);
 
         editor.commit();
-
     }
 
 
@@ -142,10 +134,9 @@ public class PreferenceManager {
 
         SharedPreferences prefs = getPreferences(context);
 
-        String value = prefs.getString(key, DEFAULT_VALUE_STRING );
+        String value = prefs.getString(key, DEFAULT_VALUE_STRING);
 
         return value;
-
     }
 
 
@@ -164,7 +155,6 @@ public class PreferenceManager {
         boolean value = prefs.getBoolean(key, DEFAULT_VALUE_BOOLEAN);
 
         return value;
-
     }
 
 
@@ -183,7 +173,6 @@ public class PreferenceManager {
         int value = prefs.getInt(key, DEFAULT_VALUE_INT);
 
         return value;
-
     }
 
 
@@ -202,7 +191,6 @@ public class PreferenceManager {
         long value = prefs.getLong(key, DEFAULT_VALUE_LONG);
 
         return value;
-
     }
 
 
@@ -221,7 +209,6 @@ public class PreferenceManager {
         float value = prefs.getFloat(key, DEFAULT_VALUE_FLOAT);
 
         return value;
-
     }
 
 
@@ -241,7 +228,6 @@ public class PreferenceManager {
         edit.remove(key);
 
         edit.commit();
-
     }
 
 
@@ -260,8 +246,5 @@ public class PreferenceManager {
         edit.clear();
 
         edit.commit();
-
     }
-
 }
-
