@@ -156,10 +156,8 @@ public class cameraFragment extends Fragment {
             bottomSheetDialog.dismiss();
             processCameraProvider.unbindAll(); //프리뷰 카메라 종료
             //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
-
-            //mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,new BaumannFragment()).commit();
-
-            sendImage();
+            mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,new BaumannFragment()).commit();
+            //sendImage();
         });
 
         btnClose.setOnClickListener(view12 -> {
