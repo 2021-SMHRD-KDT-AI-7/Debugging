@@ -29,7 +29,6 @@ public class historyAdapter extends BaseAdapter {
         this.inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         this.activity = activity;
-        // this.history_pic = history_pic;
     }
 
     @Override
