@@ -20,6 +20,7 @@ public class historyAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Activity activity;
 
+
     public historyAdapter(int template, ArrayList<historyListVO> data,
                           Context context, Activity activity) {
         this.template = template;
@@ -61,6 +62,7 @@ public class historyAdapter extends BaseAdapter {
         time.setText(data.get(i).getTime());
         res.setText(Integer.toString(data.get(i).getRes()));
         notifyDataSetChanged();
+
         return view;
     }
 }

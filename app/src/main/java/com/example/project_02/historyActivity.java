@@ -23,6 +23,7 @@ public class historyActivity extends AppCompatActivity {
     private LineChart lineChart; // 차트
     ListView lv; // 리스트뷰
     ArrayList<historyListVO> data = new ArrayList<>();
+    int[] history_pic = {R.drawable.jung_bae1, R.drawable.jung_bae2, R.drawable.jung_bae3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,29 +33,14 @@ public class historyActivity extends AppCompatActivity {
         lv = findViewById(R.id.lv_);
         lineChart = findViewById(R.id.chart);
 
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 10, "13 : 12", 89));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 20, "15 : 26", 57));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 30, "11 : 11", 66));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 40, "15 : 12", 98));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 50, "20 : 16", 96));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 60, "07 : 28", 86));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 70, "10 : 50", 78));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 80, "13 : 05", 93));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 90, "09 : 01", 82));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 100, "14 : 38", 76));
-        data.add(new historyListVO(R.drawable.ic_baseline_camera_alt_24, 110, "19 : 40", 79));
+        data.add(new historyListVO(R.drawable.jung_bae1, 10, "13 : 12", 89));
+        data.add(new historyListVO(R.drawable.jung_bae2, 20, "15 : 26", 57));
+        data.add(new historyListVO(R.drawable.jung_bae3, 30, "11 : 11", 66));
 
         List<Entry> entries = new ArrayList<>(); // 차트 데이터값
         entries.add(new Entry(data.get(0).getdate(), data.get(0).getRes()));
         entries.add(new Entry(data.get(1).getdate(), data.get(1).getRes()));
         entries.add(new Entry(data.get(2).getdate(), data.get(2).getRes()));
-        entries.add(new Entry(data.get(3).getdate(), data.get(3).getRes()));
-        entries.add(new Entry(data.get(4).getdate(), data.get(4).getRes()));
-        entries.add(new Entry(data.get(5).getdate(), data.get(5).getRes()));
-        entries.add(new Entry(data.get(6).getdate(), data.get(6).getRes()));
-        entries.add(new Entry(data.get(7).getdate(), data.get(7).getRes()));
-        entries.add(new Entry(data.get(8).getdate(), data.get(8).getRes()));
-        entries.add(new Entry(data.get(9).getdate(), data.get(9).getRes()));
 
         LineDataSet lineDataSet = new LineDataSet(entries, null); // 차트 데이터 디자인
         lineDataSet.setLineWidth(2); // 선 굵기
@@ -99,6 +85,7 @@ public class historyActivity extends AppCompatActivity {
         lineChart.invalidate();
         lineChart.animateXY(1000, 2000,
                 Easing.EaseInOutCubic, Easing.EaseInOutCubic); // 차트 그리기 애니메이션
+
         // 차트 끝
         historyAdapter adapter = new historyAdapter(R.layout.history_custom, data,
                 getApplicationContext(), historyActivity.this);

@@ -15,7 +15,8 @@ import java.util.Objects;
 public class Fragment_tab4 extends Fragment {
     ArrayList<CosVO> cos_list = new ArrayList<>();
     ListView lv;
-    TextView cos_count;
+    TextView cos_count, user;
+    String userName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -24,6 +25,10 @@ public class Fragment_tab4 extends Fragment {
 
         lv = v.findViewById(R.id.cos_listview);
         cos_count = v.findViewById(R.id.cos_count);
+        user = v.findViewById(R.id.tv_user);
+
+        userName = "채정배";
+        user.setText(userName);
 
         // cos_list
         // 바우만 테스트 결과 = cos DB에 바우만 컬럼의 값이 일치하는 화장품 가져와서 add
@@ -37,7 +42,6 @@ public class Fragment_tab4 extends Fragment {
 
         CosAdapter adapter = new CosAdapter(R.layout.cos_custom, cos_list, Objects.requireNonNull(getContext()).getApplicationContext(), Fragment_tab4.this);
         lv.setAdapter(adapter);
-
         // template  >> R.layout.custom  우리가 디자인한 템플릿
         // data >> 데이터를 저장한 어레이 리스트
 
