@@ -8,7 +8,7 @@
     tools:context=".Fragment_tab3">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tv_result_baumann"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/oval"
@@ -65,7 +65,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.355"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/tv_result_baumann"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -78,7 +78,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.191"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/tv_result_baumann"
         app:layout_constraintTop_toBottomOf="@+id/tv_user2"
         app:layout_constraintVertical_bias="0.292" />
 

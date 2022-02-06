@@ -35,16 +35,18 @@ public class Fragment_tab3 extends Fragment {
     ArrayList<String> skintype = new ArrayList<>();
 
     HorizontalBarChart barChart;
-    TextView user, tv_type;
+    TextView user, tv_type,tv_result_baumann;
     String userName;
-    String result = "";
+    String result2,result = "";
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
+
         tv_type = v.findViewById(R.id.tv_type);
+        tv_result_baumann = v.findViewById(R.id.tv_result_baumann);
 
         user = v.findViewById(R.id.tv_user2);
         if (getArguments() != null) {
@@ -54,10 +56,12 @@ public class Fragment_tab3 extends Fragment {
             scoretin = getArguments().getDouble("scoretin");
 
             result = getArguments().getString("result") + " 타입 입니다.";
+            result2= getArguments().getString("result") ;
         }
         userName = "채정배" + " 님은";
         user.setText(userName);
         tv_type.setText(result);
+        tv_result_baumann.setText(result2);
         String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
