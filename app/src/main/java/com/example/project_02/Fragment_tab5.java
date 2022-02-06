@@ -35,7 +35,7 @@ public class Fragment_tab5 extends Fragment {
         mContext = v.getContext();
 
         userName = PreferenceManager.getString(mContext, "user_name" + " 님 환영합니다.");
-        name.setText(userName);
+        //name.setText(userName);
 
         List<String> list = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.simple, list);

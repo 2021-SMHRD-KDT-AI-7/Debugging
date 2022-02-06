@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,29 +24,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fragment_tab3 extends Fragment {
+
     ArrayList<Integer> baumanScore = new ArrayList<>();
+
+    double scoreoil;
+    double scoremel;
+    double scoretin;
+    double scoresen;
+
     ArrayList<String> skintype = new ArrayList<>();
+
     HorizontalBarChart barChart;
-    TextView user;
+    TextView user, tv_type;
     String userName;
+    String result = "";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
+        tv_type = v.findViewById(R.id.tv_type);
 
         user = v.findViewById(R.id.tv_user2);
-        userName = "채정배";
-        user.setText(userName + " 님은");
+        if (getArguments() != null) {
+            scoreoil = getArguments().getDouble("scoreoil");
+            scoresen = getArguments().getDouble("scoresen");
+            scoremel = getArguments().getDouble("scoremel");
+            scoretin = getArguments().getDouble("scoretin");
 
+            result = getArguments().getString("result") + " 타입 입니다.";
+        }
+        userName = "채정배" + " 님은";
+        user.setText(userName);
+        tv_type.setText(result);
         String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
 
-        baumanScore.add(83);
-        baumanScore.add(50);
-        baumanScore.add(75);
-        baumanScore.add(70);
+        baumanScore.add((int) scoreoil);
+        baumanScore.add((int) scoresen);
+        baumanScore.add((int) scoremel);
+        baumanScore.add((int) scoretin);
 
         List<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, baumanScore.get(3)));
@@ -55,7 +75,7 @@ public class Fragment_tab3 extends Fragment {
 
         BarDataSet barDataSet = new BarDataSet(entries, null);
         barDataSet.setDrawValues(true);
-        barDataSet.setValueTextSize(10);
+        barDataSet.setValueTextSize(9);
 
         BarData barData = new BarData(barDataSet);
 
@@ -67,7 +87,7 @@ public class Fragment_tab3 extends Fragment {
         YAxis yLAxis = barChart.getAxisLeft(); // y축 왼쪽
         yLAxis.setDrawGridLines(false); // 격자 삭제
         yLAxis.setAxisMinimum(0); // y축 최소값
-        yLAxis.setAxisMaximum(105); // y축 최대값
+        yLAxis.setAxisMaximum(115); // y축 최대값
         barChart.getAxisRight().setDrawLabels(false); //
 
         Description description = new Description(); // 차트 주석 생성

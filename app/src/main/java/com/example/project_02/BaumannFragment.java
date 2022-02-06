@@ -1,8 +1,10 @@
 package com.example.project_02;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,17 +44,17 @@ public class BaumannFragment extends Fragment {
     ViewGroup rootView;
     Button next;
 
-    int[] arr = {2,3,4,5,6,13,14,18,22,25,26,27,28,30,31,32}; // 선택사항 4개인 문제 인덱스 번호
+    int[] arr = {2, 3, 4, 5, 6, 13, 14, 18, 22, 25, 26, 27, 28, 30, 31, 32}; // 선택사항 4개인 문제 인덱스 번호
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = (ViewGroup)inflater.inflate(R.layout.fragment_baumann, container, false);
+        rootView = (ViewGroup) inflater.inflate(R.layout.fragment_baumann, container, false);
 
         init();
 
-        Button button = (Button)rootView.findViewById(R.id.next);
+        Button button = (Button) rootView.findViewById(R.id.next);
         button.setOnClickListener(this::onClick);
 
         // option1 체크박스가 눌렸을 때
@@ -88,6 +90,7 @@ public class BaumannFragment extends Fragment {
 
         return rootView;
     }
+
     private void init() {
 
         type = rootView.findViewById(R.id.type);
@@ -186,12 +189,12 @@ public class BaumannFragment extends Fragment {
 
             vo = list.get(index);
 
-            for(int i=0; i<arr.length;i++){
-                if(temp){
-                    if(index == arr[i] ){
+            for (int i = 0; i < arr.length; i++) {
+                if (temp) {
+                    if (index == arr[i]) {
                         checkBox5.setVisibility(View.INVISIBLE);
                         temp = false;
-                    }else {
+                    } else {
                         checkBox5.setVisibility(View.VISIBLE);
                     }
                 }
@@ -199,8 +202,7 @@ public class BaumannFragment extends Fragment {
 
             match(v);
             baumann(v);
-
-
+            Toast.makeText(getActivity(), "oil" + scoreoil, Toast.LENGTH_SHORT).show();
             type.setText(vo.getType());
             Qs.setText(vo.getQs());
             checkBox.setText(vo.getCheckBox());
@@ -212,6 +214,22 @@ public class BaumannFragment extends Fragment {
             //scoreList.add(score);
         } else {
             calculate(v);
+
+            Bundle bundle = new Bundle(); // 번들을 통해 값 전달
+            bundle.putDouble("scoreoil", scoreoil);
+            bundle.putDouble("scoresen", scoresen);
+            bundle.putDouble("scoremel", scoremel);
+            bundle.putDouble("scoretin", scoretin);//번들에 넘길 값 저장
+
+            bundle.putString("result",mbtiDO + mbtiSR + mbtiPN + mbtiWT);
+
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            Fragment_tab3 fragment_tab3 = new Fragment_tab3();//프래그먼트2 선언
+            fragment_tab3.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
+
+            transaction.replace(R.id.container, fragment_tab3);
+            transaction.commit();
+
             Toast.makeText(getActivity(), "문항이 없습니다.", Toast.LENGTH_LONG).show();
             Toast.makeText(getActivity(), "oil" + scoreoil + " sen" + scoresen + " mel" + scoremel + " tin" + scoretin, Toast.LENGTH_LONG).show();
             Toast.makeText(getActivity(), "result: " + mbtiDO + mbtiSR + mbtiPN + mbtiWT, Toast.LENGTH_LONG).show();
@@ -219,6 +237,7 @@ public class BaumannFragment extends Fragment {
         }
 
     }
+
     public void baumann(View v) {
         if (scoreoil >= 6) {
             mbtiDO = "D";
@@ -227,7 +246,7 @@ public class BaumannFragment extends Fragment {
         }
         if (scoresen >= 9) {
             mbtiSR = "R";
-        }else if (scoresen >= 15.5) {
+        } else if (scoresen >= 15.5) {
             mbtiSR = "S";
         }
         if (scoremel >= 7) {
@@ -241,6 +260,7 @@ public class BaumannFragment extends Fragment {
             mbtiWT = "W";
         }
     }
+
     public void Checked(View v) { // 체크되었을 때 동작할 메소드 구현
 
         isChecked = ((RadioButton) v).isChecked();
@@ -279,11 +299,13 @@ public class BaumannFragment extends Fragment {
             scoretin += score;
         }
     }
-    public void calculate(View v){
-        scoreoil=scoreoil/44*100;
-        scoresen=scoresen/36*100;
-        scoremel=scoremel/28*100;
-        scoretin=scoretin/44*100;
+
+    public void calculate(View v) {
+        scoreoil = (scoreoil / 24) * 100;
+        scoresen = (scoresen / 36) * 100;
+        scoremel = (scoremel / 28) * 100;
+        scoretin = (scoretin / 44) * 100;
+
     }
 
 
