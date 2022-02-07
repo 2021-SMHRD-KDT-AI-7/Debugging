@@ -1,5 +1,8 @@
 package com.example.project_02;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +39,9 @@ public class Fragment_tab3 extends Fragment {
     ArrayList<String> skintype = new ArrayList<>();
 
     HorizontalBarChart barChart;
-    TextView user, tv_type,tv_result_baumann;
-    String userName;
-    String result2,result = "";
-
+    TextView user, tv_type, tv_result_baumann;
+    String userName, result;
+    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,13 +58,12 @@ public class Fragment_tab3 extends Fragment {
             scoremel = getArguments().getDouble("scoremel");
             scoretin = getArguments().getDouble("scoretin");
 
-            result = getArguments().getString("result") + " 타입 입니다.";
-            result2= getArguments().getString("result") ;
+            result = getArguments().getString("result");
         }
-        userName = "채정배" + " 님은";
+        //userName = PreferenceManager.getString(mContext, "user_name") + "님은 ";
         user.setText(userName);
-        tv_type.setText(result);
-        tv_result_baumann.setText(result2);
+        tv_type.setText(result + " 타입 입니다.");
+        tv_result_baumann.setText(result);
         String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
@@ -80,6 +82,7 @@ public class Fragment_tab3 extends Fragment {
         BarDataSet barDataSet = new BarDataSet(entries, null);
         barDataSet.setDrawValues(true);
         barDataSet.setValueTextSize(9);
+        barDataSet.setGradientColor(Color.parseColor("#000000"), Color.parseColor("#FFFFFF"));
 
         BarData barData = new BarData(barDataSet);
 
