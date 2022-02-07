@@ -1,6 +1,5 @@
 package com.example.project_02;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,33 +20,20 @@ import java.util.ArrayList;
 public class BaumannFragment extends Fragment {
 
     ArrayList<checkVO> list = new ArrayList<>(); // 문제 항목 담아줄 ArrayList
-
-    //피부 종목별 점수 담아줄 변수
-    double scoreoil;
-    double scoresen;
-    double scoremel;
-    double scoretin;
-    static double average;
-    //피부 바우만테스트 알파벳 담아줄 변수
-    String mbtiDO;
-    String mbtiSR;
-    String mbtiPN;
-    String mbtiWT;
-
+    double score, scoreoil, scoresen, scoremel, scoretin, scoreavg; // 바우만 타입별 점수
+    String mbtiDO, mbtiSR, mbtiPN, mbtiWT; // 바우만 타입
     boolean temp; // 질문 5개 ,4개 구분해서 비져블 인비져블 구분할 변수
     boolean isChecked; // 항목 체크 될 때 안될 때 구분할 변수
 
     TextView type, Qs; // 피부종목 type, 피부질문 Qs
     RadioButton checkBox, checkBox2, checkBox3, checkBox4, checkBox5; // 피부질문 들어갈 5칸
     int index;// list 인덱스 갯수 들어갈 변수
-    double score;// 항목 별 점수가 다르게 부여됨 , score에 기준 따라 배점
     checkVO vo; // VO 선언
     RadioGroup radioGroup; //RadioGroup 선언
     ViewGroup rootView;
     Button next;
 
     int[] arr = {2, 3, 4, 5, 6, 13, 14, 18, 22, 25, 26, 27, 28, 30, 31, 32}; // 선택사항 4개인 문제 인덱스 번호
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,8 +43,8 @@ public class BaumannFragment extends Fragment {
 
         init();
 
-        Button button = (Button) rootView.findViewById(R.id.next);
-        button.setOnClickListener(this::onClick);
+        next = rootView.findViewById(R.id.next);
+        next.setOnClickListener(this::onClick);
 
         // option1 체크박스가 눌렸을 때
         rootView.findViewById(R.id.checkBox).setOnClickListener(new Button.OnClickListener() {
@@ -90,8 +76,6 @@ public class BaumannFragment extends Fragment {
                 Checked(v); // 체크되었을 때 동작코드
             }
         });
-        
-
         return rootView;
     }
 
@@ -99,12 +83,11 @@ public class BaumannFragment extends Fragment {
 
         type = rootView.findViewById(R.id.type);
         Qs = rootView.findViewById(R.id.Qs);
-        checkBox = (RadioButton) rootView.findViewById(R.id.checkBox);
-        checkBox2 = (RadioButton) rootView.findViewById(R.id.checkBox2);
-        checkBox3 = (RadioButton) rootView.findViewById(R.id.checkBox3);
-        checkBox4 = (RadioButton) rootView.findViewById(R.id.checkBox4);
-        checkBox5 = (RadioButton) rootView.findViewById(R.id.checkBox5);
-
+        checkBox = rootView.findViewById(R.id.checkBox);
+        checkBox2 = rootView.findViewById(R.id.checkBox2);
+        checkBox3 = rootView.findViewById(R.id.checkBox3);
+        checkBox4 = rootView.findViewById(R.id.checkBox4);
+        checkBox5 = rootView.findViewById(R.id.checkBox5);
 
         //지성,건성 문제
         list.add(new checkVO("지성vs건성", "1. 파우더를 사용하지 않고 기초 화장(베이스,파운데이션)만 한 상태에서 2~3시간 후에 당신의 화장 상태는 어떻습니까?",
@@ -172,7 +155,6 @@ public class BaumannFragment extends Fragment {
         list.add(new checkVO("주름vs탱탱함", "33. 원래의 피부 색깔은(피부를 태우거나 태닝을 하지 않았을 때)?", "짙은 색깔", "중간 색깔", "옅은 색깔", "매우 옅은 색깔"));
 
         vo = list.get(index);
-
 //        type.setText(vo.getType());
 //        Qs.setText(vo.getQs());
 //        checkBox.setText(vo.getCheckBox());
@@ -180,7 +162,6 @@ public class BaumannFragment extends Fragment {
 //        checkBox3.setText(vo.getCheckBox3());
 //        checkBox4.setText(vo.getCheckBox4());
 //        checkBox5.setText(vo.getCheckBox5());
-
     }
 
     public void onClick(View v) {
@@ -206,9 +187,7 @@ public class BaumannFragment extends Fragment {
 
             match(v);
             baumann(v);
-
-            //Toast.makeText(getActivity(), "oil" + scoreoil, Toast.LENGTH_SHORT).show(); 결과 더 해지는지 확인용
-
+            Toast.makeText(getActivity(), "oil" + scoreoil, Toast.LENGTH_SHORT).show();
             type.setText(vo.getType());
             Qs.setText(vo.getQs());
             checkBox.setText(vo.getCheckBox());
@@ -227,13 +206,7 @@ public class BaumannFragment extends Fragment {
             bundle.putDouble("scoremel", scoremel);
             bundle.putDouble("scoretin", scoretin);//번들에 넘길 값 저장
 
-            bundle.putString("result",mbtiDO + mbtiSR + mbtiPN + mbtiWT);
-
-            if(mOnMyLisetner != null){
-                mOnMyLisetner.onReceivedData(average);
-            }
-
-
+            bundle.putString("result", mbtiDO + mbtiSR + mbtiPN + mbtiWT);
 
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             Fragment_tab3 fragment_tab3 = new Fragment_tab3();//프래그먼트2 선언
@@ -245,9 +218,7 @@ public class BaumannFragment extends Fragment {
 //            Toast.makeText(getActivity(), "문항이 없습니다.", Toast.LENGTH_LONG).show();
 //            Toast.makeText(getActivity(), "oil" + scoreoil + " sen" + scoresen + " mel" + scoremel + " tin" + scoretin, Toast.LENGTH_LONG).show();
 //            Toast.makeText(getActivity(), "result: " + mbtiDO + mbtiSR + mbtiPN + mbtiWT, Toast.LENGTH_LONG).show();
-
         }
-
     }
 
     public void baumann(View v) {
@@ -313,30 +284,34 @@ public class BaumannFragment extends Fragment {
     }
 
     public void calculate(View v) {
+
         scoreoil = (scoreoil / 24) * 100;
         scoresen = (scoresen / 36) * 100;
         scoremel = (scoremel / 28) * 100;
         scoretin = (scoretin / 44) * 100;
 
-         average = scoreoil+scoresen+scoretin+scoremel/4;
-
-    }
-
-    public interface OnMyListner{
-        void onReceivedData(Object average);
-    }
-    private OnMyListner mOnMyLisetner;
-
-    @Override
-    public void onAttach(Context context){
-        super.onAttach(context);
-        if(getActivity() != null && getActivity() instanceof OnMyListner){
-            mOnMyLisetner = (OnMyListner) getActivity();
+        if (scoreoil <= 50) {
+            scoreoil = scoreoil * 2;
+        } else {
+            scoreoil = (100 - scoreoil) * 2 + 2;
         }
-        //historyActivity.data.add();
+        if (scoresen <= 50) {
+            scoresen = scoresen * 2;
+        } else {
+            scoresen = (100 - scoresen) * 2 + 2;
+        }
+        if (scoremel <= 50) {
+            scoremel = scoremel * 2;
+        } else {
+            scoremel = (100 - scoremel) * 2 + 2;
+        }
+        if (scoretin <= 50) {
+            scoretin = scoretin * 2;
+        } else {
+            scoretin = (100 - scoretin) * 2 + 2;
+        }
+        scoreavg = (scoreoil + scoresen + scoremel + scoretin) / 4;
     }
 
 
-    }
-
-
+}
