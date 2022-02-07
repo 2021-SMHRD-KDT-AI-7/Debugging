@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,14 +20,11 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -38,15 +34,14 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class cameraFragment extends Fragment {
@@ -65,7 +60,6 @@ public class cameraFragment extends Fragment {
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
     MainActivity mainactivity;
     BottomSheetDialog bottomSheetDialog;
-
 
     //카메라 프리뷰에 필요한 변수
     PreviewView previewView;
@@ -90,7 +84,7 @@ public class cameraFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        queue = Volley.newRequestQueue(getActivity());
+        queue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
 
         //bottomsheetDialog 객체 생성
         LayoutInflater inflater1 = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -105,7 +99,7 @@ public class cameraFragment extends Fragment {
         previewView = v.findViewById(R.id.previewView);
         btnCapture = v.findViewById(R.id.btnCapture);
 
-        imgPlant = view.findViewById(R.id.imgPlant);
+        imgPlant = view.findViewById(R.id.user_img);
         btnOK = view.findViewById(R.id.btnOK);
         btnClose = view.findViewById(R.id.btnClose);
 
@@ -156,7 +150,7 @@ public class cameraFragment extends Fragment {
             bottomSheetDialog.dismiss();
             processCameraProvider.unbindAll(); //프리뷰 카메라 종료
             //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
-            mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,new BaumannFragment()).commit();
+            mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new BaumannFragment()).commit();
             //sendImage();
         });
 
@@ -169,7 +163,6 @@ public class cameraFragment extends Fragment {
 
     //이미지 플라스크로 전송
     private void sendImage() {
-
         //비트맵 이미지를 byte로 변환 -> base64형태로 변환
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
