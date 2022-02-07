@@ -1,11 +1,22 @@
 package com.example.project_02;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +29,12 @@ public class Fragment_tab1 extends Fragment {
     RecyclerView mRecyclerView = null;
     Cos_Home_Adapter_Second mAdapter = null;
     ArrayList<CosVO> cos_list = new ArrayList<>();
+    public String readDay = null;
+    public String str = null;
+    public CalendarView calendarView;
+    public Button cha_Btn, del_Btn, save_Btn;
+    public TextView diaryTextView, textView2, textView3;
+    public EditText contextEditText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +47,7 @@ public class Fragment_tab1 extends Fragment {
         mAdapter = new Cos_Home_Adapter_Second(cos_list);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,true));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
 
         cos_list.add(new CosVO("닥터자르트 세라마이딘 크림 50ml", "38,000", "닥터자르트", "https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0016/A00000016073403ko.jpg?l=ko"));
         cos_list.add(new CosVO("리얼베리어 익스트림 크림 50ml", "26,900", "리얼베리어", "https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0016/A00000016072107ko.jpg?l=ko"));
@@ -38,10 +55,120 @@ public class Fragment_tab1 extends Fragment {
         cos_list.add(new CosVO("가히 김고은 멀티밤", "29,400", "가히", "https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0015/A00000015499111ko.jpeg?l=ko"));
         cos_list.add(new CosVO("크리니크 모이스춰 써지 쏙보습크림 50ml", "41,000", "크리니크", "https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0015/A00000015887308ko.jpg?l=ko"));
 
-
         mAdapter.notifyDataSetChanged();
+
+        calendarView = v.findViewById(R.id.calendarView3);
+        save_Btn = v.findViewById(R.id.save_Btn);
+        del_Btn = v.findViewById(R.id.del_Btn);
+        textView2 = v.findViewById(R.id.textView2);
+        textView3 = v.findViewById(R.id.textView3);
+        contextEditText = v.findViewById(R.id.contextEditText);
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                // diaryTextView.setVisibility(View.VISIBLE);
+                save_Btn.setVisibility(View.VISIBLE);
+                contextEditText.setVisibility(View.VISIBLE);
+                textView2.setVisibility(View.VISIBLE);
+                // cha_Btn.setVisibility(View.VISIBLE);
+                del_Btn.setVisibility(View.VISIBLE);
+                // diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
+                contextEditText.setText("");
+                checkDay(year, month, dayOfMonth);
+            }
+        });
+        save_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveDiary(readDay);
+                Log.d("b", "onClick: ");
+                str = contextEditText.getText().toString();
+                textView2.setText(str);
+                save_Btn.setVisibility(View.VISIBLE);
+                // cha_Btn.setVisibility(View.VISIBLE);
+                del_Btn.setVisibility(View.VISIBLE);
+                contextEditText.setVisibility(View.VISIBLE);
+                textView2.setVisibility(View.VISIBLE);
+            }
+        });
+
         return v;
     }
+    public void checkDay(int cYear, int cMonth, int cDay) {
+        readDay = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt";
+        FileInputStream fis;
+
+        try {
+            fis = getActivity().openFileInput(readDay);
+
+            byte[] fileData = new byte[fis.available()];
+            fis.read(fileData);
+            fis.close();
+
+            str = new String(fileData);
+
+            contextEditText.setVisibility(View.VISIBLE);
+            textView2.setVisibility(View.VISIBLE);
+            textView2.setText(str);
+
+            save_Btn.setVisibility(View.VISIBLE);
+            // cha_Btn.setVisibility(View.VISIBLE);
+            del_Btn.setVisibility(View.VISIBLE);
+
+            del_Btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    textView2.setVisibility(View.VISIBLE);
+                    contextEditText.setText("");
+                    contextEditText.setVisibility(View.VISIBLE);
+                    save_Btn.setVisibility(View.VISIBLE);
+//                  cha_Btn.setVisibility(View.VISIBLE);
+                    del_Btn.setVisibility(View.VISIBLE);
+                    removeDiary(readDay);
+                }
+            });
+            if (textView2.getText() == null) {
+                textView2.setVisibility(View.VISIBLE);
+                diaryTextView.setVisibility(View.VISIBLE);
+                save_Btn.setVisibility(View.VISIBLE);
+                cha_Btn.setVisibility(View.VISIBLE);
+                del_Btn.setVisibility(View.VISIBLE);
+                contextEditText.setVisibility(View.VISIBLE);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    public void removeDiary(String readDay) {
+        FileOutputStream fos;
+        try {
+            fos = getActivity().openFileOutput(readDay, getActivity().MODE_NO_LOCALIZED_COLLATORS);
+            String content = "";
+            fos.write((content).getBytes());
+            fos.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    public void saveDiary(String readDay) {
+        FileOutputStream fos;
+        try {
+            fos = getActivity().openFileOutput(readDay, getActivity().MODE_NO_LOCALIZED_COLLATORS);
+            String content = contextEditText.getText().toString();
+            fos.write((content).getBytes());
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 // cos_list
