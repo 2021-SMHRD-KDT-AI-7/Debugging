@@ -33,9 +33,9 @@ public class historyActivity extends AppCompatActivity {
         lv = findViewById(R.id.lv_);
         lineChart = findViewById(R.id.chart);
 
-        data.add(new historyListVO(R.drawable.jung_bae1, 10, "13 : 12", 89));
-        data.add(new historyListVO(R.drawable.jung_bae2, 20, "15 : 26", 57));
-        data.add(new historyListVO(R.drawable.jung_bae3, 30, "11 : 11", 66));
+        data.add(new historyListVO(R.drawable.front_face1, 220207, "09 : 30", 89));
+        data.add(new historyListVO(R.drawable.front_face2, 220210, "15 : 10", 57));
+        data.add(new historyListVO(R.drawable.front_face3, 220211, "11 : 45", 66));
 
         List<Entry> entries = new ArrayList<>(); // 차트 데이터값
         entries.add(new Entry(data.get(0).getdate(), data.get(0).getRes()));
