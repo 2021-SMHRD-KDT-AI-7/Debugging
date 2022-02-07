@@ -1,12 +1,14 @@
 package com.example.project_02;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +41,15 @@ public class Fragment_tab3 extends Fragment {
     ArrayList<String> skintype = new ArrayList<>();
 
     HorizontalBarChart barChart;
-    TextView user, tv_type, tv_result_baumann;
+    TextView user, tv_type;
+    TextView testView;  //  테스트용
+    int testInt; // 테스트용2
+    ImageView user_image;
     String userName, result;
+    Bitmap user_analyze_image;
+
     Context mContext;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +57,8 @@ public class Fragment_tab3 extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
 
         tv_type = v.findViewById(R.id.tv_type);
-        tv_result_baumann = v.findViewById(R.id.tv_result_baumann);
+        user_image = v.findViewById(R.id.user_image);
+        testView = v.findViewById(R.id.testView);
 
         user = v.findViewById(R.id.tv_user2);
         if (getArguments() != null) {
@@ -59,12 +68,18 @@ public class Fragment_tab3 extends Fragment {
             scoretin = getArguments().getDouble("scoretin");
 
             result = getArguments().getString("result");
+            testInt = getArguments().getInt("testInt");
         }
-        userName = PreferenceManager.getString(mContext, "user_name") + "님은 ";
+        // userName = PreferenceManager.getString(mContext, "user_name") + "님은 ";
+        user_analyze_image = getArguments().getParcelable("BitmapImage");
+        user_image.setImageBitmap(user_analyze_image);
+        testView.setText(testInt+"");
+
+
         user.setText(userName);
         tv_type.setText(result + " 타입 입니다.");
-        tv_result_baumann.setText(result);
-        String[] skin = {"T", "", "N", "", "S", "", "O"};
+
+        //String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
 
@@ -88,8 +103,9 @@ public class Fragment_tab3 extends Fragment {
 
         XAxis xAxis = barChart.getXAxis(); // X축
         xAxis.setTextSize(18); // 텍스트 크기
+        xAxis.setDrawLabels(false); // 라벨 삭제
         xAxis.setDrawGridLines(false); // 격자 삭제
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(skin)); // X축을 피부타입으로 변경
+        //xAxis.setValueFormatter(new IndexAxisValueFormatter(skin)); // X축을 피부타입으로 변경
 
         YAxis yLAxis = barChart.getAxisLeft(); // y축 왼쪽
         yLAxis.setDrawGridLines(false); // 격자 삭제

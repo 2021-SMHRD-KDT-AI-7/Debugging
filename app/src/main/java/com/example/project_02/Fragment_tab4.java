@@ -95,7 +95,6 @@ public class Fragment_tab4 extends Fragment {
         cos_lv.setAdapter(adapter);
         // template  >> R.layout.custom  우리가 디자인한 템플릿
         // data >> 데이터를 저장한 어레이 리스트
-
         return v;
     }
 }

@@ -3,10 +3,12 @@ package com.example.project_02;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,11 +22,14 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,14 +39,15 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class cameraFragment extends Fragment {
@@ -49,7 +55,7 @@ public class cameraFragment extends Fragment {
     Button btnOK, btnClose;
     ImageView imgPlant;
     ImageView btnCapture;
-    //TextureView cameraPreView;
+    TextureView cameraPreView;
 
     private RequestQueue queue;
     private String currentPhotoPath;
@@ -60,6 +66,7 @@ public class cameraFragment extends Fragment {
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
     MainActivity mainactivity;
     BottomSheetDialog bottomSheetDialog;
+
 
     //카메라 프리뷰에 필요한 변수
     PreviewView previewView;
@@ -84,7 +91,7 @@ public class cameraFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        queue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
+        queue = Volley.newRequestQueue(getActivity());
 
         //bottomsheetDialog 객체 생성
         LayoutInflater inflater1 = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -149,9 +156,9 @@ public class cameraFragment extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(), "확인", Toast.LENGTH_SHORT).show();
             bottomSheetDialog.dismiss();
             processCameraProvider.unbindAll(); //프리뷰 카메라 종료
-            //Volley 이용해서 서버로 bitmap -> base54로 변환해서 전송
+            //Volley 이용해서 서버로 bitmap -> base64로 변환해서 전송
             mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new BaumannFragment()).commit();
-            //sendImage();
+            sendImage();
         });
 
         btnClose.setOnClickListener(view12 -> {
@@ -163,14 +170,15 @@ public class cameraFragment extends Fragment {
 
     //이미지 플라스크로 전송
     private void sendImage() {
+
         //비트맵 이미지를 byte로 변환 -> base64형태로 변환
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
         byte[] imageBytes = baos.toByteArray();
         imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
-        String flask_url = "http://211.227.224.206:5000/sendImage";
+        String flask_url = "http://211.227.224.206:5000/sendFrame";
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
                 response -> {
                     Log.d("cameraFragment", response);
@@ -178,8 +186,21 @@ public class cameraFragment extends Fragment {
                     byte[] decodedString = Base64.decode(response, Base64.DEFAULT);
                     Bitmap b = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
+                    // 인텐트 선언 해서 img > b
+                    // 프래그먼트3
+                    //============================================================
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("BitmapImage", b);
+                    int test = 19940819;
+                    bundle.putInt("testInt", test);
+                    Fragment_tab3 tab3 = new Fragment_tab3();
+                    tab3.setArguments(bundle);
+                    ////============================================================
+                    // 프래그먼트3 에서는
+                    // 인텐트 >> img 값을 받아 b
+
                     imgPlant.setImageBitmap(b);
-                    bottomSheetDialog.show();
+//                    bottomSheetDialog.show();
 
 //                 if (response.equals("true")) {
 //                        Log.d("cameraFragment", "Uploaded Successful");

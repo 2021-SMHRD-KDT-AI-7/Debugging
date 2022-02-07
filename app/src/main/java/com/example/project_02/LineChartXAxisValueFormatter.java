@@ -22,7 +22,7 @@ class LineChartXAxisValueFormatter extends IndexAxisValueFormatter {
         Date Milliseconds = new Date(MilliTime);
 
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("MM-dd");
-        return year + dateTimeFormat.format(Milliseconds);
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateTimeFormat.format(Milliseconds);
     }
 }
