@@ -1,11 +1,16 @@
 package com.example.project_02;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -15,14 +20,24 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 public class historyActivity extends AppCompatActivity {
 
                 int scoreavg;
                 private LineChart lineChart; // 차트
                 ListView lv; // 리스트뷰
                 ArrayList<historyListVO> data = new ArrayList<>();
+                RequestQueue rq;
+                StringRequest sr;
+                String result;
 
                 @Override
                 protected void onCreate (Bundle savedInstanceState){
@@ -32,6 +47,32 @@ public class historyActivity extends AppCompatActivity {
                         lv = findViewById(R.id.lv_);
                         lineChart = findViewById(R.id.chart);
                         scoreavg = (int)BaumannFragment.scoreavg;
+
+                        rq = Volley.newRequestQueue(
+                                getApplicationContext());
+
+                        sr = new StringRequest(Request.Method.POST,
+                                "",
+                                response -> {
+                                        if (response != null) {
+                                                try {
+                                                     //   result = ;
+
+                                                } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                }
+                                        }
+                                }, error -> {
+                        }) {
+                                @NonNull
+                                @Override
+                                protected Map<String, String> getParams() {
+                                        Map<String, String> data = new HashMap<>();
+                                        //data.put("result", Integer.toString(result));
+
+                                        return data;
+                                }
+                        };
 
                         data.add(new historyListVO(R.drawable.front_face1, 22_02_07, "09 : 30", scoreavg));
                         data.add(new historyListVO(R.drawable.front_face2, 22_02_10, "15 : 10", 57));

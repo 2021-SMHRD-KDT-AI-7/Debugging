@@ -3,6 +3,7 @@ package com.example.project_02;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -15,14 +16,21 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaumannFragment extends Fragment {
 
     ArrayList<checkVO> list = new ArrayList<>(); // 문제 항목 담아줄 ArrayList
     double score, scoreoil, scoresen, scoremel, scoretin;
     static double scoreavg;// 바우만 타입별 점수
-    String mbtiDO, mbtiSR, mbtiPN, mbtiWT; // 바우만 타입
+    String mbtiDO, mbtiSR, mbtiPN, mbtiWT,result; // 바우만 타입
     boolean temp; // 질문 5개 ,4개 구분해서 비져블 인비져블 구분할 변수
     boolean isChecked; // 항목 체크 될 때 안될 때 구분할 변수
 
@@ -33,6 +41,9 @@ public class BaumannFragment extends Fragment {
     RadioGroup radioGroup; //RadioGroup 선언
     ViewGroup rootView;
     Button next;
+    StringRequest sr;
+    RequestQueue rq;
+
 
     int[] arr = {2, 3, 4, 5, 6, 13, 14, 18, 22, 25, 26, 27, 28, 30, 31, 32}; // 선택사항 4개인 문제 인덱스 번호
 
@@ -77,6 +88,26 @@ public class BaumannFragment extends Fragment {
                 Checked(v); // 체크되었을 때 동작코드
             }
         });
+
+        rq = Volley.newRequestQueue(getActivity().getApplicationContext());
+        sr = new StringRequest(Request.Method.POST, "http://211.227.224.206:8081/DB_to_Android/and_DB.jsp", response -> {
+            if (response != null) {
+                Toast.makeText(getActivity().getApplicationContext(),
+                        "db에 보내졌슈~.", Toast.LENGTH_SHORT).show();
+
+            }
+        }, error -> {
+        }) {
+            @NonNull
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> data = new HashMap<>();
+                data.put("result",result);
+                return data;
+            }
+        };
+
+
         return rootView;
     }
 
@@ -207,7 +238,7 @@ public class BaumannFragment extends Fragment {
             bundle.putDouble("scoremel", scoremel);
             bundle.putDouble("scoretin", scoretin);//번들에 넘길 값 저장
 
-            bundle.putString("result", mbtiDO + mbtiSR + mbtiPN + mbtiWT);
+            bundle.putString("result", result);
 
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             Fragment_tab3 fragment_tab3 = new Fragment_tab3();//프래그먼트2 선언
@@ -243,6 +274,7 @@ public class BaumannFragment extends Fragment {
         } else if (scoretin >= 22.5) {
             mbtiWT = "W";
         }
+        result = mbtiDO + mbtiSR + mbtiPN + mbtiWT;
     }
 
     public void Checked(View v) { // 체크되었을 때 동작할 메소드 구현

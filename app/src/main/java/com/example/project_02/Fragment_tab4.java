@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,6 +83,8 @@ public class Fragment_tab4 extends Fragment {
                 return data;
             }
         };
+        Toast.makeText( getContext(),"추천 상품의 효과는 개인마다 차이가 있을 수 있습니다. ", Toast.LENGTH_LONG).show();
+        Toast.makeText( getContext(),"또한, 미러는 추천 상품의 정보를 제공 할 뿐 어떠한 책임도 지지않습니다.", Toast.LENGTH_LONG).show();
 
         // cos_list
         // 바우만 테스트 결과 = cos DB에 바우만 컬럼의 값이 일치하는 화장품 가져와서 add
