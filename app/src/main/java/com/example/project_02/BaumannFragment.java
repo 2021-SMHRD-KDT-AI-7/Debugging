@@ -1,5 +1,6 @@
 package com.example.project_02;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -26,6 +27,7 @@ public class BaumannFragment extends Fragment {
     double scoresen;
     double scoremel;
     double scoretin;
+    static double average;
     //피부 바우만테스트 알파벳 담아줄 변수
     String mbtiDO;
     String mbtiSR;
@@ -45,6 +47,7 @@ public class BaumannFragment extends Fragment {
     Button next;
 
     int[] arr = {2, 3, 4, 5, 6, 13, 14, 18, 22, 25, 26, 27, 28, 30, 31, 32}; // 선택사항 4개인 문제 인덱스 번호
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +90,7 @@ public class BaumannFragment extends Fragment {
                 Checked(v); // 체크되었을 때 동작코드
             }
         });
+        
 
         return rootView;
     }
@@ -225,6 +229,12 @@ public class BaumannFragment extends Fragment {
 
             bundle.putString("result",mbtiDO + mbtiSR + mbtiPN + mbtiWT);
 
+            if(mOnMyLisetner != null){
+                mOnMyLisetner.onReceivedData(average);
+            }
+
+
+
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             Fragment_tab3 fragment_tab3 = new Fragment_tab3();//프래그먼트2 선언
             fragment_tab3.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
@@ -308,7 +318,25 @@ public class BaumannFragment extends Fragment {
         scoremel = (scoremel / 28) * 100;
         scoretin = (scoretin / 44) * 100;
 
+         average = scoreoil+scoresen+scoretin+scoremel/4;
+
+    }
+
+    public interface OnMyListner{
+        void onReceivedData(Object average);
+    }
+    private OnMyListner mOnMyLisetner;
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(getActivity() != null && getActivity() instanceof OnMyListner){
+            mOnMyLisetner = (OnMyListner) getActivity();
+        }
+        //historyActivity.data.add();
     }
 
 
-}
+    }
+
+
