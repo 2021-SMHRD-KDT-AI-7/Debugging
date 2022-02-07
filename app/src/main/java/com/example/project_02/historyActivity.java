@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class historyActivity extends AppCompatActivity {
 
-                int average;
+                int scoreavg;
                 private LineChart lineChart; // 차트
                 ListView lv; // 리스트뷰
                 ArrayList<historyListVO> data = new ArrayList<>();
@@ -31,11 +31,11 @@ public class historyActivity extends AppCompatActivity {
 
                         lv = findViewById(R.id.lv_);
                         lineChart = findViewById(R.id.chart);
-                        average = (int)BaumannFragment.average;
+                        scoreavg = (int)BaumannFragment.scoreavg;
 
-                        data.add(new historyListVO(R.drawable.front_face1, 22_02_07, "09 : 30", 89));
+                        data.add(new historyListVO(R.drawable.front_face1, 22_02_07, "09 : 30", scoreavg));
                         data.add(new historyListVO(R.drawable.front_face2, 22_02_10, "15 : 10", 57));
-                        data.add(new historyListVO(R.drawable.front_face3, 22_02_11, "11 : 45", average));
+                        data.add(new historyListVO(R.drawable.front_face3, 22_02_11, "11 : 45", 89));
 
                         List<Entry> entries = new ArrayList<>(); // 차트 데이터값
                         entries.add(new Entry(data.get(0).getdate(), data.get(0).getRes()));

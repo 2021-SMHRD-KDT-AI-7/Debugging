@@ -60,7 +60,7 @@ public class Fragment_tab3 extends Fragment {
 
             result = getArguments().getString("result");
         }
-        userName = PreferenceManager.getString(mContext, "user_name") + "님은 ";
+        //userName = PreferenceManager.getString(mContext, "user_name") + "님은 ";
         user.setText(userName);
         tv_type.setText(result + " 타입 입니다.");
         tv_result_baumann.setText(result);
