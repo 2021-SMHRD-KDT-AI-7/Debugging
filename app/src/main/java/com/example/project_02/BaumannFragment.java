@@ -168,7 +168,7 @@ public class BaumannFragment extends Fragment {
         list.add(new checkVO("주름vs탱탱함", "33. 원래의 피부 색깔은(피부를 태우거나 태닝을 하지 않았을 때)?", "짙은 색깔", "중간 색깔", "옅은 색깔", "매우 옅은 색깔"));
 
         vo = list.get(index);
-//
+
 //        type.setText(vo.getType());
 //        Qs.setText(vo.getQs());
 //        checkBox.setText(vo.getCheckBox());
@@ -202,7 +202,9 @@ public class BaumannFragment extends Fragment {
 
             match(v);
             baumann(v);
-            Toast.makeText(getActivity(), "oil" + scoreoil, Toast.LENGTH_SHORT).show();
+
+            //Toast.makeText(getActivity(), "oil" + scoreoil, Toast.LENGTH_SHORT).show(); 결과 더 해지는지 확인용
+
             type.setText(vo.getType());
             Qs.setText(vo.getQs());
             checkBox.setText(vo.getCheckBox());
