@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class BaumannFragment extends Fragment {
 
     ArrayList<checkVO> list = new ArrayList<>(); // 문제 항목 담아줄 ArrayList
-    double score, scoreoil, scoresen, scoremel, scoretin, scoreavg; // 바우만 타입별 점수
+    double score, scoreoil, scoresen, scoremel, scoretin;
+    static double scoreavg;// 바우만 타입별 점수
     String mbtiDO, mbtiSR, mbtiPN, mbtiWT; // 바우만 타입
     boolean temp; // 질문 5개 ,4개 구분해서 비져블 인비져블 구분할 변수
     boolean isChecked; // 항목 체크 될 때 안될 때 구분할 변수
