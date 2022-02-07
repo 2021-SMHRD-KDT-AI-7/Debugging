@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragment_tab3">
 
-    <TextView
-        android:id="@+id/tv_result_baumann"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/oval"
-        android:gravity="center"
-        android:text="OSNT"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintStart_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
         android:layout_width="wrap_content"
@@ -58,29 +46,25 @@
         android:id="@+id/tv_user2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="108dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text=" 디버깅 님은"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.355"
-        app:layout_constraintStart_toEndOf="@+id/tv_result_baumann"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/user_image"
+        app:layout_constraintTop_toTopOf="@+id/user_image" />
 
     <TextView
         android:id="@+id/tv_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:text="OSNT 타입 입니다"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.191"
-        app:layout_constraintStart_toEndOf="@+id/tv_result_baumann"
-        app:layout_constraintTop_toBottomOf="@+id/tv_user2"
-        app:layout_constraintVertical_bias="0.292" />
+        app:layout_constraintStart_toStartOf="@+id/tv_user2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user2" />
 
     <TextView
         android:id="@+id/textView13"
@@ -113,5 +97,23 @@
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/guideline14"
         app:layout_constraintVertical_bias="0.471" />
+
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/testView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/tv_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_type" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
