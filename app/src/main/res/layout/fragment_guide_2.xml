@@ -28,6 +28,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="2. 얼굴을 촬영합니다"
+            android:fontFamily="@font/gowundodum"
             android:textColor="#555A5C"
             android:textSize="20sp"
             android:textStyle="bold" />

@@ -2,7 +2,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fontFamily="@font/scdream4"
+    android:fontFamily="@font/gowundodum"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
     android:text="안녕하세요. 테스트 페이지로 만들었습니다. Hello world! 지우지마세요ㅠ"
