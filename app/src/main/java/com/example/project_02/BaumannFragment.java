@@ -335,21 +335,21 @@ public class BaumannFragment extends Fragment {
         } else {
             scoreoil = (100 - scoreoil) * 2 + 2;
         }
-        if (scoresen <= 50) {
-            scoresen = scoresen * 2;
-        } else {
-            scoresen = (100 - scoresen) * 2 + 2;
-        }
-        if (scoremel <= 50) {
-            scoremel = scoremel * 2;
-        } else {
-            scoremel = (100 - scoremel) * 2 + 2;
-        }
-        if (scoretin <= 50) {
-            scoretin = scoretin * 2;
-        } else {
-            scoretin = (100 - scoretin) * 2 + 2;
-        }
+//        if (scoresen <= 50) {
+//            scoresen = scoresen * 2;
+//        } else {
+//            scoresen = (100 - scoresen) * 2 + 2;
+//        }
+//        if (scoremel <= 50) {
+//            scoremel = scoremel * 2;
+//        } else {
+//            scoremel = (100 - scoremel) * 2 + 2;
+//        }
+//        if (scoretin <= 50) {
+//            scoretin = scoretin * 2;
+//        } else {
+//            scoretin = (100 - scoretin) * 2 + 2;
+//        }
         scoreavg = (scoreoil + scoresen + scoremel + scoretin) / 4;
     }
 
