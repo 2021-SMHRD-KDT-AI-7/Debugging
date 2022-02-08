@@ -1,10 +1,12 @@
 package com.example.project_02;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +26,6 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +43,12 @@ public class Fragment_tab3 extends Fragment {
 
     HorizontalBarChart barChart;
     TextView user, tv_type;
-    TextView testView;  //  테스트용
-    int testInt; // 테스트용2
     ImageView user_image;
-    String userName, result;
-    Bitmap user_analyze_image;
-
-    Context mContext;
+    String userName;
+    String result2,result = "";
+    TextView testView;
+    Bundle bundle;
+    Bitmap bitmapImage;
 
 
     @Override
@@ -61,25 +61,25 @@ public class Fragment_tab3 extends Fragment {
         testView = v.findViewById(R.id.testView);
 
         user = v.findViewById(R.id.tv_user2);
-        if (getArguments() != null) {
+
+        if (bundle != null) {
             scoreoil = getArguments().getDouble("scoreoil");
             scoresen = getArguments().getDouble("scoresen");
             scoremel = getArguments().getDouble("scoremel");
             scoretin = getArguments().getDouble("scoretin");
 
-            result = getArguments().getString("result");
-            testInt = getArguments().getInt("testInt");
+            result = getArguments().getString("result") + " 타입 입니다.";
+            result2= getArguments().getString("result") ;
         }
-        // userName = PreferenceManager.getString(mContext, "user_name") + "님은 ";
-        user_analyze_image = getArguments().getParcelable("BitmapImage");
-        user_image.setImageBitmap(user_analyze_image);
-        testView.setText(testInt+"");
-
-
+        userName = "채정배" + " 님은";
         user.setText(userName);
-        tv_type.setText(result + " 타입 입니다.");
+        tv_type.setText(result);
 
-        //String[] skin = {"T", "", "N", "", "S", "", "O"};
+        // 얼굴분석 이미지 수신받는곳
+        Bitmap bitmap = getArguments().getParcelable("a");
+        user_image.setImageBitmap(bitmap);
+
+        String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
 
@@ -97,15 +97,13 @@ public class Fragment_tab3 extends Fragment {
         BarDataSet barDataSet = new BarDataSet(entries, null);
         barDataSet.setDrawValues(true);
         barDataSet.setValueTextSize(9);
-        barDataSet.setGradientColor(Color.parseColor("#000000"), Color.parseColor("#FFFFFF"));
 
         BarData barData = new BarData(barDataSet);
 
         XAxis xAxis = barChart.getXAxis(); // X축
         xAxis.setTextSize(18); // 텍스트 크기
-        xAxis.setDrawLabels(false); // 라벨 삭제
         xAxis.setDrawGridLines(false); // 격자 삭제
-        //xAxis.setValueFormatter(new IndexAxisValueFormatter(skin)); // X축을 피부타입으로 변경
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(skin)); // X축을 피부타입으로 변경
 
         YAxis yLAxis = barChart.getAxisLeft(); // y축 왼쪽
         yLAxis.setDrawGridLines(false); // 격자 삭제
@@ -124,5 +122,12 @@ public class Fragment_tab3 extends Fragment {
         barChart.animateXY(1000, 2000,
                 Easing.EaseInOutCubic, Easing.EaseInOutCubic);
         return v;
+    }
+
+    public String getByteData(){
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("response_bitmap", Context.MODE_PRIVATE);
+        String value = prefs.getString("response",null);
+
+        return value;
     }
 }

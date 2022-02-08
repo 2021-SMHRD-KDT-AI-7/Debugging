@@ -4,6 +4,7 @@ package com.example.project_02;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -74,6 +75,8 @@ public class cameraFragment extends Fragment {
     int lensFacing = CameraSelector.LENS_FACING_FRONT;
     ImageCapture imageCapture;
     Fragment BaumannFragment;
+
+    int test;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -157,7 +160,6 @@ public class cameraFragment extends Fragment {
             bottomSheetDialog.dismiss();
             processCameraProvider.unbindAll(); //프리뷰 카메라 종료
             //Volley 이용해서 서버로 bitmap -> base64로 변환해서 전송
-            mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new BaumannFragment()).commit();
             sendImage();
         });
 
@@ -178,28 +180,24 @@ public class cameraFragment extends Fragment {
         imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
-        String flask_url = "http://211.227.224.206:5000/sendFrame";
+        String flask_url = "http://220.80.203.107:5000/sendFrame";
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
                 response -> {
                     Log.d("cameraFragment", response);
 
+                    // base64룰 Bitmap 타입으로 다시 디코드.
                     byte[] decodedString = Base64.decode(response, Base64.DEFAULT);
                     Bitmap b = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                    // 인텐트 선언 해서 img > b
-                    // 프래그먼트3
-                    //============================================================
+                    // 번들로 이미지 전송
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("BitmapImage", b);
-                    int test = 19940819;
-                    bundle.putInt("testInt", test);
-                    Fragment_tab3 tab3 = new Fragment_tab3();
-                    tab3.setArguments(bundle);
-                    ////============================================================
-                    // 프래그먼트3 에서는
-                    // 인텐트 >> img 값을 받아 b
+                    bundle.putParcelable("a",b);
+                    BaumannFragment bau = new BaumannFragment();
+                    bau.setArguments(bundle);
+                    mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, bau).commit();
 
-                    imgPlant.setImageBitmap(b);
+
+//                    imgPlant.setImageBitmap(b);
 //                    bottomSheetDialog.show();
 
 //                 if (response.equals("true")) {
