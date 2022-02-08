@@ -28,6 +28,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="3. AI가 당신의 피부를 \n분석해요"
+            android:fontFamily="@font/gowundodum"
             android:textColor="#555A5C"
             android:textSize="20sp"
             android:textStyle="bold" />

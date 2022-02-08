@@ -27,6 +27,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="1. 미러는\n당신의 피부를 분석하고\n기록해요"
+            android:fontFamily="@font/gowundodum"
             android:textColor="#555A5C"
             android:textSize="20sp"
             android:textStyle="bold" />

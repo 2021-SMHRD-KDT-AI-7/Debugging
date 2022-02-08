@@ -28,6 +28,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="5. 당신의 피부 상태를 \n기록해보세요"
+            android:fontFamily="@font/gowundodum"
             android:textColor="#555A5C"
             android:textSize="20sp"
             android:textStyle="bold" />

@@ -28,6 +28,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="4. 피부에 맞는 화장품을 \n추천 받아 보세요"
+            android:fontFamily="@font/gowundodum"
             android:textColor="#555A5C"
             android:textSize="20sp"
             android:textStyle="bold" />
