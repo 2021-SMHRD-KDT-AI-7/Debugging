@@ -285,11 +285,9 @@ public class BaumannFragment extends Fragment {
                     break;
             }
         }
-
     }
 
     public void match(View v) {
-
         if (type.getText().equals("지성vs건성")) {
             scoreoil += score;
         } else if (type.getText().equals("민감성vs저항성")) {
@@ -307,7 +305,6 @@ public class BaumannFragment extends Fragment {
         scoresen = (scoresen / 36) * 100;
         scoremel = (scoremel / 28) * 100;
         scoretin = (scoretin / 44) * 100;
-
         if (scoreoil <= 50) {
             scoreoil = scoreoil * 2;
         } else {

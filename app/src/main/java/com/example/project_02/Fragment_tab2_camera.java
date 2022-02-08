@@ -51,7 +51,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class cameraFragment extends Fragment {
+public class Fragment_tab2_camera extends Fragment {
 
     Button btnOK, btnClose;
     ImageView imgPlant;
