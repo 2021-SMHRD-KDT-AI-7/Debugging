@@ -18,6 +18,7 @@ class LineChartXAxisValueFormatter extends IndexAxisValueFormatter {
     public String getFormattedValue(float value) {
         LocalDate now = LocalDate.now();
         int year = now.getYear();
+
         long MilliTime = TimeUnit.DAYS.toMillis((long) value);
         Date Milliseconds = new Date(MilliTime);
 

@@ -46,7 +46,7 @@ public class loginActivity extends AppCompatActivity {
         cb_ = findViewById(R.id.cb_);
         mContext = this;
         rq = Volley.newRequestQueue(getApplicationContext());
-        sr = new StringRequest(Request.Method.POST, "", response -> {
+        sr = new StringRequest(Request.Method.POST, "http://211.227.224.206:8081/DB_to_Android/login.jsp", response -> {
             if (response != null) {
                 try {
                     JSONObject member_json = new JSONObject(response);
