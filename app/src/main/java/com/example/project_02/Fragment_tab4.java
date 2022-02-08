@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,13 +64,13 @@ public class Fragment_tab4 extends Fragment {
         rq = Volley.newRequestQueue(
                 Objects.requireNonNull(getContext()).getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
-                "http://121.147.52.64:8081/DB_to_Android/tab4",
+                "http://121.147.52.64:8081/Mirror/tab4",
                 response -> {
                     if (response != null) {
                         try {
                             jsonObject = new JSONObject(response); //데이터 받아옴
                             jArray = jsonObject.optJSONArray("list"); //데이터 어레이로 분리
-                            for (int i = 0; i < jArray.length(); i++) {
+                            for (int i = 0; i < Objects.requireNonNull(jArray).length(); i++) {
                                 cos_json = (JSONObject) jArray.opt(i); //다시 분리
                                 Log.d("json", String.valueOf(cos_json));
                                 String cos_name = cos_json.optString("cos_name");
@@ -91,7 +92,7 @@ public class Fragment_tab4 extends Fragment {
             @Override //response를 UTF8로 변경해주는 소스코드
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 try {
-                    String utf8String = new String(response.data, "UTF-8");
+                    String utf8String = new String(response.data, StandardCharsets.UTF_8);
                     return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
                 } catch (Exception e) {
                     return Response.error(new ParseError(e));
@@ -107,12 +108,8 @@ public class Fragment_tab4 extends Fragment {
                 }
                 return data;
             }
-        }
-
-        ;
-        Handler handler = new Handler();
-        handler.postDelayed(() -> rq.add(sr), 100);
-
+        };
+        rq.add(sr);
         return v;
     }
 }

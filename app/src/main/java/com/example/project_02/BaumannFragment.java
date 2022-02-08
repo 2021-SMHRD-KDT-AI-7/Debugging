@@ -43,8 +43,6 @@ public class BaumannFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
-
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment_baumann, container, false);
 
         init();
@@ -218,9 +216,9 @@ public class BaumannFragment extends Fragment {
             bundle.putParcelable("a", bitmap);
 
             // 비트맵 이미지 받아오는지 확인
-            if (bitmap != null){
+            if (bitmap != null) {
                 Log.d("transmit_ok", "yes");
-            }else{
+            } else {
                 Log.d("transmit_no", "no");
             }
 

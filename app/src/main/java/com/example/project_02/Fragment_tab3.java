@@ -29,6 +29,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Fragment_tab3 extends Fragment {
 
@@ -45,7 +46,7 @@ public class Fragment_tab3 extends Fragment {
     TextView user, tv_type;
     ImageView user_image;
     String userName;
-    String result2,result = "";
+    String result2, result = "";
     TextView testView;
     Bundle bundle;
     Bitmap bitmapImage;
@@ -69,14 +70,14 @@ public class Fragment_tab3 extends Fragment {
             scoretin = getArguments().getDouble("scoretin");
 
             result = getArguments().getString("result") + " 타입 입니다.";
-            result2= getArguments().getString("result") ;
+            result2 = getArguments().getString("result");
         }
         userName = "채정배" + " 님은";
         user.setText(userName);
         tv_type.setText(result);
 
         // 얼굴분석 이미지 수신받는곳
-        Bitmap bitmap = getArguments().getParcelable("a");
+        Bitmap bitmap = Objects.requireNonNull(getArguments()).getParcelable("a");
         user_image.setImageBitmap(bitmap);
 
         String[] skin = {"T", "", "N", "", "S", "", "O"};
@@ -124,9 +125,9 @@ public class Fragment_tab3 extends Fragment {
         return v;
     }
 
-    public String getByteData(){
+    public String getByteData() {
         SharedPreferences prefs = this.getActivity().getSharedPreferences("response_bitmap", Context.MODE_PRIVATE);
-        String value = prefs.getString("response",null);
+        String value = prefs.getString("response", null);
 
         return value;
     }
