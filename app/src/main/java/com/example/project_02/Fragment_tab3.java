@@ -42,12 +42,13 @@ public class Fragment_tab3 extends Fragment {
     ArrayList<String> skintype = new ArrayList<>();
 
     HorizontalBarChart barChart;
-    TextView user, tv_type;
+    TextView user, tv_type, type_memo;
     ImageView user_image;
     String userName;
-    String result2,result = "";
+    String result2, result = "", type_explanation;
+    ;
     TextView testView;
-    Bundle bundle;
+    Bundle bundle,bundle2;
     Bitmap bitmapImage;
 
 
@@ -59,27 +60,32 @@ public class Fragment_tab3 extends Fragment {
         tv_type = v.findViewById(R.id.tv_type);
         user_image = v.findViewById(R.id.user_image);
         testView = v.findViewById(R.id.testView);
+        type_memo = v.findViewById(R.id.type_memo);
 
         user = v.findViewById(R.id.tv_user2);
 
-        if (bundle != null) {
-            scoreoil = getArguments().getDouble("scoreoil");
-            scoresen = getArguments().getDouble("scoresen");
-            scoremel = getArguments().getDouble("scoremel");
-            scoretin = getArguments().getDouble("scoretin");
+        scoreoil = getArguments().getDouble("scoreoil");
+        scoresen = getArguments().getDouble("scoresen");
+        scoremel = getArguments().getDouble("scoremel");
+        scoretin = getArguments().getDouble("scoretin");
 
-            result = getArguments().getString("result") + " 타입 입니다.";
-            result2= getArguments().getString("result") ;
-        }
+        result = getArguments().getString("result") + " 타입 입니다.";
+        result2 = getArguments().getString("result");
+        type_explanation = getArguments().getString("memos");
+
+        Log.d("Fragment_tab3", scoreoil + " / " + scoresen + " / " + scoremel + " / " + scoretin);
+
+        
         userName = "채정배" + " 님은";
         user.setText(userName);
         tv_type.setText(result);
+        type_memo.setText(type_explanation);
 
         // 얼굴분석 이미지 수신받는곳
         Bitmap bitmap = getArguments().getParcelable("a");
         user_image.setImageBitmap(bitmap);
 
-        String[] skin = {"T", "", "N", "", "S", "", "O"};
+//        String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
 
@@ -103,7 +109,7 @@ public class Fragment_tab3 extends Fragment {
         XAxis xAxis = barChart.getXAxis(); // X축
         xAxis.setTextSize(18); // 텍스트 크기
         xAxis.setDrawGridLines(false); // 격자 삭제
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(skin)); // X축을 피부타입으로 변경
+        //  xAxis.setValueFormatter(new IndexAxisValueFormatter(skin)); // X축을 피부타입으로 변경
 
         YAxis yLAxis = barChart.getAxisLeft(); // y축 왼쪽
         yLAxis.setDrawGridLines(false); // 격자 삭제
@@ -124,9 +130,9 @@ public class Fragment_tab3 extends Fragment {
         return v;
     }
 
-    public String getByteData(){
+    public String getByteData() {
         SharedPreferences prefs = this.getActivity().getSharedPreferences("response_bitmap", Context.MODE_PRIVATE);
-        String value = prefs.getString("response",null);
+        String value = prefs.getString("response", null);
 
         return value;
     }

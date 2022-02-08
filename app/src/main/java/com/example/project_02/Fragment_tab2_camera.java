@@ -196,7 +196,7 @@ public class Fragment_tab2_camera extends Fragment {
                     bundle.putParcelable("a",b);
                     BaumannFragment bau = new BaumannFragment();
                     bau.setArguments(bundle);
-                    mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, bau).commit();
+                    mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,bau).commit();
 
 
 //                    imgPlant.setImageBitmap(b);
