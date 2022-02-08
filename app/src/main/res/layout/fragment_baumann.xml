@@ -65,7 +65,7 @@
             android:text="각질이 일어나거나 주름 사이에 끼어 있다" />
 
         <RadioButton
-            android:id="@+id/checkBox3"
+            android:id="@+id/checkBox2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -73,7 +73,7 @@
             android:text="윤기가 흐른다" />
 
         <RadioButton
-            android:id="@+id/checkBox4"
+            android:id="@+id/checkBox3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -81,7 +81,7 @@
             android:text="줄이 생기고 윤기가 흐른다" />
 
         <RadioButton
-            android:id="@+id/checkBox5"
+            android:id="@+id/checkBox4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -89,7 +89,7 @@
             android:text="나는 기초화장(파운데이션)을 하지 않는다" />
 
         <RadioButton
-            android:id="@+id/checkBox2"
+            android:id="@+id/checkBox5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

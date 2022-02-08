@@ -70,11 +70,11 @@ public class historyActivity extends AppCompatActivity {
                                 String cos_price = cos_json.optString("cos_price");
                                 String cos_brand = cos_json.optString("cos_brand");
                                 String cos_img = cos_json.optString("cos_img");
-                                history_list.add(new historyListVO(cos_name, cos_price, cos_brand, cos_img));
+                               // history_list.add(new historyListVO(cos_name, cos_price, cos_brand, cos_img));
                             }
-                            CosAdapter adapter = new CosAdapter(R.layout.cos_custom, history_list,
-                                    getApplicationContext(), historyActivity.this);
-                            lv.setAdapter(adapter);
+                          //  CosAdapter adapter = new CosAdapter(R.layout.cos_custom, history_list,
+                                   // getApplicationContext(), historyActivity.this);
+                          //  lv.setAdapter(adapter);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -96,7 +96,7 @@ public class historyActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> data = new HashMap<>();
                 for (int i = cnt - 10; i < cnt; i++) {
-                    data.put("seq" + (i + 1), Integer.toString(temp[i]));
+                  //  data.put("seq" + (i + 1), Integer.toString(temp[i]));
                 }
                 return data;
             }
