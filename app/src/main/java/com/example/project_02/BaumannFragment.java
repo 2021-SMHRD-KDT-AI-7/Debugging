@@ -30,7 +30,7 @@ public class BaumannFragment extends Fragment {
     ArrayList<checkVO> list = new ArrayList<>(); // 문제 항목 담아줄 ArrayList
     double score, scoreoil, scoresen, scoremel, scoretin;
     static double scoreavg;// 바우만 타입별 점수
-    String mbtiDO, mbtiSR, mbtiPN, mbtiWT,result; // 바우만 타입
+    String mbtiDO, mbtiSR, mbtiPN, mbtiWT,result,mbtiDO_memo, mbtiSR_memo, mbtiPN_memo, mbtiWT_memo,memos; // 바우만 타입
     boolean temp; // 질문 5개 ,4개 구분해서 비져블 인비져블 구분할 변수
     boolean isChecked; // 항목 체크 될 때 안될 때 구분할 변수
 
@@ -43,6 +43,7 @@ public class BaumannFragment extends Fragment {
     Button next;
     StringRequest sr;
     RequestQueue rq;
+
 
 
     int[] arr = {2, 3, 4, 5, 6, 13, 14, 18, 22, 25, 26, 27, 28, 30, 31, 32}; // 선택사항 4개인 문제 인덱스 번호
@@ -94,7 +95,6 @@ public class BaumannFragment extends Fragment {
             if (response != null) {
                 Toast.makeText(getActivity().getApplicationContext(),
                         "db에 보내졌슈~.", Toast.LENGTH_SHORT).show();
-
             }
         }, error -> {
         }) {
@@ -238,6 +238,7 @@ public class BaumannFragment extends Fragment {
             bundle.putDouble("scoremel", scoremel);
             bundle.putDouble("scoretin", scoretin);//번들에 넘길 값 저장
 
+            bundle.putString("memos",memos);
             bundle.putString("result", result);
 
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -256,25 +257,34 @@ public class BaumannFragment extends Fragment {
     public void baumann(View v) {
         if (scoreoil >= 6) {
             mbtiDO = "D";
+            mbtiDO_memo="건조한,";
         } else if (scoreoil >= 16) {
             mbtiDO = "O";
+            mbtiDO_memo = "지성의,";
         }
         if (scoresen >= 9) {
             mbtiSR = "R";
+            mbtiSR_memo  = "아무 화장품이나 사용해도 트러블이 없는, ";
         } else if (scoresen >= 15.5) {
             mbtiSR = "S";
+            mbtiSR_memo  = "예민한 트러블이 잘 생기는,";
         }
         if (scoremel >= 7) {
             mbtiPN = "N";
+            mbtiPN_memo = "일광에 빨갛게 되고 그을리지 않는,";
         } else if (scoremel >= 15) {
             mbtiPN = "P";
+            mbtiPN_memo = "색소침착이 잘 생기는,";
         }
         if (scoretin >= 11) {
             mbtiWT = "T";
+            mbtiWT_memo = "끈끈한 보습제는 답답한";
         } else if (scoretin >= 22.5) {
             mbtiWT = "W";
+            mbtiWT_memo = "끈끈한 보습제가 촉촉해서 좋은";
         }
         result = mbtiDO + mbtiSR + mbtiPN + mbtiWT;
+        memos = mbtiDO_memo+mbtiSR_memo+mbtiPN_memo+mbtiWT_memo+" 피부입니다";
     }
 
     public void Checked(View v) { // 체크되었을 때 동작할 메소드 구현

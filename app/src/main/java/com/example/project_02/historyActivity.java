@@ -1,11 +1,16 @@
 package com.example.project_02;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -15,27 +20,63 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class historyActivity extends AppCompatActivity {
 
+    int scoreavg;
     private LineChart lineChart; // 차트
     ListView lv; // 리스트뷰
     ArrayList<historyListVO> data = new ArrayList<>();
-    int[] history_pic = {R.drawable.jung_bae1, R.drawable.jung_bae2, R.drawable.jung_bae3};
+    RequestQueue rq;
+    StringRequest sr;
+    String result;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
         lv = findViewById(R.id.lv_);
         lineChart = findViewById(R.id.chart);
+        scoreavg = (int)BaumannFragment.scoreavg;
 
-        data.add(new historyListVO(R.drawable.front_face1, 18994, "09 : 30", 89));
-        data.add(new historyListVO(R.drawable.front_face2, 18995, "15 : 10", 57));
-        data.add(new historyListVO(R.drawable.front_face3, 18996, "11 : 45", 66));
+        rq = Volley.newRequestQueue(
+                getApplicationContext());
+
+        sr = new StringRequest(Request.Method.POST,
+                "",
+                response -> {
+                    if (response != null) {
+                        try {
+                            //   result = ;
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, error -> {
+        }) {
+            @NonNull
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> data = new HashMap<>();
+                //data.put("result", Integer.toString(result));
+
+                return data;
+            }
+        };
+
+        data.add(new historyListVO(R.drawable.front_face1, 22_02_07, "09 : 30", scoreavg));
+        data.add(new historyListVO(R.drawable.front_face2, 22_02_10, "15 : 10", 57));
+        data.add(new historyListVO(R.drawable.front_face3, 22_02_11, "11 : 45", 89));
 
         List<Entry> entries = new ArrayList<>(); // 차트 데이터값
         entries.add(new Entry(data.get(0).getdate(), data.get(0).getRes()));
@@ -91,4 +132,5 @@ public class historyActivity extends AppCompatActivity {
                 getApplicationContext(), historyActivity.this);
         lv.setAdapter(adapter);
     }
+
 }

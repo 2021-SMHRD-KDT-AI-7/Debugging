@@ -93,6 +93,7 @@ public class Fragment_tab2_camera extends Fragment {
 
         queue = Volley.newRequestQueue(getActivity());
 
+
         //bottomsheetDialog 객체 생성
         LayoutInflater inflater1 = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.capture, null, false);
@@ -109,6 +110,7 @@ public class Fragment_tab2_camera extends Fragment {
         imgPlant = view.findViewById(R.id.user_img);
         btnOK = view.findViewById(R.id.btnOK);
         btnClose = view.findViewById(R.id.btnClose);
+
 
         try {
             processCameraProvider = ProcessCameraProvider.getInstance(getActivity()).get();

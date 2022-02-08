@@ -38,14 +38,15 @@ public class Fragment_tab3 extends Fragment {
     double scoretin;
     double scoresen;
 
+
     ArrayList<String> skintype = new ArrayList<>();
 
     HorizontalBarChart barChart;
-    TextView user, tv_type;
+    TextView user, tv_type,type_memo;
     TextView testView;  //  테스트용
     int testInt; // 테스트용2
     ImageView user_image;
-    String userName, result;
+    String userName, result,type_explanation;
     Bitmap user_analyze_image;
 
     Context mContext;
@@ -59,8 +60,10 @@ public class Fragment_tab3 extends Fragment {
         tv_type = v.findViewById(R.id.tv_type);
         user_image = v.findViewById(R.id.user_image);
         testView = v.findViewById(R.id.testView);
-
+        type_memo = v.findViewById(R.id.type_memo);
         user = v.findViewById(R.id.tv_user2);
+        type_memo = v.findViewById(R.id.type_memo);
+
         if (getArguments() != null) {
             scoreoil = getArguments().getDouble("scoreoil");
             scoresen = getArguments().getDouble("scoresen");
@@ -68,26 +71,29 @@ public class Fragment_tab3 extends Fragment {
             scoretin = getArguments().getDouble("scoretin");
 
             result = getArguments().getString("result");
+            type_explanation = getArguments().getString("memos");
             testInt = getArguments().getInt("testInt");
         }
         // userName = PreferenceManager.getString(mContext, "user_name") + "님은 ";
-        user_analyze_image = getArguments().getParcelable("BitmapImage");
-        user_image.setImageBitmap(user_analyze_image);
-        testView.setText(testInt+"");
+
+//        user_analyze_image = getArguments().getParcelable("BitmapImage");
+//        user_image.setImageBitmap(user_analyze_image);
+//        testView.setText(testInt+"");
 
 
         user.setText(userName);
         tv_type.setText(result + " 타입 입니다.");
+        type_memo.setText(type_explanation);
 
         //String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
-
-        baumanScore.add((int) scoreoil);
-        baumanScore.add((int) scoresen);
-        baumanScore.add((int) scoremel);
-        baumanScore.add((int) scoretin);
-
+        if (getArguments() != null) {
+            baumanScore.add((int) scoreoil);
+            baumanScore.add((int) scoresen);
+            baumanScore.add((int) scoremel);
+            baumanScore.add((int) scoretin);
+        }
         List<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, baumanScore.get(3)));
         entries.add(new BarEntry(2, baumanScore.get(2)));

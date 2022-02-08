@@ -32,6 +32,7 @@ public class Cos_Home_Adapter_Second extends RecyclerView.Adapter<Cos_Home_Adapt
         mdata = list;
     }
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
+
     @NonNull
     @Override
     public Cos_Home_Adapter_Second.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
