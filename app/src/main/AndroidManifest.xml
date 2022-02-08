@@ -11,8 +11,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <uses-feature android:name="android.hardware.camera.any" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher1"
@@ -24,13 +22,7 @@
 
 
         <activity
-            android:name=".GuideActivity"
-            android:exported="false" />
-        <activity
             android:name=".splashActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GuideActivity"
+            android:exported="false" />
         <activity
             android:name=".historyActivity"
             android:exported="false" />
@@ -51,5 +50,7 @@
             android:name=".joinActivity"
             android:exported="false" />
     </application>
+
+    <uses-feature android:name="android.hardware.camera.any" />
 
 </manifest>

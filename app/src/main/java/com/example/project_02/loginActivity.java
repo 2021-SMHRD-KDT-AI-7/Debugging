@@ -46,14 +46,15 @@ public class loginActivity extends AppCompatActivity {
         cb_ = findViewById(R.id.cb_);
         mContext = this;
         rq = Volley.newRequestQueue(getApplicationContext());
-        sr = new StringRequest(Request.Method.POST, "http://211.227.224.206:8081/DB_to_Android/login.jsp", response -> {
+        sr = new StringRequest(Request.Method.POST,
+                "http://121.147.52.64:8081/Mirror/login", response -> {
             if (response != null) {
                 try {
                     JSONObject member_json = new JSONObject(response);
-                    PreferenceManager.setString(mContext, "user_id", member_json.getString("id"));
-                    PreferenceManager.setString(mContext, "user_pw", member_json.getString("pw"));
-                    PreferenceManager.setString(mContext, "user_name", member_json.getString("name"));
-                    PreferenceManager.setString(mContext, "user_bd", member_json.getString("bd"));
+                    PreferenceManager.setString(mContext, "user_id", member_json.getString("user_id"));
+                    PreferenceManager.setString(mContext, "user_pw", member_json.getString("user_pw"));
+                    PreferenceManager.setString(mContext, "user_name", member_json.getString("user_name"));
+                    PreferenceManager.setString(mContext, "user_bd", member_json.getString("user_bd"));
                     Toast.makeText(getApplicationContext(),
                             "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(

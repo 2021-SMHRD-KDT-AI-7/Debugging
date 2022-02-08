@@ -53,7 +53,6 @@ public class Fragment_tab4 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab4, container, false);
-
         cos_lv = v.findViewById(R.id.cos_lv);
         cos_count = v.findViewById(R.id.cos_count);
         user = v.findViewById(R.id.tv_user);

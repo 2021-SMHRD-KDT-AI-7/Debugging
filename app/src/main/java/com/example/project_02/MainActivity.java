@@ -1,5 +1,6 @@
 package com.example.project_02;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -12,11 +13,14 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bn;
     private long lastTimeBackPressed;
     private Context mContext;
+    public static Activity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mainActivity = MainActivity.this;
 
         mContext = this;
         String text = PreferenceManager.getString(mContext, "user_name");

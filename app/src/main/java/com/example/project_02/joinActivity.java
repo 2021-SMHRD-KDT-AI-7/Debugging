@@ -40,7 +40,8 @@ public class joinActivity extends AppCompatActivity {
         btn_join = findViewById(R.id.btn_join_); // btn_join_ 아이디 중복 방지 언더바
 
         rq = Volley.newRequestQueue(getApplicationContext());
-        sr = new StringRequest(Request.Method.POST, "http://211.227.224.206:8081/DB_to_Android/LoginDB.java", response -> {
+        sr = new StringRequest(Request.Method.POST,
+                "http://121.147.52.64:8081/Mirror/join", response -> {
             if (response != null) {
                 Toast.makeText(getApplicationContext(),
                         "회원가입되었습니다.", Toast.LENGTH_SHORT).show();
@@ -61,7 +62,6 @@ public class joinActivity extends AppCompatActivity {
                 return data;
             }
         };
-
         btn_join.setOnClickListener(view -> {
             if (pw.getText().equals(pw2.getText())) {
                 Toast.makeText(getApplicationContext(),
