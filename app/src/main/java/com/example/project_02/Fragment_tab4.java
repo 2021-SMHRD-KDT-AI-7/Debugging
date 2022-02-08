@@ -29,7 +29,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -92,7 +91,7 @@ public class Fragment_tab4 extends Fragment {
             @Override //response를 UTF8로 변경해주는 소스코드
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 try {
-                    String utf8String = new String(response.data, StandardCharsets.UTF_8);
+                    String utf8String = new String(response.data, "UTF-8");
                     return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
                 } catch (Exception e) {
                     return Response.error(new ParseError(e));
