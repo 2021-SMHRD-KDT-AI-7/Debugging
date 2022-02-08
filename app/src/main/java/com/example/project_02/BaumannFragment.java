@@ -221,7 +221,7 @@ public class BaumannFragment extends Fragment {
             Fragment_tab3 fragment_tab3 = new Fragment_tab3();//프래그먼트2 선언
             fragment_tab3.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
 
-            Toast.makeText(getActivity(), scoreoil + memos, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), scoreoil + memos, Toast.LENGTH_SHORT).show();
 
             // 비트맵 이미지 받아오는지 확인
 //            if (bitmap != null) {

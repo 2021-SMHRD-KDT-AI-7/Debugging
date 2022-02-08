@@ -53,9 +53,9 @@
         android:id="@+id/tv_user2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text=" 디버깅 님은"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="디버깅 님은"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/user_image"
@@ -65,8 +65,8 @@
         android:id="@+id/tv_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
         android:text="OSNT 타입 입니다"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -75,16 +75,17 @@
 
     <TextView
         android:id="@+id/type_memo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_width="318dp"
+        android:layout_height="79dp"
         android:text="경미한 지성, 심한 민감성, 비색소성, 탄력적인 \n피부 입니다"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintVertical_bias="0.476" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
@@ -98,7 +99,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="110dp"
+        android:layout_marginEnd="70dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline23"
         app:layout_constraintEnd_toStartOf="@+id/guideline29"
         app:layout_constraintHorizontal_bias="0.495"
@@ -110,19 +111,12 @@
         android:id="@+id/user_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.488"
         tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/testView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/tv_type"
-        app:layout_constraintTop_toBottomOf="@+id/tv_type" />
 
     <TextView
         android:id="@+id/textView8"
@@ -130,6 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="Moisture"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView9"
@@ -141,6 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:text="Senstiveness"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -151,6 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:text="Pigmentation"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView11"
@@ -162,6 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:text="Elasticity"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 

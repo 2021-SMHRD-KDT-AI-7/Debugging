@@ -47,7 +47,7 @@ public class Fragment_tab3 extends Fragment {
     String userName;
     String result2, result = "", type_explanation;
     ;
-    TextView testView;
+
     Bundle bundle,bundle2;
     Bitmap bitmapImage;
 
@@ -59,7 +59,7 @@ public class Fragment_tab3 extends Fragment {
 
         tv_type = v.findViewById(R.id.tv_type);
         user_image = v.findViewById(R.id.user_image);
-        testView = v.findViewById(R.id.testView);
+
         type_memo = v.findViewById(R.id.type_memo);
 
         user = v.findViewById(R.id.tv_user2);
@@ -107,12 +107,14 @@ public class Fragment_tab3 extends Fragment {
         BarData barData = new BarData(barDataSet);
 
         XAxis xAxis = barChart.getXAxis(); // X축
-        xAxis.setTextSize(18); // 텍스트 크기
+
         xAxis.setDrawGridLines(false); // 격자 삭제
+        xAxis.setDrawLabels(false);
         //  xAxis.setValueFormatter(new IndexAxisValueFormatter(skin)); // X축을 피부타입으로 변경
 
         YAxis yLAxis = barChart.getAxisLeft(); // y축 왼쪽
         yLAxis.setDrawGridLines(false); // 격자 삭제
+        yLAxis.setTextSize(16); // 텍스트 크기
         yLAxis.setAxisMinimum(0); // y축 최소값
         yLAxis.setAxisMaximum(115); // y축 최대값
         barChart.getAxisRight().setDrawLabels(false); //
