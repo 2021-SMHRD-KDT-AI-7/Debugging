@@ -61,6 +61,7 @@ public class joinActivity extends AppCompatActivity {
                 return data;
             }
         };
+
         btn_join.setOnClickListener(view -> {
             if (pw.getText().equals(pw2.getText())) {
                 Toast.makeText(getApplicationContext(),
