@@ -1,8 +1,10 @@
 package com.example.project_02;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,13 +55,13 @@ public class Fragment_tab4 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab4, container, false);
-
         cos_lv = v.findViewById(R.id.cos_lv);
         cos_count = v.findViewById(R.id.cos_count);
         user = v.findViewById(R.id.tv_user);
         bundle = getArguments();
         mContext = v.getContext();
-        userName = PreferenceManager.getString(mContext, "user_id");
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        userName = pref.getString("user_id", "");
         user.setText(userName);
         rq = Volley.newRequestQueue(
                 Objects.requireNonNull(getContext()).getApplicationContext());
