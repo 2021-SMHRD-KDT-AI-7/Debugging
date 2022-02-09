@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaumannFragment extends Fragment {
 
@@ -36,6 +47,9 @@ public class BaumannFragment extends Fragment {
     ViewGroup rootView;
     Button next;
     MainActivity mainactivity;
+
+    // 안드-> Flask
+    RequestQueue queue;
 
     int[] arr = {2, 3, 4, 5, 6, 13, 14, 18, 22, 25, 26, 27, 28, 30, 31, 32}; // 선택사항 4개인 문제 인덱스 번호
 
@@ -227,6 +241,49 @@ public class BaumannFragment extends Fragment {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             Fragment_tab3 fragment_tab3 = new Fragment_tab3();//프래그먼트2 선언
             fragment_tab3.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
+
+            // 바우만결과 -> Flask
+            queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+            //flask서버의 ip주소로 변경할 것
+            //뒤에 라우터 경로 작성할 것
+            String flask_url = "http://220.80.203.107:5000/Baumann"; //경로
+
+            StringRequest request = new StringRequest(Request.Method.POST, flask_url,
+                    new Response.Listener<String>() {
+
+
+                        public void onResponse(String response) {
+                            //Flask서버의 return문에 작성한 결과값을 response변수를 통해서 접근
+                            Log.v("Flask응답값>> ", response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+
+                        public void onErrorResponse(VolleyError error) {
+                            Log.v("Flask응답값>> ", "Flask 통신 실패");
+                        }
+                    }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+
+                    Map<String, String> params = new HashMap<>();
+
+                    //flask서버로 전달할 데이터를
+                    params.put("scoreoil", Integer.toString( (int)Math.round(scoreoil)) ); //더블형 반올림
+                    params.put("scoresen",Integer.toString( (int)Math.round(scoresen)) );
+                    params.put("scoremel",Integer.toString( (int)Math.round(scoremel)) );
+                    params.put("scoretin",Integer.toString( (int)Math.round(scoretin)) );
+                    params.put("skin_mbti",mbtiDO + mbtiSR + mbtiPN + mbtiWT);
+                    params.put("memos",memos);
+
+                    return params;
+                }
+            };
+            queue.add(request);
+
+
+        // 통신코드 종료
 
             //Toast.makeText(getActivity(), scoreoil + memos, Toast.LENGTH_SHORT).show();
 
