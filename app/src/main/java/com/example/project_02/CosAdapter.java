@@ -106,7 +106,7 @@ public class CosAdapter extends BaseAdapter {
 
         name.setText(data.get(i).getCos_name());
         brand.setText(data.get(i).getCos_brand());
-        price.setText(data.get(i).getCos_price() + "원");
+        price.setText(data.get(i).getCos_price());
 
         // ---------------------------------------------------------- URL ImageView 출력 --------------------------------------
         // 안드로이드에서 네트워크와 관련된 작업을 할 때,
@@ -121,7 +121,6 @@ public class CosAdapter extends BaseAdapter {
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true); // 서버로 부터 응답 수신
                     conn.connect();
-
                     InputStream is = conn.getInputStream(); // InputStream 값 가져오기
                     bitmap = BitmapFactory.decodeStream(is); // Bitmap으로 변환
                 } catch (Exception e) {
@@ -134,7 +133,6 @@ public class CosAdapter extends BaseAdapter {
             // 메인 Thread는 별도의 작업 Thread가 작업을 완료할 때까지 대기해야한다
             // join()를 호출하여 별도의 작업 Thread가 종료될 때까지 메인 Thread가 기다리게 한다
             mThread.join();
-
             // 작업 Thread에서 이미지를 불러오는 작업을 완료한 뒤
             // UI 작업을 할 수 있는 메인 Thread에서 ImageView에 이미지를 지정한다
             cos_img.setImageBitmap(bitmap);
