@@ -61,12 +61,11 @@ public class historyAdapter extends BaseAdapter {
         TextView date = view.findViewById(R.id.tv_date);
         TextView Bauman = view.findViewById(R.id.tv_time);
         TextView res = view.findViewById(R.id.tv_res);
-
         Thread mThread = new Thread() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL(data.get(i).getAnal_date());
+                    URL url = new URL(data.get(i).getImg_src());
                     // Web에서 이미지를 가져온 뒤 ImageView에 지정할 Bitmap을 만든다
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true); // 서버로 부터 응답 수신
@@ -80,7 +79,6 @@ public class historyAdapter extends BaseAdapter {
         };
         mThread.start(); // Thread 실행
         try {
-            // 메인 Thread는 별도의 작업 Thread가 작업을 완료할 때까지 대기해야한다
             // join()를 호출하여 별도의 작업 Thread가 종료될 때까지 메인 Thread가 기다리게 한다
             mThread.join();
             // 작업 Thread에서 이미지를 불러오는 작업을 완료한 뒤

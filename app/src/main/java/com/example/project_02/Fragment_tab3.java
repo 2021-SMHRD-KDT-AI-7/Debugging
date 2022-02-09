@@ -58,7 +58,7 @@ public class Fragment_tab3 extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
 
         tv_type = v.findViewById(R.id.tv_type);
-        user_image = v.findViewById(R.id.user_image);
+        user_image = v.findViewById(R.id.imageView11);
 
         type_memo = v.findViewById(R.id.type_memo);
 
