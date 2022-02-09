@@ -46,16 +46,14 @@ public class loginActivity extends AppCompatActivity {
         cb_ = findViewById(R.id.cb_);
         mContext = this;
         rq = Volley.newRequestQueue(getApplicationContext());
-        sr = new StringRequest(Request.Method.POST, "", response -> {
+        sr = new StringRequest(Request.Method.POST, "http://211.227.224.206:8081/DB_to_Android/login.jsp", response -> {
             if (response != null) {
                 try {
                     JSONObject member_json = new JSONObject(response);
-
                     PreferenceManager.setString(mContext, "user_id", member_json.getString("id"));
                     PreferenceManager.setString(mContext, "user_pw", member_json.getString("pw"));
                     PreferenceManager.setString(mContext, "user_name", member_json.getString("name"));
                     PreferenceManager.setString(mContext, "user_bd", member_json.getString("bd"));
-
                     Toast.makeText(getApplicationContext(),
                             "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(
@@ -67,7 +65,7 @@ public class loginActivity extends AppCompatActivity {
                 }
             }
         }, error -> Toast.makeText(getApplicationContext(),
-                "아이디 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show()) {
+                "아이디 혹은 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show()) {
             @NonNull
             @Override
             protected Map<String, String> getParams() {

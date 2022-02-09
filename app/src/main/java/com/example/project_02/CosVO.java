@@ -2,11 +2,11 @@ package com.example.project_02;
 
 public class CosVO {
     private int cos_seq;
+    private String cos_bauman;
     private String cos_name;
     private String cos_price;
     private String cos_brand;
     private String cos_img;
-    private String cos_bauman;
 
     public CosVO(int cos_seq, String cos_name, String cos_price, String cos_brand, String cos_img, String cos_bauman) {
         this.cos_seq = cos_seq;
