@@ -64,14 +64,16 @@ public class Fragment_tab3 extends Fragment {
 
         user = v.findViewById(R.id.tv_user2);
 
-        scoreoil = getArguments().getDouble("scoreoil");
-        scoresen = getArguments().getDouble("scoresen");
-        scoremel = getArguments().getDouble("scoremel");
-        scoretin = getArguments().getDouble("scoretin");
+        Bundle bundle = getArguments();
 
-        result = getArguments().getString("result") + " 타입 입니다.";
-        result2 = getArguments().getString("result");
-        type_explanation = getArguments().getString("memos");
+        scoreoil = bundle.getDouble("scoreoil");
+        scoresen = bundle.getDouble("scoresen");
+        scoremel = bundle.getDouble("scoremel");
+        scoretin = bundle.getDouble("scoretin");
+
+        result = bundle.getString("result") + " 타입 입니다.";
+        result2 = bundle.getString("result");
+        type_explanation = bundle.getString("memos");
 
         Log.d("Fragment_tab3", scoreoil + " / " + scoresen + " / " + scoremel + " / " + scoretin);
 

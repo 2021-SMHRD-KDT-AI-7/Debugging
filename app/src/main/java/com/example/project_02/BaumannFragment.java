@@ -1,8 +1,10 @@
 package com.example.project_02;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -33,8 +35,15 @@ public class BaumannFragment extends Fragment {
     RadioGroup radioGroup; //RadioGroup 선언
     ViewGroup rootView;
     Button next;
+    MainActivity mainactivity;
 
     int[] arr = {2, 3, 4, 5, 6, 13, 14, 18, 22, 25, 26, 27, 28, 30, 31, 32}; // 선택사항 4개인 문제 인덱스 번호
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mainactivity = (MainActivity) getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,7 +106,7 @@ public class BaumannFragment extends Fragment {
                 "약간 건조한 느낌이 들지만 갈라지는 느낌은 없다", "정상적인 느낌이다", "기름기가 있는 느낌이다", "나는 비누나 거품이 생기는 클렌저를 사용하지 않는다"));
         list.add(new checkVO("지성vs건성", "3. 보습제를 사용하지 않으면 얼굴 피부는 탱탱한 느낌입니까?", "항상 그렇다", "때때로 그렇다", "거의 그렇지 않다", "전혀 그렇지 않다"));
         list.add(new checkVO("지성vs건성", "4. 얼굴에 모공이 있습니까?", "전혀 없다", "때때로 있다", "자주 있다", "항상있다"));
-        list.add(new checkVO("지성vs건성", "5. 얼굴의 T존(이마와 코)에 기름기가 있습니까?", "전혀없다", "때떄로 있다", "자주 있다", "항상 있다"));
+        list.add(new checkVO("지성vs건성", "5. 얼굴의 T존(이마와 코)에 기름기가 있습니까?", "전혀없다", "때때로 있다", "자주 있다", "항상 있다"));
         list.add(new checkVO("지성vs건성", "6. 보습제를 바르고 2~3시간 이후에 양 볼은?", "매우 거칠거나,피부가 벗겨지거나 창백하다", "매끄럽다", "약간 윤기가 흐른다", "윤기가 흐르고 번들거린다 혹은, 나는 보습제를 사용하지 않는다"));
 
         //민감성,저항성 문제
@@ -233,6 +242,7 @@ public class BaumannFragment extends Fragment {
             // 프래그먼트 3번으로 가는부분
             transaction.replace(R.id.container, fragment_tab3);
             transaction.commit();
+
 
 //            Toast.makeText(getActivity(), "문항이 없습니다.", Toast.LENGTH_LONG).show();
 //            Toast.makeText(getActivity(), "oil" + scoreoil + " sen" + scoresen + " mel" + scoremel + " tin" + scoretin, Toast.LENGTH_LONG).show();
