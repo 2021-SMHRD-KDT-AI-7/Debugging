@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,15 +49,20 @@ public class loginActivity extends AppCompatActivity {
         btn_join = findViewById(R.id.btn_join2);
         cb_ = findViewById(R.id.cb_);
         mContext = this;
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = pref.edit();
+
         rq = Volley.newRequestQueue(getApplicationContext());
-        sr = new StringRequest(Request.Method.POST, "http://211.227.224.206:8081/DB_to_Android/login.jsp", response -> {
-            if (response != null) {
+        sr = new StringRequest(Request.Method.POST,
+                "http://121.147.52.64:8081/Mirror/login", response -> {
+            if (!response.equals("없는 계정입니다.")) {
                 try {
-                    JSONObject member_json = new JSONObject(response);
-                    PreferenceManager.setString(mContext, "user_id", member_json.getString("id"));
-                    PreferenceManager.setString(mContext, "user_pw", member_json.getString("pw"));
-                    PreferenceManager.setString(mContext, "user_name", member_json.getString("name"));
-                    PreferenceManager.setString(mContext, "user_bd", member_json.getString("bd"));
+                    JSONObject jsonObject = new JSONObject(response);
+                    editor.putString("user_id", jsonObject.getString("user_id"));
+                    editor.putString("user_pw", jsonObject.getString("user_pw"));
+                    editor.putString("user_name", jsonObject.getString("user_name"));
+                    editor.putString("user_bd", jsonObject.getString("user_bd"));
+                    editor.apply();
                     Toast.makeText(getApplicationContext(),
                             "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(
@@ -63,16 +72,18 @@ public class loginActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        response + "", Toast.LENGTH_SHORT).show();
             }
         }, error -> Toast.makeText(getApplicationContext(),
-                "아이디 혹은 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show()) {
+                "오류 발생", Toast.LENGTH_SHORT).show()) {
             @NonNull
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> data = new HashMap<>();
                 data.put("id", et_id.getText().toString());
                 data.put("pw", et_pw.getText().toString());
-
                 return data;
             }
         };

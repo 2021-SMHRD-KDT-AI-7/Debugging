@@ -26,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
+            android:fontFamily="@font/gowundodum"
             android:gravity="center"
             android:text="6. 피부 히스토리로 \n매일 달라진 피부를 \n확인하세요"
-            android:fontFamily="@font/gowundodum"
             android:textColor="#555A5C"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -41,10 +41,10 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="118dp"
-            android:layout_marginTop="140dp"
-            android:layout_marginEnd="122dp"
-            android:layout_marginBottom="84dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="80dp"
             android:minHeight="70dp"
             android:text="start" />
 

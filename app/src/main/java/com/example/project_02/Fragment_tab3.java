@@ -48,7 +48,7 @@ public class Fragment_tab3 extends Fragment {
     String result2, result = "", type_explanation;
     ;
 
-    Bundle bundle,bundle2;
+    Bundle bundle, bundle2;
     Bitmap bitmapImage;
 
 
@@ -64,6 +64,7 @@ public class Fragment_tab3 extends Fragment {
 
         user = v.findViewById(R.id.tv_user2);
 
+        assert getArguments() != null;
         scoreoil = getArguments().getDouble("scoreoil");
         scoresen = getArguments().getDouble("scoresen");
         scoremel = getArguments().getDouble("scoremel");
@@ -73,9 +74,6 @@ public class Fragment_tab3 extends Fragment {
         result2 = getArguments().getString("result");
         type_explanation = getArguments().getString("memos");
 
-        Log.d("Fragment_tab3", scoreoil + " / " + scoresen + " / " + scoremel + " / " + scoretin);
-
-        
         userName = "채정배" + " 님은";
         user.setText(userName);
         tv_type.setText(result);
@@ -85,7 +83,7 @@ public class Fragment_tab3 extends Fragment {
         Bitmap bitmap = getArguments().getParcelable("a");
         user_image.setImageBitmap(bitmap);
 
-//        String[] skin = {"T", "", "N", "", "S", "", "O"};
+        // String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
 
