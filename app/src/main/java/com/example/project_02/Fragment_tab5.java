@@ -2,7 +2,9 @@ package com.example.project_02;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,13 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 public class Fragment_tab5 extends Fragment {
 
     ListView lv;
     TextView name, gender, birthdate, skintype;
-    String userName;
+    String userName, userBD;
     Context mContext;
     MainActivity mainActivity = (MainActivity) MainActivity.mainActivity;
 
@@ -33,9 +36,11 @@ public class Fragment_tab5 extends Fragment {
         skintype = v.findViewById(R.id.tv_skintype);
         lv = v.findViewById(R.id.lv_);
         mContext = v.getContext();
-
-        userName = PreferenceManager.getString(mContext, "user_name" + " 님 환영합니다.");
-        //name.setText(userName);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        userName = pref.getString("user_name", "") + "님 환영합니다.";
+        name.setText(userName);
+        userBD = pref.getString("user_bd", "");
+        birthdate.setText(userBD);
 
         List<String> list = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.simple, list);

@@ -64,6 +64,7 @@ public class Fragment_tab3 extends Fragment {
 
         user = v.findViewById(R.id.tv_user2);
 
+        assert getArguments() != null;
         scoreoil = getArguments().getDouble("scoreoil");
         scoresen = getArguments().getDouble("scoresen");
         scoremel = getArguments().getDouble("scoremel");
@@ -72,9 +73,6 @@ public class Fragment_tab3 extends Fragment {
         result = getArguments().getString("result") + " 타입 입니다.";
         result2 = getArguments().getString("result");
         type_explanation = getArguments().getString("memos");
-
-        Log.d("Fragment_tab3", scoreoil + " / " + scoresen + " / " + scoremel + " / " + scoretin);
-
 
         userName = "채정배" + " 님은";
         user.setText(userName);

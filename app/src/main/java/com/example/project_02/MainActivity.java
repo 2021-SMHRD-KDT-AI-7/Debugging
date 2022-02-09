@@ -2,7 +2,9 @@ package com.example.project_02;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +14,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bn;
     private long lastTimeBackPressed;
-    private Context mContext;
     public static Activity mainActivity;
 
     @Override
@@ -22,18 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
         mainActivity = MainActivity.this;
 
-        mContext = this;
-        String text = PreferenceManager.getString(mContext, "user_name");
-        if (text.equals("")) {
-            text = "데이터 없음";
-            PreferenceManager.setString(mContext, "user_name", "채정배");
-        }
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new Fragment_tab1()).commit();
-
         bn = findViewById(R.id.bnview);
-
         bn.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.tab1) {
                 getSupportFragmentManager().beginTransaction()

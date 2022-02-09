@@ -1,7 +1,10 @@
 package com.example.project_02;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,23 +32,28 @@ public class Fragment_tab1 extends Fragment {
     RecyclerView mRecyclerView = null;
     Cos_Home_Adapter_Second mAdapter = null;
     ArrayList<CosVO> cos_list = new ArrayList<>();
-    public String readDay = null;
-    public String str = null;
-    public CalendarView calendarView;
-    public Button cha_Btn, del_Btn, save_Btn;
-    public TextView diaryTextView, textView2, textView3;
-    public EditText contextEditText;
+    String readDay = null, str = null, name;
+    CalendarView calendarView;
+    Button cha_Btn, del_Btn, save_Btn;
+    TextView diaryTextView, textView2, textView3, user_name;
+    EditText contextEditText;
+
+    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab1, container, false);
-
-        mRecyclerView = v.findViewById(R.id.cos_listview_home);
-
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
+        mRecyclerView = v.findViewById(R.id.cos_listview_home);
+        user_name = v.findViewById(R.id.user_name);
+        mContext = v.getContext();
+
         mAdapter = new Cos_Home_Adapter_Second(cos_list);
         mRecyclerView.setAdapter(mAdapter);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        name = pref.getString("user_name", "") + "님";
+        user_name.setText(name);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
 
@@ -64,37 +72,32 @@ public class Fragment_tab1 extends Fragment {
         textView3 = v.findViewById(R.id.textView3);
         contextEditText = v.findViewById(R.id.contextEditText);
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                // diaryTextView.setVisibility(View.VISIBLE);
-                save_Btn.setVisibility(View.VISIBLE);
-                contextEditText.setVisibility(View.VISIBLE);
-                textView2.setVisibility(View.VISIBLE);
-                // cha_Btn.setVisibility(View.VISIBLE);
-                del_Btn.setVisibility(View.VISIBLE);
-                // diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
-                contextEditText.setText("");
-                checkDay(year, month, dayOfMonth);
-            }
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            // diaryTextView.setVisibility(View.VISIBLE);
+            save_Btn.setVisibility(View.VISIBLE);
+            contextEditText.setVisibility(View.VISIBLE);
+            textView2.setVisibility(View.VISIBLE);
+            // cha_Btn.setVisibility(View.VISIBLE);
+            del_Btn.setVisibility(View.VISIBLE);
+            // diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
+            contextEditText.setText("");
+            checkDay(year, month, dayOfMonth);
         });
-        save_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveDiary(readDay);
-                Log.d("b", "onClick: ");
-                str = contextEditText.getText().toString();
-                textView2.setText(str);
-                save_Btn.setVisibility(View.VISIBLE);
-                // cha_Btn.setVisibility(View.VISIBLE);
-                del_Btn.setVisibility(View.VISIBLE);
-                contextEditText.setVisibility(View.VISIBLE);
-                textView2.setVisibility(View.VISIBLE);
-            }
+        save_Btn.setOnClickListener(view -> {
+            saveDiary(readDay);
+            Log.d("b", "onClick: ");
+            str = contextEditText.getText().toString();
+            textView2.setText(str);
+            save_Btn.setVisibility(View.VISIBLE);
+            // cha_Btn.setVisibility(View.VISIBLE);
+            del_Btn.setVisibility(View.VISIBLE);
+            contextEditText.setVisibility(View.VISIBLE);
+            textView2.setVisibility(View.VISIBLE);
         });
 
         return v;
     }
+
     public void checkDay(int cYear, int cMonth, int cDay) {
         readDay = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt";
         FileInputStream fis;
