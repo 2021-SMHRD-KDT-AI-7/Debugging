@@ -42,7 +42,7 @@ public class Fragment_tab3 extends Fragment {
     ArrayList<String> skintype = new ArrayList<>();
 
     HorizontalBarChart barChart;
-    TextView user, tv_type, type_memo;
+    TextView user, user_type, tv_type, type_memo;
     ImageView user_image;
     String userName;
     String result2, result = "", type_explanation;
@@ -57,6 +57,7 @@ public class Fragment_tab3 extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
 
+        user_type = v.findViewById(R.id.user_type);
         tv_type = v.findViewById(R.id.tv_type);
         user_image = v.findViewById(R.id.imageView11);
 
