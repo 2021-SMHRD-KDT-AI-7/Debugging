@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -67,7 +68,7 @@ public class historyActivity extends AppCompatActivity {
         rq = Volley.newRequestQueue(getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
                 "http://121.147.52.64:8081/Mirror/bauman", response -> {
-            if (response != null) {
+            if (!response.equals("데이터가 없습니다.")) {
                 try {
                     jArray = new JSONArray(response);
                     for (int i = 0; i < jArray.length(); i++) {
@@ -89,68 +90,79 @@ public class historyActivity extends AppCompatActivity {
                         editor.apply();
 
                         data.add(new historyVO(
-                                bauman,
-                                sk_res, sk_oil, sk_sen, sk_pig, sk_ela,
+                                bauman, sk_res, sk_oil, sk_sen, sk_pig, sk_ela,
                                 user_id, date, img_src));
                     }
+                    List<Entry> entries = new ArrayList<>(); // 차트 데이터값
+                    for (int i = 0; i < data.size(); i++) {
+                        entries.add(new Entry(i, data.get(i).getSk_res()));
+                    }
+                    LineDataSet lineDataSet = new LineDataSet(entries, null); // 차트 데이터 디자인
+                    lineDataSet.setLineWidth(2); // 선 굵기
+                    lineDataSet.setCircleRadius(2); // 원 크기
+                    lineDataSet.setCircleHoleRadius(1);
+                    lineDataSet.setCircleColor(Color.parseColor("#242424")); // 원 색상
+                    lineDataSet.setGradientColor(Color.parseColor("#00FFA7C4"), Color.parseColor("#FFFFA7C4")); // 선 색상
+                    lineDataSet.setDrawCircleHole(false); // 원 구멍
+                    lineDataSet.setDrawCircles(true); // 원 그리기
+                    lineDataSet.setDrawHighlightIndicators(true); // 눌렀을때 라인 표시
+                    lineDataSet.setDrawValues(true); // 값 보여주기
+                    lineDataSet.setValueTextSize(10);
+
+                    LineData lineData = new LineData(lineDataSet); // 차트 그리기
+                    XAxis xAxis = lineChart.getXAxis(); // X축 생성
+                    xAxis.setSpaceMax(0.3f); // X축 여백
+                    xAxis.setSpaceMin(0.3f); // X축 여백
+                    xAxis.setLabelCount(2, /*force: */true); // X축을 count개로 분할
+                    String[] xAxisdate = {data.get(0).getAnal_date(), anal_date};
+                    xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisdate));
+                    xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // X축 위치
+                    xAxis.setTextColor(Color.parseColor("#242424")); // 텍스트 색상
+                    xAxis.setTextSize(12);
+                    xAxis.setDrawGridLines(false);
+
+                    YAxis yLAxis = lineChart.getAxisLeft(); // 왼쪽 y축 생성
+                    YAxis yRAxis = lineChart.getAxisRight(); // 오른쪽 y축 생성
+                    yLAxis.setTextColor(Color.parseColor("#242424")); // y축 텍스트 색상
+                    yRAxis.setTextColor(Color.parseColor("#242424"));
+                    yLAxis.setDrawGridLines(false);
+                    yRAxis.setDrawGridLines(false);
+                    yLAxis.setAxisMinimum(0); // y축 최소값
+                    yRAxis.setAxisMinimum(0);
+                    yLAxis.setAxisMaximum(110); // y축 최대값
+                    yRAxis.setAxisMaximum(110);
+
+                    Description description = new Description(); // 차트 주석 생성
+                    description.setText(""); // 주석 미기입
+
+                    lineChart.setData(lineData); // 차트 생성
+                    lineChart.setDoubleTapToZoomEnabled(false);
+                    lineChart.setPinchZoom(false);
+                    lineChart.setDrawGridBackground(false); // 배경에 점선 표시?
+                    lineChart.setDescription(description); // 주석 그리기
+                    lineChart.invalidate();
+                    lineChart.animateXY(1000, 2000,
+                            Easing.EaseInOutCubic, Easing.EaseInOutCubic); // 차트 그리기 애니메이션
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else {
+                Toast.makeText(getApplicationContext(), response + "", Toast.LENGTH_SHORT).show();
+                List<Entry> entries = new ArrayList<>(); // 차트 데이터값
+                LineDataSet lineDataSet = new LineDataSet(entries, null); // 차트 데이터 디자인
+                LineData lineData = new LineData(lineDataSet); // 차트 그리기
+                Description description = new Description(); // 차트 주석 생성
+                description.setText("");
+                lineChart.setData(lineData); // 차트 생성
+                lineChart.setDoubleTapToZoomEnabled(false);
+                lineChart.setPinchZoom(false);
+                lineChart.setDrawGridBackground(false); // 배경에 점선 표시?
+                lineChart.setDescription(description); // 주석 그리기
+                lineChart.invalidate();
             }
             historyAdapter adapter = new historyAdapter(R.layout.history_custom, data,
                     getApplicationContext(), historyActivity.this);
             lv.setAdapter(adapter);
-
-            List<Entry> entries = new ArrayList<>(); // 차트 데이터값
-            for (int i = 0; i < data.size(); i++) {
-                entries.add(new Entry(i, data.get(i).getSk_res()));
-            }
-            LineDataSet lineDataSet = new LineDataSet(entries, null); // 차트 데이터 디자인
-            lineDataSet.setLineWidth(2); // 선 굵기
-            lineDataSet.setCircleRadius(2); // 원 크기
-            lineDataSet.setCircleHoleRadius(1);
-            lineDataSet.setCircleColor(Color.parseColor("#242424")); // 원 색상
-            lineDataSet.setGradientColor(Color.parseColor("#00FFA7C4"), Color.parseColor("#FFFFA7C4")); // 선 색상
-            lineDataSet.setDrawCircleHole(false); // 원 구멍
-            lineDataSet.setDrawCircles(true); // 원 그리기
-            lineDataSet.setDrawHighlightIndicators(true); // 눌렀을때 라인 표시
-            lineDataSet.setDrawValues(true); // 값 보여주기
-            lineDataSet.setValueTextSize(10);
-
-            LineData lineData = new LineData(lineDataSet); // 차트 그리기
-            XAxis xAxis = lineChart.getXAxis(); // X축 생성
-            xAxis.setSpaceMax(0.3f); // X축 여백
-            xAxis.setSpaceMin(0.3f); // X축 여백
-            xAxis.setLabelCount(2, /*force: */true); // X축을 count개로 분할
-            String[] xAxisdate = {data.get(0).getAnal_date(), anal_date};
-            xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisdate));
-            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // X축 위치
-            xAxis.setTextColor(Color.parseColor("#242424")); // 텍스트 색상
-            xAxis.setTextSize(12);
-            xAxis.setDrawGridLines(false);
-
-            YAxis yLAxis = lineChart.getAxisLeft(); // 왼쪽 y축 생성
-            YAxis yRAxis = lineChart.getAxisRight(); // 오른쪽 y축 생성
-            yLAxis.setTextColor(Color.parseColor("#242424")); // y축 텍스트 색상
-            yRAxis.setTextColor(Color.parseColor("#242424"));
-            yLAxis.setDrawGridLines(false);
-            yRAxis.setDrawGridLines(false);
-            yLAxis.setAxisMinimum(0); // y축 최소값
-            yRAxis.setAxisMinimum(0);
-            yLAxis.setAxisMaximum(110); // y축 최대값
-            yRAxis.setAxisMaximum(110);
-
-            Description description = new Description(); // 차트 주석 생성
-            description.setText(""); // 주석 미기입
-
-            lineChart.setData(lineData); // 차트 생성
-            lineChart.setDoubleTapToZoomEnabled(false);
-            lineChart.setPinchZoom(false);
-            lineChart.setDrawGridBackground(false); // 배경에 점선 표시?
-            lineChart.setDescription(description); // 주석 그리기
-            lineChart.invalidate();
-            lineChart.animateXY(1000, 2000,
-                    Easing.EaseInOutCubic, Easing.EaseInOutCubic); // 차트 그리기 애니메이션
         }, error -> {
         }) {
             @Override //response를 UTF8로 변경해주는 소스코드

@@ -55,11 +55,11 @@ public class Fragment_tab3 extends Fragment {
 
         user_type = v.findViewById(R.id.user_type);
         tv_type = v.findViewById(R.id.tv_type);
-        user_image = v.findViewById(R.id.user_img);
+        user_image = v.findViewById(R.id.user_image);
         type_memo = v.findViewById(R.id.type_memo);
         user = v.findViewById(R.id.tv_user2);
-
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        barChart = v.findViewById(R.id.barchart);
+        mContext = v.getContext();
 
         Bundle bundle = getArguments();
         assert bundle != null;
@@ -72,6 +72,7 @@ public class Fragment_tab3 extends Fragment {
         result2 = bundle.getString("result");
         type_explanation = bundle.getString("memos");
 
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
         userName = pref.getString("user_name", "") + " 님은";
         user.setText(userName);
         tv_type.setText(result);
@@ -80,9 +81,6 @@ public class Fragment_tab3 extends Fragment {
         // 얼굴분석 이미지 수신받는곳
         Bitmap bitmap = getArguments().getParcelable("a");
         user_image.setImageBitmap(bitmap);
-        //String[] skin = {"T", "", "N", "", "S", "", "O"};
-
-        barChart = v.findViewById(R.id.barchart);
 
         baumanScore.add((int) scoreoil);
         baumanScore.add((int) scoresen);
