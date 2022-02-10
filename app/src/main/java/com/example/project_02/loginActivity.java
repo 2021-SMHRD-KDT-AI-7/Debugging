@@ -57,7 +57,6 @@ public class loginActivity extends AppCompatActivity {
         mContext = this;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = pref.edit();
-
         rq = Volley.newRequestQueue(getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
                 "http://121.147.52.64:8081/Mirror/login", response -> {
@@ -96,36 +95,12 @@ public class loginActivity extends AppCompatActivity {
             }
         };
 
-        String flask_url = "http://220.80.203.107:5000/login_id"; //경로
-        sr2 = new StringRequest(Request.Method.POST, flask_url,
-                new Response.Listener<String>() {
-                    public void onResponse(String response) {
-                        //Flask서버의 return문에 작성한 결과값을 response변수를 통해서 접근
-                        Log.v("Flask응답값>> ", response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    public void onErrorResponse(VolleyError error) {
-                        Log.v("Flask응답값>> ", "Flask 통신 실패");
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                user_id = pref.getString("user_id", "");
-                params.put("user_id", user_id);
-                return params;
-            }
-        };
-
-
         btn_login.setOnClickListener(view -> {
             if (TextUtils.isEmpty(et_id.getText()) || TextUtils.isEmpty(et_pw.getText())) {
                 Toast.makeText(getApplicationContext(),
                         "아이디 혹은 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
             } else {
                 rq.add(sr);
-                rq.add(sr2);
             }
         });
         btn_join.setOnClickListener(view -> {
