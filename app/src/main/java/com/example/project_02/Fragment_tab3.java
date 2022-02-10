@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +34,6 @@ import java.util.List;
 public class Fragment_tab3 extends Fragment {
 
     ArrayList<Integer> baumanScore = new ArrayList<>();
-
     double scoreoil;
     double scoremel;
     double scoretin;
@@ -42,39 +42,37 @@ public class Fragment_tab3 extends Fragment {
     ArrayList<String> skintype = new ArrayList<>();
 
     HorizontalBarChart barChart;
-    TextView user, tv_type, type_memo;
+    TextView user, user_type, tv_type, type_memo;
     ImageView user_image;
     String userName;
     String result2, result = "", type_explanation;
-    ;
-
-    Bundle bundle, bundle2;
-    Bitmap bitmapImage;
-
+    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
 
+        user_type = v.findViewById(R.id.user_type);
         tv_type = v.findViewById(R.id.tv_type);
-        user_image = v.findViewById(R.id.user_image);
-
+        user_image = v.findViewById(R.id.user_img);
         type_memo = v.findViewById(R.id.type_memo);
-
         user = v.findViewById(R.id.tv_user2);
 
-        assert getArguments() != null;
-        scoreoil = getArguments().getDouble("scoreoil");
-        scoresen = getArguments().getDouble("scoresen");
-        scoremel = getArguments().getDouble("scoremel");
-        scoretin = getArguments().getDouble("scoretin");
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
 
-        result = getArguments().getString("result") + " 타입 입니다.";
-        result2 = getArguments().getString("result");
-        type_explanation = getArguments().getString("memos");
+        Bundle bundle = getArguments();
+        assert bundle != null;
+        scoreoil = bundle.getDouble("scoreoil");
+        scoresen = bundle.getDouble("scoresen");
+        scoremel = bundle.getDouble("scoremel");
+        scoretin = bundle.getDouble("scoretin");
 
-        userName = "채정배" + " 님은";
+        result = bundle.getString("result") + " 타입 입니다.";
+        result2 = bundle.getString("result");
+        type_explanation = bundle.getString("memos");
+
+        userName = pref.getString("user_name", "") + " 님은";
         user.setText(userName);
         tv_type.setText(result);
         type_memo.setText(type_explanation);
@@ -82,8 +80,7 @@ public class Fragment_tab3 extends Fragment {
         // 얼굴분석 이미지 수신받는곳
         Bitmap bitmap = getArguments().getParcelable("a");
         user_image.setImageBitmap(bitmap);
-
-        // String[] skin = {"T", "", "N", "", "S", "", "O"};
+        //String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
 

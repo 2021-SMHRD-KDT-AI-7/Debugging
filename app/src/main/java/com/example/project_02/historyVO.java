@@ -1,15 +1,11 @@
 package com.example.project_02;
 
 public class historyVO {
-    private int deep_seq;
     private String bauman;
     private int sk_res, sk_oil, sk_sen, sk_pig, sk_ela;
     private String user_id, anal_date, img_src;
 
-    public historyVO(int deep_seq, String bauman,
-                     int sk_res, int sk_oil, int sk_sen, int sk_pig, int sk_ela,
-                     String user_id, String anal_date, String img_src) {
-        this.deep_seq = deep_seq;
+    public historyVO(String bauman, int sk_res, int sk_oil, int sk_sen, int sk_pig, int sk_ela, String user_id, String anal_date, String img_src) {
         this.bauman = bauman;
         this.sk_res = sk_res;
         this.sk_oil = sk_oil;
@@ -19,14 +15,6 @@ public class historyVO {
         this.user_id = user_id;
         this.anal_date = anal_date;
         this.img_src = img_src;
-    }
-
-    public int getDeep_seq() {
-        return deep_seq;
-    }
-
-    public void setDeep_seq(int deep_seq) {
-        this.deep_seq = deep_seq;
     }
 
     public String getBauman() {

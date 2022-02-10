@@ -61,7 +61,6 @@ public class loginActivity extends AppCompatActivity {
                     editor.putString("user_id", jsonObject.getString("user_id"));
                     editor.putString("user_pw", jsonObject.getString("user_pw"));
                     editor.putString("user_name", jsonObject.getString("user_name"));
-                    editor.putString("user_bd", jsonObject.getString("user_bd"));
                     editor.apply();
                     Toast.makeText(getApplicationContext(),
                             "로그인 되었습니다.", Toast.LENGTH_SHORT).show();

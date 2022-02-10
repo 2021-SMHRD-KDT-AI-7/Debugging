@@ -2,17 +2,30 @@ package com.example.project_02;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.TextureView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.camera.core.AspectRatio;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
@@ -23,40 +36,28 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.provider.MediaStore;
-import android.util.Base64;
-import android.util.Log;
-import android.view.LayoutInflater;
-
-import android.view.TextureView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class Fragment_tab2_camera extends Fragment {
 
-    Button btnOK, btnClose;
+    Button  btnClose;
+    Button btnOK;
     ImageView imgPlant;
     ImageView btnCapture;
     TextureView cameraPreView;
+    AppCompatDialog progressDialog;
 
     private RequestQueue queue;
     private String currentPhotoPath;
@@ -78,6 +79,22 @@ public class Fragment_tab2_camera extends Fragment {
 
     int test;
 
+    // 이미지 회전시키는 메소드
+    public Bitmap rotateBitmap(Bitmap original, float degrees) {
+        int width = original.getWidth();
+        int height = original.getHeight();
+
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degrees);
+        matrix.setScale(-1, 1);
+
+        Bitmap rotatedBitmap = Bitmap.createBitmap(original, 0, 0, width, height, matrix, true);
+        // Canvas 라는 클래스인데 사용하는건 이미지 뷰에 적용시키는 역할이라 의미없음
+        //        Canvas canvas = new Canvas(rotatedBitmap);
+        //        canvas.drawBitmap(original, 5.0f, 0.0f, null);
+
+        return rotatedBitmap;
+    }
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -104,7 +121,7 @@ public class Fragment_tab2_camera extends Fragment {
         bottomSheetDialog.setContentView(view);
 
         //fragment3.xml
-        View v = inflater.inflate(R.layout.fragment_camera, container, false);
+        View v = inflater.inflate(R.layout.fragment_tab2_camera, container, false);
 
         //cameraPreView = v.findViewById(R.id.cameraPreView);
         previewView = v.findViewById(R.id.previewView);
@@ -114,19 +131,38 @@ public class Fragment_tab2_camera extends Fragment {
         btnOK = view.findViewById(R.id.btnOK);
         btnClose = view.findViewById(R.id.btnClose);
 
-
         try {
             processCameraProvider = ProcessCameraProvider.getInstance(getActivity()).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
         //카메라 권한 요청
+        //이 구조의 문제점: 한번 더 버튼을 눌러야 카메라 기능이 동작
+//        if (allPermissionsGranted()) {
+//            bindPreview();
+//            bindImageCapture();
+//        } else {
+//            ActivityCompat.requestPermissions(getActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+//        }
+
+        //위 문제점 개선한 구조 -> 권한 설정 후 딜레이 주기
         if (allPermissionsGranted()) {
             bindPreview();
             bindImageCapture();
         } else {
             ActivityCompat.requestPermissions(getActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+
+            //권한 설정하고 1초 뒤에 카메라 바인딩
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    bindPreview();
+                    bindImageCapture();
+                }
+            },1000);
         }
+
 
         btnCapture.setOnClickListener(view13 -> {
             imageCapture.takePicture(ContextCompat.getMainExecutor(getActivity()),
@@ -141,12 +177,16 @@ public class Fragment_tab2_camera extends Fragment {
                                 Log.d("MainActivity", Integer.toString(bitmap.getWidth())); //4128
                                 Log.d("MainActivity", Integer.toString(bitmap.getHeight())); //3096
 
+                                // 이미지 회전 메소드 이용
+                                bitmap = rotateBitmap(bitmap,180);
+
                                 imgPlant.setImageBitmap(bitmap);
 
                                 //close() 안해주면 Too many acquire images. Close image to be able to process next 오류발생
                                 //이미지 데이터가 계속 쌓이게 되면서 사진이 찍히지 않음
                                 image.close();
                                 mediaImage.close();
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -162,6 +202,9 @@ public class Fragment_tab2_camera extends Fragment {
             bottomSheetDialog.dismiss();
             processCameraProvider.unbindAll(); //프리뷰 카메라 종료
             //Volley 이용해서 서버로 bitmap -> base64로 변환해서 전송
+
+            //여기서 프로그래스 다이얼로그 불러오기
+            progressON(getActivity(), "Loading...");
             sendImage();
         });
 
@@ -196,6 +239,9 @@ public class Fragment_tab2_camera extends Fragment {
                     bundle.putParcelable("a",b);
                     BaumannFragment bau = new BaumannFragment();
                     bau.setArguments(bundle);
+
+                    //여기서 끝
+                    progressOFF();
                     mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,bau).commit();
 
 
@@ -210,6 +256,7 @@ public class Fragment_tab2_camera extends Fragment {
                 },
                 error -> {
                     Log.d("cameraFragment", "Some error occurred -> " + error);
+                    progressOFF();
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -258,5 +305,53 @@ public class Fragment_tab2_camera extends Fragment {
     public void onPause() {
         super.onPause();
         processCameraProvider.unbindAll(); //프리뷰 카메라 종료
+    }
+
+    public void progressSET(String message) {
+
+        if (progressDialog == null || !progressDialog.isShowing()) {
+            return;
+        }
+
+        TextView tv_message = progressDialog.findViewById(R.id.tv_message);
+        if (!TextUtils.isEmpty(message)) {
+            tv_message.setText(message);
+        }
+
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    public void progressON(Activity activity, String message){
+
+        if( getActivity() == null || getActivity().isFinishing() ){
+            return;
+        }
+
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressSET(message);
+        } else {
+
+            progressDialog = new AppCompatDialog(activity);
+            progressDialog.setCancelable(false);
+            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            progressDialog.setContentView(R.layout.progress_loading);
+            progressDialog.show();
+
+        }
+
+        ImageView img_progress = progressDialog.findViewById(R.id.img_progress);
+        //GIF이미지를 적용하기 위해 Glide 라이브러리 사용
+        Glide.with(this).load(R.raw.face_ai).into(img_progress);
+
+        TextView tv_message = progressDialog.findViewById(R.id.tv_message);
+        if (!TextUtils.isEmpty(message)) {
+            tv_message.setText(message);
+        }
+
     }
 }
