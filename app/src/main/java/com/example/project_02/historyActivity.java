@@ -71,11 +71,11 @@ public class historyActivity extends AppCompatActivity {
             if (!response.equals("데이터가 없습니다.")) {
                 try {
                     jArray = new JSONArray(response);
-                    for (int i = jArray.length() - 1; i > 0; i--) {
+                    for (int i = jArray.length() - 1; i >= 0; i--) {
                         his_json = (JSONObject) jArray.opt(i); // 해체
                         Log.d("json", String.valueOf(his_json));
                         String bauman = his_json.optString("bauman");
-                        int sk_res = his_json.optInt("sk_res") / 4;
+                        int sk_res = his_json.optInt("sk_res");
                         int sk_oil = his_json.optInt("sk_oil");
                         int sk_sen = his_json.optInt("sk_sen");
                         int sk_pig = his_json.optInt("sk_pig");
