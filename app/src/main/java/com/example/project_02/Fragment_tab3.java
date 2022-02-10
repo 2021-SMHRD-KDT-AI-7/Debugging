@@ -59,7 +59,7 @@ public class Fragment_tab3 extends Fragment {
 
         user_type = v.findViewById(R.id.user_type);
         tv_type = v.findViewById(R.id.tv_type);
-        user_image = v.findViewById(R.id.imageView11);
+        user_image = v.findViewById(R.id.user_image);
 
         type_memo = v.findViewById(R.id.type_memo);
 
