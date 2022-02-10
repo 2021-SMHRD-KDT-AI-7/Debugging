@@ -70,7 +70,6 @@ public class Fragment_tab3 extends Fragment {
         result = bundle.getString("result") + " 타입 입니다.";
         result2 = bundle.getString("result");
         type_explanation = bundle.getString("memos");
-
         Log.d("Fragment_tab3", scoreoil + " / " + scoresen + " / " + scoremel + " / " + scoretin);*/
 
         userName = "채정배" + " 님은";
