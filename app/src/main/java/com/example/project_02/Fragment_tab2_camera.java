@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
@@ -78,6 +79,22 @@ public class Fragment_tab2_camera extends Fragment {
 
     int test;
 
+    // 이미지 회전시키는 메소드
+    public Bitmap rotateBitmap(Bitmap original, float degrees) {
+        int width = original.getWidth();
+        int height = original.getHeight();
+
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degrees);
+        matrix.setScale(-1, 1);
+
+        Bitmap rotatedBitmap = Bitmap.createBitmap(original, 0, 0, width, height, matrix, true);
+        // Canvas 라는 클래스인데 사용하는건 이미지 뷰에 적용시키는 역할이라 의미없음
+        //        Canvas canvas = new Canvas(rotatedBitmap);
+        //        canvas.drawBitmap(original, 5.0f, 0.0f, null);
+
+        return rotatedBitmap;
+    }
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -159,6 +176,9 @@ public class Fragment_tab2_camera extends Fragment {
 
                                 Log.d("MainActivity", Integer.toString(bitmap.getWidth())); //4128
                                 Log.d("MainActivity", Integer.toString(bitmap.getHeight())); //3096
+
+                                // 이미지 회전 메소드 이용
+                                bitmap = rotateBitmap(bitmap,180);
 
                                 imgPlant.setImageBitmap(bitmap);
 
