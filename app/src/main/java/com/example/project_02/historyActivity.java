@@ -73,7 +73,6 @@ public class historyActivity extends AppCompatActivity {
                     for (int i = 0; i < jArray.length(); i++) {
                         his_json = (JSONObject) jArray.opt(i); // 해체
                         Log.d("json", String.valueOf(his_json));
-                        int deep_seq = his_json.optInt("deep_seq");
                         String bauman = his_json.optString("bauman");
                         int sk_res = his_json.optInt("sk_res") / 4;
                         int sk_oil = his_json.optInt("sk_oil");
@@ -90,7 +89,7 @@ public class historyActivity extends AppCompatActivity {
                         editor.apply();
 
                         data.add(new historyVO(
-                                deep_seq, bauman,
+                                bauman,
                                 sk_res, sk_oil, sk_sen, sk_pig, sk_ela,
                                 user_id, date, img_src));
                     }

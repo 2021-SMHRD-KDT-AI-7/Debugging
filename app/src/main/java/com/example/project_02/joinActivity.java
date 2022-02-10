@@ -36,7 +36,7 @@ public class joinActivity extends AppCompatActivity {
         pw = findViewById(R.id.et_pw);
         pw2 = findViewById(R.id.et_pw2);
         name = findViewById(R.id.et_name);
-        bd = findViewById(R.id.et_birthday);
+        //bd = findViewById(R.id.et_birthday);
         btn_join = findViewById(R.id.btn_join_); // btn_join_ 아이디 중복 방지 언더바
 
         rq = Volley.newRequestQueue(getApplicationContext());
@@ -61,7 +61,7 @@ public class joinActivity extends AppCompatActivity {
                 data.put("id", id.getText().toString());
                 data.put("pw", pw.getText().toString());
                 data.put("name", name.getText().toString());
-                data.put("bd", bd.getText().toString());
+                //data.put("bd", bd.getText().toString());
                 return data;
             }
         };
