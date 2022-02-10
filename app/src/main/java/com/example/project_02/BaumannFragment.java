@@ -222,7 +222,7 @@ public class BaumannFragment extends Fragment {
 
             //scoreList.add(score);
         } else {
-            calculate(v);
+            scoreavg = calculate(v);
 
             //cameraFragment
             Bitmap bitmap = getArguments().getParcelable("a");
@@ -270,12 +270,17 @@ public class BaumannFragment extends Fragment {
                     Map<String, String> params = new HashMap<>();
 
                     //flask서버로 전달할 데이터를
-                    params.put("scoreoil", Integer.toString((int) Math.round(scoreoil))); //더블형 반올림
-                    params.put("scoresen", Integer.toString((int) Math.round(scoresen)));
-                    params.put("scoremel", Integer.toString((int) Math.round(scoremel)));
-                    params.put("scoretin", Integer.toString((int) Math.round(scoretin)));
-                    params.put("skin_mbti", mbtiDO + mbtiSR + mbtiPN + mbtiWT);
-                    params.put("memos", memos);
+                    params.put("scoreoil", Integer.toString( (int)Math.round(scoreoil)) ); //더블형 반올림
+                    params.put("scoresen",Integer.toString( (int)Math.round(scoresen)) );
+                    params.put("scoremel",Integer.toString( (int)Math.round(scoremel)) );
+                    params.put("scoretin",Integer.toString( (int)Math.round(scoretin)) );
+                    params.put("skin_score",Integer.toString( (int)Math.round(scoreavg)) );
+                    params.put("skin_mbti",mbtiDO + mbtiSR + mbtiPN + mbtiWT);
+                    params.put("memos",memos);
+
+
+
+
 
                     return params;
                 }
@@ -377,7 +382,7 @@ public class BaumannFragment extends Fragment {
         }
     }
 
-    public void calculate(View v) {
+    public double calculate(View v) {
 
         scoreoil = (scoreoil / 24) * 100;
         scoresen = (scoresen / 36) * 100;
@@ -390,6 +395,7 @@ public class BaumannFragment extends Fragment {
         }
 
         scoreavg = (scoreoil + scoresen + scoremel + scoretin) / 4;
+        return scoreavg;
     }
 
 
