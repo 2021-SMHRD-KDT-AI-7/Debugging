@@ -62,7 +62,7 @@ public class Fragment_tab4 extends Fragment {
         bundle = getArguments();
         mContext = v.getContext();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
-        userName = pref.getString("user_id", "");
+        userName = pref.getString("user_name", "");
         user.setText(userName);
         userType = pref.getString("bauman", "");
         tv_user_type.setText(userType);
