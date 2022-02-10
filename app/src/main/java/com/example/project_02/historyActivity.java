@@ -71,7 +71,7 @@ public class historyActivity extends AppCompatActivity {
             if (!response.equals("데이터가 없습니다.")) {
                 try {
                     jArray = new JSONArray(response);
-                    for (int i = 0; i < jArray.length(); i++) {
+                    for (int i = jArray.length() - 1; i > 0; i--) {
                         his_json = (JSONObject) jArray.opt(i); // 해체
                         Log.d("json", String.valueOf(his_json));
                         String bauman = his_json.optString("bauman");
@@ -94,8 +94,10 @@ public class historyActivity extends AppCompatActivity {
                                 user_id, date, img_src));
                     }
                     List<Entry> entries = new ArrayList<>(); // 차트 데이터값
-                    for (int i = 0; i < data.size(); i++) {
-                        entries.add(new Entry(i, data.get(i).getSk_res()));
+                    int j = 0;
+                    for (int i = data.size() - 1; i >= 0; i--) {
+                        j++;
+                        entries.add(new Entry(j, data.get(i).getSk_res()));
                     }
                     LineDataSet lineDataSet = new LineDataSet(entries, null); // 차트 데이터 디자인
                     lineDataSet.setLineWidth(2); // 선 굵기
