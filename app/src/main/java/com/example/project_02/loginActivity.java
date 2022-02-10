@@ -53,6 +53,7 @@ public class loginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login_);
         btn_join = findViewById(R.id.btn_join2);
         cb_ = findViewById(R.id.cb_);
+
         mContext = this;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = pref.edit();
@@ -64,6 +65,7 @@ public class loginActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     editor.putString("user_id", jsonObject.getString("user_id"));
+                    Log.d("userID", jsonObject.getString("user_id"));
                     user_id = jsonObject.getString("user_id");
                     editor.putString("user_pw", jsonObject.getString("user_pw"));
                     editor.putString("user_name", jsonObject.getString("user_name"));
@@ -94,7 +96,6 @@ public class loginActivity extends AppCompatActivity {
             }
         };
 
-        // 바우만결과 -> Flask
         String flask_url = "http://220.80.203.107:5000/login_id"; //경로
         sr2 = new StringRequest(Request.Method.POST, flask_url,
                 new Response.Listener<String>() {
@@ -104,25 +105,18 @@ public class loginActivity extends AppCompatActivity {
                     }
                 },
                 new Response.ErrorListener() {
-
                     public void onErrorResponse(VolleyError error) {
                         Log.v("Flask응답값>> ", "Flask 통신 실패");
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
                 Map<String, String> params = new HashMap<>();
-
-                //flask서버로 전달할 데이터를
-
-                params.put("user_id", user_id); //더블형 반올림
-
-
+                user_id = pref.getString("user_id", "");
+                params.put("user_id", user_id);
                 return params;
             }
         };
-
 
 
         btn_login.setOnClickListener(view -> {
