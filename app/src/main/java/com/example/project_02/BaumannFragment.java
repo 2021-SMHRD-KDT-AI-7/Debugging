@@ -211,7 +211,7 @@ public class BaumannFragment extends Fragment {
 
             match(v);
             baumann(v);
-            Toast.makeText(getActivity(), "oil" + scoreoil, Toast.LENGTH_SHORT).show();
+
             type.setText(vo.getType());
             Qs.setText(vo.getQs());
             checkBox.setText(vo.getCheckBox());
