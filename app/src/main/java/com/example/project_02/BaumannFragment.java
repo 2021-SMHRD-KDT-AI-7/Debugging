@@ -1,11 +1,14 @@
 package com.example.project_02;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaumannFragment extends Fragment {
 
@@ -33,8 +46,18 @@ public class BaumannFragment extends Fragment {
     RadioGroup radioGroup; //RadioGroup 선언
     ViewGroup rootView;
     Button next;
+    MainActivity mainactivity;
+
+    // 안드-> Flask
+    RequestQueue queue;
 
     int[] arr = {2, 3, 4, 5, 6, 13, 14, 18, 22, 25, 26, 27, 28, 30, 31, 32}; // 선택사항 4개인 문제 인덱스 번호
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mainactivity = (MainActivity) getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,7 +120,7 @@ public class BaumannFragment extends Fragment {
                 "약간 건조한 느낌이 들지만 갈라지는 느낌은 없다", "정상적인 느낌이다", "기름기가 있는 느낌이다", "나는 비누나 거품이 생기는 클렌저를 사용하지 않는다"));
         list.add(new checkVO("지성vs건성", "3. 보습제를 사용하지 않으면 얼굴 피부는 탱탱한 느낌입니까?", "항상 그렇다", "때때로 그렇다", "거의 그렇지 않다", "전혀 그렇지 않다"));
         list.add(new checkVO("지성vs건성", "4. 얼굴에 모공이 있습니까?", "전혀 없다", "때때로 있다", "자주 있다", "항상있다"));
-        list.add(new checkVO("지성vs건성", "5. 얼굴의 T존(이마와 코)에 기름기가 있습니까?", "전혀없다", "때떄로 있다", "자주 있다", "항상 있다"));
+        list.add(new checkVO("지성vs건성", "5. 얼굴의 T존(이마와 코)에 기름기가 있습니까?", "전혀없다", "때때로 있다", "자주 있다", "항상 있다"));
         list.add(new checkVO("지성vs건성", "6. 보습제를 바르고 2~3시간 이후에 양 볼은?", "매우 거칠거나,피부가 벗겨지거나 창백하다", "매끄럽다", "약간 윤기가 흐른다", "윤기가 흐르고 번들거린다 혹은, 나는 보습제를 사용하지 않는다"));
 
         //민감성,저항성 문제
@@ -185,8 +208,10 @@ public class BaumannFragment extends Fragment {
                     }
                 }
             }
+
             match(v);
             baumann(v);
+            Toast.makeText(getActivity(), "oil" + scoreoil, Toast.LENGTH_SHORT).show();
             type.setText(vo.getType());
             Qs.setText(vo.getQs());
             checkBox.setText(vo.getCheckBox());
@@ -194,12 +219,12 @@ public class BaumannFragment extends Fragment {
             checkBox3.setText(vo.getCheckBox3());
             checkBox4.setText(vo.getCheckBox4());
             checkBox5.setText(vo.getCheckBox5());
+
             //scoreList.add(score);
         } else {
             calculate(v);
 
             //cameraFragment
-            assert getArguments() != null;
             Bitmap bitmap = getArguments().getParcelable("a");
 
             Bundle bundle = new Bundle(); // 번들을 통해 값 전달
@@ -217,17 +242,65 @@ public class BaumannFragment extends Fragment {
             Fragment_tab3 fragment_tab3 = new Fragment_tab3();//프래그먼트2 선언
             fragment_tab3.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
 
+            // 바우만결과 -> Flask
+            queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+            //flask서버의 ip주소로 변경할 것
+            //뒤에 라우터 경로 작성할 것
+            String flask_url = "http://220.80.203.107:5000/Baumann"; //경로
+
+            StringRequest request = new StringRequest(Request.Method.POST, flask_url,
+                    new Response.Listener<String>() {
+
+
+                        public void onResponse(String response) {
+                            //Flask서버의 return문에 작성한 결과값을 response변수를 통해서 접근
+                            Log.v("Flask응답값>> ", response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+
+                        public void onErrorResponse(VolleyError error) {
+                            Log.v("Flask응답값>> ", "Flask 통신 실패");
+                        }
+                    }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+
+                    Map<String, String> params = new HashMap<>();
+
+                    //flask서버로 전달할 데이터를
+                    params.put("scoreoil", Integer.toString( (int)Math.round(scoreoil)) ); //더블형 반올림
+                    params.put("scoresen",Integer.toString( (int)Math.round(scoresen)) );
+                    params.put("scoremel",Integer.toString( (int)Math.round(scoremel)) );
+                    params.put("scoretin",Integer.toString( (int)Math.round(scoretin)) );
+                    params.put("skin_mbti",mbtiDO + mbtiSR + mbtiPN + mbtiWT);
+                    params.put("memos",memos);
+
+                    return params;
+                }
+            };
+            queue.add(request);
+
+
+        // 통신코드 종료
+
             //Toast.makeText(getActivity(), scoreoil + memos, Toast.LENGTH_SHORT).show();
+
             // 비트맵 이미지 받아오는지 확인
 //            if (bitmap != null) {
 //                Log.d("transmit_ok", "yes");
 //            } else {
 //                Log.d("transmit_no", "no");
 //            }
+
             // 번들에서 프래그먼트3으로 보내는 부분
+
             // 프래그먼트 3번으로 가는부분
             transaction.replace(R.id.container, fragment_tab3);
             transaction.commit();
+
+
 //            Toast.makeText(getActivity(), "문항이 없습니다.", Toast.LENGTH_LONG).show();
 //            Toast.makeText(getActivity(), "oil" + scoreoil + " sen" + scoresen + " mel" + scoremel + " tin" + scoretin, Toast.LENGTH_LONG).show();
 //            Toast.makeText(getActivity(), "result: " + mbtiDO + mbtiSR + mbtiPN + mbtiWT, Toast.LENGTH_LONG).show();
@@ -315,6 +388,9 @@ public class BaumannFragment extends Fragment {
         } else {
             scoreoil = (100 - scoreoil) * 2 + 2;
         }
+
         scoreavg = (scoreoil + scoresen + scoremel + scoretin) / 4;
     }
+
+
 }

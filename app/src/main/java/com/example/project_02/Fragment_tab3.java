@@ -42,7 +42,7 @@ public class Fragment_tab3 extends Fragment {
     ArrayList<String> skintype = new ArrayList<>();
 
     HorizontalBarChart barChart;
-    TextView user, tv_type, type_memo;
+    TextView user, user_type, tv_type, type_memo;
     ImageView user_image;
     String userName;
     String result2, result = "", type_explanation;
@@ -57,6 +57,7 @@ public class Fragment_tab3 extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab3, container, false);
 
+        user_type = v.findViewById(R.id.user_type);
         tv_type = v.findViewById(R.id.tv_type);
         user_image = v.findViewById(R.id.imageView11);
 
@@ -64,15 +65,19 @@ public class Fragment_tab3 extends Fragment {
 
         user = v.findViewById(R.id.tv_user2);
 
-        assert getArguments() != null;
-        scoreoil = getArguments().getDouble("scoreoil");
-        scoresen = getArguments().getDouble("scoresen");
-        scoremel = getArguments().getDouble("scoremel");
-        scoretin = getArguments().getDouble("scoretin");
+        Bundle bundle = getArguments();
 
-        result = getArguments().getString("result") + " 타입 입니다.";
-        result2 = getArguments().getString("result");
-        type_explanation = getArguments().getString("memos");
+        scoreoil = bundle.getDouble("scoreoil");
+        scoresen = bundle.getDouble("scoresen");
+        scoremel = bundle.getDouble("scoremel");
+        scoretin = bundle.getDouble("scoretin");
+
+        result = bundle.getString("result") + " 타입 입니다.";
+        result2 = bundle.getString("result");
+        type_explanation = bundle.getString("memos");
+
+        Log.d("Fragment_tab3", scoreoil + " / " + scoresen + " / " + scoremel + " / " + scoretin);
+
 
         userName = "채정배" + " 님은";
         user.setText(userName);
@@ -83,7 +88,7 @@ public class Fragment_tab3 extends Fragment {
         Bitmap bitmap = getArguments().getParcelable("a");
         user_image.setImageBitmap(bitmap);
 
-        // String[] skin = {"T", "", "N", "", "S", "", "O"};
+//        String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);
 
