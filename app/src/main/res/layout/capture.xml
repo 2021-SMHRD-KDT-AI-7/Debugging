@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/user_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:layout_weight="1"
@@ -37,7 +37,8 @@
             <Button
                 android:id="@+id/btnOK"
                 android:layout_width="160dp"
-                android:layout_height="48dp"
+                android:layout_height="56dp"
+                android:layout_marginRight="16dp"
                 android:background="#BBE6EC"
                 android:fontFamily="@font/gowundodum"
                 android:text="확인"
@@ -49,11 +50,11 @@
             <Button
                 android:id="@+id/btnClose"
                 android:layout_width="160dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="8dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="16dp"
                 android:background="#BBE6EC"
                 android:fontFamily="@font/gowundodum"
-                android:text="닫기"
+                android:text="다시 찍기"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="italic"

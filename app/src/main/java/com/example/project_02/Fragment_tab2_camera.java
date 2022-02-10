@@ -52,7 +52,7 @@ import java.util.Map;
 
 public class Fragment_tab2_camera extends Fragment {
 
-    Button  btnClose;
+    Button btnClose;
     Button btnOK;
     ImageView imgPlant;
     ImageView btnCapture;
@@ -95,6 +95,7 @@ public class Fragment_tab2_camera extends Fragment {
 
         return rotatedBitmap;
     }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -160,7 +161,7 @@ public class Fragment_tab2_camera extends Fragment {
                     bindPreview();
                     bindImageCapture();
                 }
-            },1000);
+            }, 1000);
         }
 
 
@@ -178,7 +179,7 @@ public class Fragment_tab2_camera extends Fragment {
                                 Log.d("MainActivity", Integer.toString(bitmap.getHeight())); //3096
 
                                 // 이미지 회전 메소드 이용
-                                bitmap = rotateBitmap(bitmap,180);
+                                bitmap = rotateBitmap(bitmap, 180);
 
                                 imgPlant.setImageBitmap(bitmap);
 
@@ -236,13 +237,13 @@ public class Fragment_tab2_camera extends Fragment {
 
                     // 번들로 이미지 전송
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("a",b);
+                    bundle.putParcelable("a", b);
                     BaumannFragment bau = new BaumannFragment();
                     bau.setArguments(bundle);
 
                     //여기서 끝
                     progressOFF();
-                    mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container,bau).commit();
+                    mainactivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, bau).commit();
 
 
 //                    imgPlant.setImageBitmap(b);
@@ -326,9 +327,9 @@ public class Fragment_tab2_camera extends Fragment {
         }
     }
 
-    public void progressON(Activity activity, String message){
+    public void progressON(Activity activity, String message) {
 
-        if( getActivity() == null || getActivity().isFinishing() ){
+        if (getActivity() == null || getActivity().isFinishing()) {
             return;
         }
 

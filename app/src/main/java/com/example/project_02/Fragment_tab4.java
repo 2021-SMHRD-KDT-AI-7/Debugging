@@ -40,8 +40,8 @@ import java.util.Objects;
 public class Fragment_tab4 extends Fragment {
     ArrayList<CosVO> cos_list = new ArrayList<>();
     ListView cos_lv;
-    TextView cos_count, user;
-    String userName;
+    TextView cos_count, user, tv_user_type;
+    String userName, userType;
     int cnt = 10;
     Bundle bundle;
     Context mContext;
@@ -58,11 +58,14 @@ public class Fragment_tab4 extends Fragment {
         cos_lv = v.findViewById(R.id.cos_lv);
         cos_count = v.findViewById(R.id.cos_count);
         user = v.findViewById(R.id.tv_user);
+        tv_user_type = v.findViewById(R.id.tv_user_type);
         bundle = getArguments();
         mContext = v.getContext();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
         userName = pref.getString("user_id", "");
         user.setText(userName);
+        userType = pref.getString("bauman", "");
+        tv_user_type.setText(userType);
         rq = Volley.newRequestQueue(
                 Objects.requireNonNull(getContext()).getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
