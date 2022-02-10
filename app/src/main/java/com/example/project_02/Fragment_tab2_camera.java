@@ -347,7 +347,7 @@ public class Fragment_tab2_camera extends Fragment {
 
         ImageView img_progress = progressDialog.findViewById(R.id.img_progress);
         //GIF이미지를 적용하기 위해 Glide 라이브러리 사용
-        Glide.with(this).load(R.raw.face_ai).into(img_progress);
+        Glide.with(this).load(R.raw.loading).into(img_progress);
 
         TextView tv_message = progressDialog.findViewById(R.id.tv_message);
         if (!TextUtils.isEmpty(message)) {
