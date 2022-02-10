@@ -35,16 +35,16 @@
 
         <Button
             android:id="@+id/btn_start"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="59dp"
             android:layout_below="@+id/tvName1"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginStart="97dp"
+            android:layout_marginTop="105dp"
+            android:layout_marginEnd="103dp"
+            android:layout_marginBottom="123dp"
             android:minHeight="70dp"
             android:text="start" />
 

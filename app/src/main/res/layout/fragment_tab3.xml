@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/cinzelvariable"
-                android:text="Moisture"
+                android:text="수분"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/guideline19"
                 app:layout_constraintTop_toTopOf="@+id/barchart" />
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:fontFamily="@font/cinzelvariable"
-                android:text="Senstiveness"
+                android:text="민감성"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/guideline19"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:fontFamily="@font/cinzelvariable"
-                android:text="Pigmentation"
+                android:text="색소침착"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/guideline19"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:fontFamily="@font/cinzelvariable"
-                android:text="Elasticity"
+                android:text="탄력성"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/guideline19"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.1" />
+                app:layout_constraintGuide_percent="0.08" />
 
             <TextView
                 android:id="@+id/tv_type"
@@ -81,6 +81,7 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/user_type"
                 app:layout_constraintEnd_toEndOf="@+id/tv_user2"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tv_user2"
                 app:layout_constraintTop_toBottomOf="@+id/tv_user2" />
 
@@ -89,14 +90,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.95" />
+                app:layout_constraintGuide_percent="0.92" />
 
             <com.github.mikephil.charting.charts.HorizontalBarChart
                 android:id="@+id/barchart"
                 android:layout_width="0dp"
                 android:layout_height="320dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_type"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline12"
@@ -108,13 +109,14 @@
                 android:id="@+id/tv_user2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="2dp"
                 android:fontFamily="@font/gowundodum"
                 android:text="디버깅 님은"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/tv_type"
                 app:layout_constraintEnd_toStartOf="@+id/guideline29"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/user_type"
                 app:layout_constraintTop_toTopOf="@+id/user_type" />
 
@@ -127,7 +129,7 @@
                 android:text="경미한 지성, 심한 민감성, 비색소성, 탄력적인 \n피부 입니다"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline29"
+                app:layout_constraintEnd_toStartOf="@+id/guideline19"
                 app:layout_constraintStart_toStartOf="@id/barchart"
                 app:layout_constraintTop_toBottomOf="@+id/user_type" />
 
@@ -136,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.9" />
+                app:layout_constraintGuide_percent="0.8" />
 
             <ImageView
                 android:id="@+id/user_image"
