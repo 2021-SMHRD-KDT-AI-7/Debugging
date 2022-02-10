@@ -81,8 +81,7 @@ public class historyAdapter extends BaseAdapter {
         try {
             // join()를 호출하여 별도의 작업 Thread가 종료될 때까지 메인 Thread가 기다리게 한다
             mThread.join();
-            // 작업 Thread에서 이미지를 불러오는 작업을 완료한 뒤
-            // UI 작업을 할 수 있는 메인 Thread에서 ImageView에 이미지를 지정한다
+            // 작업 Thread에서 이미지를 불러오는 작업을 완료한 뒤 UI 작업을 할 수 있는 메인 Thread에서 ImageView에 이미지를 지정한다
             face.setImageBitmap(bitmap);
         } catch (InterruptedException e) {
             e.printStackTrace();

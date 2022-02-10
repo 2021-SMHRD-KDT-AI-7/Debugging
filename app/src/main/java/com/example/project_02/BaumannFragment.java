@@ -185,10 +185,8 @@ public class BaumannFragment extends Fragment {
                     }
                 }
             }
-
             match(v);
             baumann(v);
-            Toast.makeText(getActivity(), "oil" + scoreoil, Toast.LENGTH_SHORT).show();
             type.setText(vo.getType());
             Qs.setText(vo.getQs());
             checkBox.setText(vo.getCheckBox());
@@ -196,12 +194,12 @@ public class BaumannFragment extends Fragment {
             checkBox3.setText(vo.getCheckBox3());
             checkBox4.setText(vo.getCheckBox4());
             checkBox5.setText(vo.getCheckBox5());
-
             //scoreList.add(score);
         } else {
             calculate(v);
 
             //cameraFragment
+            assert getArguments() != null;
             Bitmap bitmap = getArguments().getParcelable("a");
 
             Bundle bundle = new Bundle(); // 번들을 통해 값 전달
@@ -220,20 +218,16 @@ public class BaumannFragment extends Fragment {
             fragment_tab3.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
 
             //Toast.makeText(getActivity(), scoreoil + memos, Toast.LENGTH_SHORT).show();
-
             // 비트맵 이미지 받아오는지 확인
 //            if (bitmap != null) {
 //                Log.d("transmit_ok", "yes");
 //            } else {
 //                Log.d("transmit_no", "no");
 //            }
-
             // 번들에서 프래그먼트3으로 보내는 부분
-
             // 프래그먼트 3번으로 가는부분
             transaction.replace(R.id.container, fragment_tab3);
             transaction.commit();
-
 //            Toast.makeText(getActivity(), "문항이 없습니다.", Toast.LENGTH_LONG).show();
 //            Toast.makeText(getActivity(), "oil" + scoreoil + " sen" + scoresen + " mel" + scoremel + " tin" + scoretin, Toast.LENGTH_LONG).show();
 //            Toast.makeText(getActivity(), "result: " + mbtiDO + mbtiSR + mbtiPN + mbtiWT, Toast.LENGTH_LONG).show();
@@ -321,9 +315,6 @@ public class BaumannFragment extends Fragment {
         } else {
             scoreoil = (100 - scoreoil) * 2 + 2;
         }
-
         scoreavg = (scoreoil + scoresen + scoremel + scoretin) / 4;
     }
-
-
 }
