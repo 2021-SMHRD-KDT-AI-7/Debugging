@@ -41,7 +41,7 @@ public class joinActivity extends AppCompatActivity {
 
         rq = Volley.newRequestQueue(getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
-                "http://121.147.52.64:8081/Mirror/join", response -> {
+                "http://220.80.203.107:8081/Mirror/join", response -> {
             if (!response.equals("회원가입 실패")) {
                 Toast.makeText(getApplicationContext(),
                         "회원가입되었습니다.", Toast.LENGTH_SHORT).show();

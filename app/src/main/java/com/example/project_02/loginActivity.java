@@ -59,7 +59,7 @@ public class loginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
         rq = Volley.newRequestQueue(getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
-                "http://121.147.52.64:8081/Mirror/login", response -> {
+                "http://220.80.203.107:8081/Mirror/login", response -> {
             if (!response.equals("없는 계정입니다.")) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
