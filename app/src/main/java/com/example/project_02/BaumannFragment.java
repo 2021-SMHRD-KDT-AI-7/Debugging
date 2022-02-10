@@ -1,6 +1,7 @@
 package com.example.project_02;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +50,9 @@ public class BaumannFragment extends Fragment {
     Button next;
     MainActivity mainactivity;
 
+
+
+
     // 안드-> Flask
     RequestQueue queue;
 
@@ -62,6 +67,8 @@ public class BaumannFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
 
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment_baumann, container, false);
 
@@ -270,6 +277,8 @@ public class BaumannFragment extends Fragment {
                     Map<String, String> params = new HashMap<>();
 
                     //flask서버로 전달할 데이터를
+                    //userName = pref.getString("user_name"
+//                    params.put("u_id", 'gso' ); //더블형 반올림
                     params.put("scoreoil", Integer.toString( (int)Math.round(scoreoil)) ); //더블형 반올림
                     params.put("scoresen",Integer.toString( (int)Math.round(scoresen)) );
                     params.put("scoremel",Integer.toString( (int)Math.round(scoremel)) );
