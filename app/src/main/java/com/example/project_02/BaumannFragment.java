@@ -252,7 +252,7 @@ public class BaumannFragment extends Fragment {
 
             //flask서버의 ip주소로 변경할 것
             //뒤에 라우터 경로 작성할 것
-            String flask_url = "http://220.80.203.107:5000/Baumann"; //경로
+            String flask_url = "http://172.30.1.47:5000/Baumann"; //경로
 
             StringRequest request = new StringRequest(Request.Method.POST, flask_url,
                     new Response.Listener<String>() {

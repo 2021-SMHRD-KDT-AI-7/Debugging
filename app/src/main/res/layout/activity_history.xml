@@ -73,7 +73,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/gowundodum"
-        android:text="- 분석 결과 값을 평균화 시킨 그래프 입니다.\n- 평균이 50점에 가까울 수록 밸런스가 좋아요.\n- 나날이 변하는 피부 밸런스를 한눈에 확인해보세요."
+        android:text="- 분석 결과 값을 평균화 시킨 그래프 입니다.\n- 평균이 100점에 가까울 수록 밸런스가 좋아요.\n- 나날이 변하는 피부 밸런스를 한눈에 확인해보세요."
         app:layout_constraintBottom_toTopOf="@+id/guideline28"
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintStart_toStartOf="@+id/guideline25"

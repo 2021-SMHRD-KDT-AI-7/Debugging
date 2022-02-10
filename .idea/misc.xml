@@ -62,7 +62,17 @@
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/2__/app/src/main/res/layout/history_custom.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/2__/app/src/main/res/layout/simple.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/2__/app/src/main/res/menu/bnmenu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/activity_history.xml" value="0.3421875" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/activity_join.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/activity_login.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/fragment_guide_1.xml" value="0.259375" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/fragment_guide_6.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/fragment_tab2_camera.xml" value="0.259375" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/fragment_tab3.xml" value="0.33" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/fragment_tab4.xml" value="0.33" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/fragment_tab5.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/history_custom.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/Debugging/app/src/main/res/layout/progress_loading.xml" value="0.19114583333333332" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1259259259259259" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/drawable/corner_shape.xml" value="0.3594871794871795" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1259259259259259" />
@@ -106,11 +116,10 @@
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/fragment_guide_6.xml" value="0.34791666666666665" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/fragment_tab1.xml" value="0.4937637564196625" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/fragment_tab2.xml" value="0.26766304347826086" />
-        <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/fragment_tab3.xml" value="0.33" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/fragment_tab3.xml" value="0.26766304347826086" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/fragment_tab4.xml" value="0.26766304347826086" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/fragment_tab5.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/history_custom.xml" value="0.35052083333333334" />
-        <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/progress_loading.xml" value="0.33695652173913043" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/simple.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/menu/bnmenu.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/MyApplication2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />

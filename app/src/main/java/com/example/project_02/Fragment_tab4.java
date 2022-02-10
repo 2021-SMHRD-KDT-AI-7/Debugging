@@ -70,7 +70,7 @@ public class Fragment_tab4 extends Fragment {
         rq = Volley.newRequestQueue(
                 Objects.requireNonNull(getContext()).getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
-                "http://220.80.203.107:8081/Mirror/tab4",
+                "http://172.30.1.47:8081/Mirror/tab4",
                 response -> {
                     if (response != null) {
                         try {
