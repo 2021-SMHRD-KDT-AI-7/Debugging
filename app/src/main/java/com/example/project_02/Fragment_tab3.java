@@ -75,6 +75,7 @@ public class Fragment_tab3 extends Fragment {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
         userName = pref.getString("user_name", "") + " 님은";
         user.setText(userName);
+        user_type.setText(result);
         tv_type.setText(result);
         type_memo.setText(type_explanation);
 

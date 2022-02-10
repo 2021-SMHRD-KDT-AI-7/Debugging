@@ -66,6 +66,7 @@ public class Fragment_tab4 extends Fragment {
         user.setText(userName);
         userType = pref.getString("bauman", "");
         tv_user_type.setText(userType);
+
         rq = Volley.newRequestQueue(
                 Objects.requireNonNull(getContext()).getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
