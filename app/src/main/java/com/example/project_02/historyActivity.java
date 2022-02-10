@@ -122,7 +122,7 @@ public class historyActivity extends AppCompatActivity {
             xAxis.setSpaceMax(0.3f); // X축 여백
             xAxis.setSpaceMin(0.3f); // X축 여백
             xAxis.setLabelCount(2, /*force: */true); // X축을 count개로 분할
-            String[] xAxisdate = {data.get(0).getAnal_date(), data.get(data.size() - 1).getAnal_date()};
+            String[] xAxisdate = {data.get(0).getAnal_date(), anal_date};
             xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisdate));
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // X축 위치
             xAxis.setTextColor(Color.parseColor("#242424")); // 텍스트 색상
