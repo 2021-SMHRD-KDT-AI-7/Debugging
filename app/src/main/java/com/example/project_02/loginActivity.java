@@ -16,8 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -35,8 +38,10 @@ public class loginActivity extends AppCompatActivity {
     CheckBox cb_;
 
     Context mContext;
-    StringRequest sr;
+    StringRequest sr, sr2;
     RequestQueue rq;
+    RequestQueue queue;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +64,13 @@ public class loginActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     editor.putString("user_id", jsonObject.getString("user_id"));
+                    user_id = jsonObject.getString("user_id");
                     editor.putString("user_pw", jsonObject.getString("user_pw"));
                     editor.putString("user_name", jsonObject.getString("user_name"));
                     editor.apply();
                     Toast.makeText(getApplicationContext(),
                             "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(
                             loginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -86,12 +93,45 @@ public class loginActivity extends AppCompatActivity {
                 return data;
             }
         };
+
+        // 바우만결과 -> Flask
+        String flask_url = "http://220.80.203.107:5000/login_id"; //경로
+        sr2 = new StringRequest(Request.Method.POST, flask_url,
+                new Response.Listener<String>() {
+                    public void onResponse(String response) {
+                        //Flask서버의 return문에 작성한 결과값을 response변수를 통해서 접근
+                        Log.v("Flask응답값>> ", response);
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    public void onErrorResponse(VolleyError error) {
+                        Log.v("Flask응답값>> ", "Flask 통신 실패");
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+
+                //flask서버로 전달할 데이터를
+
+                params.put("user_id", user_id); //더블형 반올림
+
+
+                return params;
+            }
+        };
+
+
+
         btn_login.setOnClickListener(view -> {
             if (TextUtils.isEmpty(et_id.getText()) || TextUtils.isEmpty(et_pw.getText())) {
                 Toast.makeText(getApplicationContext(),
                         "아이디 혹은 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
             } else {
                 rq.add(sr);
+                rq.add(sr2);
             }
         });
         btn_join.setOnClickListener(view -> {

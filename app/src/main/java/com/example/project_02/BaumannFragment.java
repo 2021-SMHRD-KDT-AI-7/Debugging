@@ -37,7 +37,7 @@ public class BaumannFragment extends Fragment {
     ArrayList<checkVO> list = new ArrayList<>(); // 문제 항목 담아줄 ArrayList
     double score, scoreoil, scoresen, scoremel, scoretin;
     String mbtiDO, mbtiSR, mbtiPN, mbtiWT, result, mbtiDO_memo, mbtiSR_memo, mbtiPN_memo, mbtiWT_memo, memos; // 바우만 타입
-    String user_name;
+    String user_id;
     static double scoreavg;// 바우만 타입별 점수
     boolean temp; // 질문 5개 ,4개 구분해서 비져블 인비져블 구분할 변수
     boolean isChecked; // 항목 체크 될 때 안될 때 구분할 변수
@@ -69,7 +69,7 @@ public class BaumannFragment extends Fragment {
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment_baumann, container, false);
         mContext = rootView.getContext();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
-        user_name = pref.getString("user_id", "");
+        user_id = pref.getString("user_id", "");
         init();
 
         next = rootView.findViewById(R.id.next);
@@ -275,6 +275,8 @@ public class BaumannFragment extends Fragment {
                     Map<String, String> params = new HashMap<>();
 
                     //flask서버로 전달할 데이터를
+
+                    params.put("user_id", user_id); //더블형 반올림
                     params.put("scoreoil", Integer.toString((int) Math.round(scoreoil))); //더블형 반올림
                     params.put("scoresen", Integer.toString((int) Math.round(scoresen)));
                     params.put("scoremel", Integer.toString((int) Math.round(scoremel)));
