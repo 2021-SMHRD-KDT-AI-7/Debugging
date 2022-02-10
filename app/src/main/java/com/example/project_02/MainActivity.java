@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
         rq = Volley.newRequestQueue(getApplicationContext());
-        String flask_url = "http://220.80.203.107:5000/login_id"; //경로
+        String flask_url = "http://172.30.1.47:5000/login_id"; //경로
         sr = new StringRequest(Request.Method.POST, flask_url,
                 response -> {
                     //Flask서버의 return문에 작성한 결과값을 response변수를 통해서 접근

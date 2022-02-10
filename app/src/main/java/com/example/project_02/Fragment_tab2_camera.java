@@ -226,7 +226,7 @@ public class Fragment_tab2_camera extends Fragment {
         imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
-        String flask_url = "http://220.80.203.107:5000/sendFrame";
+        String flask_url = "http://172.30.1.47:5000/sendFrame";
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
                 response -> {
                     Log.d("cameraFragment", response);

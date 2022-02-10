@@ -88,9 +88,9 @@ public class historyAdapter extends BaseAdapter {
         }
 
 
-        date.setText(data.get(i).getAnal_date());
-        Bauman.setText(data.get(i).getBauman());
-        res.setText(Integer.toString(data.get(i).getSk_res()));
+        date.setText("날짜 : " + data.get(i).getAnal_date());
+        Bauman.setText("타입 : " + data.get(i).getBauman());
+        res.setText("점수 : " + data.get(i).getSk_res());
         notifyDataSetChanged();
         return view;
     }
