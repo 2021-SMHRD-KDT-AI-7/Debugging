@@ -94,7 +94,7 @@ public class loginActivity extends AppCompatActivity {
                 return data;
             }
         };
-
+        //  ID 바꾸기 CGI 가서 바꾸기
         btn_login.setOnClickListener(view -> {
             if (TextUtils.isEmpty(et_id.getText()) || TextUtils.isEmpty(et_pw.getText())) {
                 Toast.makeText(getApplicationContext(),

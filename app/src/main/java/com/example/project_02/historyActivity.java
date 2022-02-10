@@ -67,7 +67,7 @@ public class historyActivity extends AppCompatActivity {
         id = pref.getString("user_id", "");
         rq = Volley.newRequestQueue(getApplicationContext());
         sr = new StringRequest(Request.Method.POST,
-                "http://121.147.52.64:8081/Mirror/bauman", response -> {
+                "http://220.80.203.107:8081/Mirror/bauman", response -> {
             if (!response.equals("데이터가 없습니다.")) {
                 try {
                     jArray = new JSONArray(response);
