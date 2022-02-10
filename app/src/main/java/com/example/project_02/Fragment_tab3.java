@@ -33,7 +33,6 @@ import java.util.List;
 public class Fragment_tab3 extends Fragment {
 
     ArrayList<Integer> baumanScore = new ArrayList<>();
-
     double scoreoil;
     double scoremel;
     double scoretin;
@@ -46,10 +45,6 @@ public class Fragment_tab3 extends Fragment {
     ImageView user_image;
     String userName;
     String result2, result = "", type_explanation;
-    ;
-
-    Bundle bundle, bundle2;
-    Bitmap bitmapImage;
 
 
     @Override
@@ -59,13 +54,13 @@ public class Fragment_tab3 extends Fragment {
 
         user_type = v.findViewById(R.id.user_type);
         tv_type = v.findViewById(R.id.tv_type);
-        user_image = v.findViewById(R.id.imageView11);
+        user_image = v.findViewById(R.id.user_img);
 
         type_memo = v.findViewById(R.id.type_memo);
 
         user = v.findViewById(R.id.tv_user2);
 
-        Bundle bundle = getArguments();
+        /*Bundle bundle = getArguments();
 
         scoreoil = bundle.getDouble("scoreoil");
         scoresen = bundle.getDouble("scoresen");
@@ -76,8 +71,7 @@ public class Fragment_tab3 extends Fragment {
         result2 = bundle.getString("result");
         type_explanation = bundle.getString("memos");
 
-        Log.d("Fragment_tab3", scoreoil + " / " + scoresen + " / " + scoremel + " / " + scoretin);
-
+        Log.d("Fragment_tab3", scoreoil + " / " + scoresen + " / " + scoremel + " / " + scoretin);*/
 
         userName = "채정배" + " 님은";
         user.setText(userName);
@@ -85,9 +79,8 @@ public class Fragment_tab3 extends Fragment {
         type_memo.setText(type_explanation);
 
         // 얼굴분석 이미지 수신받는곳
-        Bitmap bitmap = getArguments().getParcelable("a");
-        user_image.setImageBitmap(bitmap);
-
+//        Bitmap bitmap = getArguments().getParcelable("a");
+//        user_image.setImageBitmap(bitmap);
 //        String[] skin = {"T", "", "N", "", "S", "", "O"};
 
         barChart = v.findViewById(R.id.barchart);

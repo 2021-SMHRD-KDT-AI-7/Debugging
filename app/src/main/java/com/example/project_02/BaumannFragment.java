@@ -263,19 +263,19 @@ public class BaumannFragment extends Fragment {
                         public void onErrorResponse(VolleyError error) {
                             Log.v("Flask응답값>> ", "Flask 통신 실패");
                         }
-                    }){
+                    }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
 
                     Map<String, String> params = new HashMap<>();
 
                     //flask서버로 전달할 데이터를
-                    params.put("scoreoil", Integer.toString( (int)Math.round(scoreoil)) ); //더블형 반올림
-                    params.put("scoresen",Integer.toString( (int)Math.round(scoresen)) );
-                    params.put("scoremel",Integer.toString( (int)Math.round(scoremel)) );
-                    params.put("scoretin",Integer.toString( (int)Math.round(scoretin)) );
-                    params.put("skin_mbti",mbtiDO + mbtiSR + mbtiPN + mbtiWT);
-                    params.put("memos",memos);
+                    params.put("scoreoil", Integer.toString((int) Math.round(scoreoil))); //더블형 반올림
+                    params.put("scoresen", Integer.toString((int) Math.round(scoresen)));
+                    params.put("scoremel", Integer.toString((int) Math.round(scoremel)));
+                    params.put("scoretin", Integer.toString((int) Math.round(scoretin)));
+                    params.put("skin_mbti", mbtiDO + mbtiSR + mbtiPN + mbtiWT);
+                    params.put("memos", memos);
 
                     return params;
                 }
@@ -283,7 +283,7 @@ public class BaumannFragment extends Fragment {
             queue.add(request);
 
 
-        // 통신코드 종료
+            // 통신코드 종료
 
             //Toast.makeText(getActivity(), scoreoil + memos, Toast.LENGTH_SHORT).show();
 
