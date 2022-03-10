@@ -16,7 +16,7 @@
 
 ##### 3.  결과
 
-<img src="https://user-images.githubusercontent.com/48702606/157675567-7934b3c1-57ea-44af-8852-0ca85d8dcb0e.png  width="200" height="400"/>
+<img src="https://user-images.githubusercontent.com/48702606/157675567-7934b3c1-57ea-44af-8852-0ca85d8dcb0e.png/>
 
 test
 ![1](https://user-images.githubusercontent.com/48702606/157671436-43627758-d2ed-45fe-bbd2-676259857de2.png)
