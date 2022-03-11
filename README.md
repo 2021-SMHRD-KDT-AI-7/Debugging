@@ -15,8 +15,7 @@
 - OracleDB
 
 ##### 3.  결과
-<img src="https://user-images.githubusercontent.com/48702606/157675567-7934b3c1-57ea-44af-8852-0ca85d8dcb0e.png" width="200" height="400">
-<img src="https://user-images.githubusercontent.com/48702606/157675572-0edcb7bb-e363-4574-8eca-1592b3c57879.png" width="200" height="400">
+<img src="https://user-images.githubusercontent.com/48702606/157675567-7934b3c1-57ea-44af-8852-0ca85d8dcb0e.png" width="200" height="400"><img src="https://user-images.githubusercontent.com/48702606/157675572-0edcb7bb-e363-4574-8eca-1592b3c57879.png" width="200" height="400">
 <img src="https://user-images.githubusercontent.com/48702606/157675575-f9be3155-5813-4ae6-a174-5c864eec920a.png" width="200" height="400">
 <img src="https://user-images.githubusercontent.com/48702606/157675578-b379fa40-26be-4d40-9369-ac47bde84e2d.png" width="200" height="400">
 <img src="https://user-images.githubusercontent.com/48702606/157675581-45e73343-4a2c-4513-8994-288128600e3b.png" width="200" height="400">
